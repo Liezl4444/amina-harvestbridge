@@ -1,0 +1,1448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="HarvestBridge Company Dossier and AI Learning Companion — Dynamic Innovation GIJ 878, Day 1" />
+  <title>HarvestBridge · Amina Mokoena · Day 1</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* =====================================================
+       GIBS INTERACTIVE NAMESPACE — HarvestBridge Day 1
+       ===================================================== */
+    .gibs-interactive *, .gibs-interactive *::before, .gibs-interactive *::after {
+      box-sizing: border-box; margin: 0; padding: 0;
+    }
+    .gibs-interactive {
+      --blue:        #002c77;
+      --blue-dark:   #001f55;
+      --blue-mid:    #1a4a9a;
+      --teal:        #007378;
+      --teal-light:  #e3f2f2;
+      --teal-mid:    #b3d8d9;
+      --orange:      #C9632f;
+      --orange-light:#fdf0eb;
+      --maroon:      #7B293D;
+      --maroon-light:#f9ebed;
+      --gold:        #c49a2a;
+      --gold-light:  #fdf6e3;
+      --surface:     #ffffff;
+      --surface-alt: #f7f8fa;
+      --surface-2:   #eef1f5;
+      --text-primary:#1a1a2e;
+      --text-sec:    #4a5568;
+      --text-muted:  #718096;
+      --border:      #e2e8f0;
+      --shadow-sm:   0 1px 3px rgba(0,0,0,0.07);
+      --shadow-md:   0 4px 16px rgba(0,44,119,0.10);
+      --shadow-lg:   0 8px 32px rgba(0,44,119,0.15);
+      --radius:      12px;
+      --radius-sm:   8px;
+      --radius-lg:   16px;
+      --font-display:'DM Serif Display', Georgia, serif;
+      --font-body:   'Inter', system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      color: var(--text-primary);
+      background: var(--surface-alt);
+    }
+
+    /* ── Skip link ── */
+    .gibs-skip {
+      position: absolute; top: -100%; left: 8px;
+      background: var(--teal); color: #fff;
+      padding: 8px 16px; border-radius: var(--radius-sm);
+      font-family: var(--font-body); font-size: 14px; font-weight: 600;
+      text-decoration: none; z-index: 9999; transition: top 0.1s;
+    }
+    .gibs-skip:focus { top: 8px; }
+
+    /* ── Focus rings ── */
+    .gibs-interactive *:focus-visible {
+      outline: 3px solid var(--teal); outline-offset: 3px;
+    }
+
+    /* ── Screen-reader only ── */
+    .sr-only {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    /* =====================================================
+       HERO PANEL
+       ===================================================== */
+    .gibs-hero {
+      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 60%, var(--blue-mid) 100%);
+      color: #fff;
+      padding: 28px 24px 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .gibs-hero::before {
+      content: '';
+      position: absolute; top: -60px; right: -60px;
+      width: 220px; height: 220px;
+      background: rgba(0,115,120,0.18); border-radius: 50%;
+      pointer-events: none;
+    }
+    .gibs-hero::after {
+      content: '';
+      position: absolute; bottom: 20px; left: -30px;
+      width: 140px; height: 140px;
+      background: rgba(201,99,47,0.10); border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .gibs-hero-inner {
+      max-width: 760px; margin: 0 auto;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; position: relative; z-index: 1;
+    }
+
+    .gibs-course-badge {
+      display: inline-block;
+      background: rgba(0,115,120,0.30);
+      color: rgba(255,255,255,0.92);
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 20px; margin-bottom: 18px;
+    }
+
+    .gibs-avatar-wrap { position: relative; display: inline-block; margin-bottom: 14px; }
+
+    .gibs-avatar {
+      width: 96px; height: 96px; border-radius: 50%;
+      border: 3px solid var(--teal);
+      object-fit: cover; display: block;
+      background: var(--blue-dark);
+    }
+    .gibs-avatar-fallback {
+      width: 96px; height: 96px; border-radius: 50%;
+      border: 3px solid var(--teal);
+      background: var(--blue-dark);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .gibs-ai-badge {
+      position: absolute; bottom: 0; right: -6px;
+      background: var(--teal); color: #fff;
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      padding: 2px 7px; border-radius: 8px;
+      border: 2px solid var(--blue-dark);
+      white-space: nowrap;
+    }
+
+    .gibs-hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 5vw, 32px);
+      font-weight: 400; line-height: 1.15;
+      margin-bottom: 4px; color: #fff;
+    }
+    .gibs-hero-sub {
+      font-size: 13px; color: rgba(255,255,255,0.72);
+      margin-bottom: 16px; font-style: italic;
+    }
+
+    /* ── Tab nav ── */
+    .gibs-tabs-nav {
+      display: flex; gap: 0;
+      border-bottom: none;
+      margin-top: 8px;
+      width: 100%;
+    }
+    .gibs-tab-btn {
+      flex: 1; padding: 12px 8px 14px;
+      background: transparent;
+      border: none;
+      color: rgba(255,255,255,0.60);
+      font-family: var(--font-body);
+      font-size: 13px; font-weight: 600;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      letter-spacing: 0.02em;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+    }
+    .gibs-tab-btn:hover { color: rgba(255,255,255,0.90); }
+    .gibs-tab-btn[aria-selected="true"] {
+      color: #fff;
+      border-bottom-color: var(--teal);
+    }
+    .gibs-tab-icon { font-size: 15px; }
+
+    /* =====================================================
+       WRAPPER & PANELS
+       ===================================================== */
+    .gibs-wrapper { max-width: 760px; margin: 0 auto; padding: 24px 16px 40px; }
+
+    .gibs-panel { display: none; }
+    .gibs-panel.active { display: block; }
+
+    /* =====================================================
+       COMPANY TAB
+       ===================================================== */
+
+    /* Hero stat strip */
+    .gibs-stat-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .gibs-stat {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 14px 12px;
+      text-align: center;
+      box-shadow: var(--shadow-sm);
+      border-top: 3px solid var(--teal);
+    }
+    .gibs-stat-value {
+      font-family: var(--font-display);
+      font-size: 22px; color: var(--blue);
+      display: block; margin-bottom: 2px;
+    }
+    .gibs-stat-label {
+      font-size: 11px; color: var(--text-muted);
+      text-transform: uppercase; letter-spacing: 0.07em;
+    }
+
+    /* Content cards */
+    .gibs-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 22px 24px;
+      margin-bottom: 16px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+    }
+    .gibs-card-heading {
+      font-family: var(--font-display);
+      font-size: 17px; color: var(--blue);
+      margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .gibs-card-heading-icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--teal-light);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .gibs-card p {
+      font-size: 14px; color: var(--text-sec);
+      line-height: 1.7; margin-bottom: 10px;
+    }
+    .gibs-card p:last-child { margin-bottom: 0; }
+
+    /* Mission/Vision callout */
+    .gibs-mv-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+      margin-bottom: 16px;
+    }
+    .gibs-mv-block {
+      padding: 16px 18px;
+      border-radius: var(--radius);
+      border-left: 4px solid;
+    }
+    .gibs-mv-block.mission { border-color: var(--teal); background: var(--teal-light); }
+    .gibs-mv-block.vision  { border-color: var(--blue); background: #eef1f8; }
+    .gibs-mv-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .gibs-mv-block.mission .gibs-mv-label { color: var(--teal); }
+    .gibs-mv-block.vision  .gibs-mv-label { color: var(--blue); }
+    .gibs-mv-text {
+      font-family: var(--font-display);
+      font-size: 14px; line-height: 1.5;
+      font-style: italic;
+    }
+    .gibs-mv-block.mission .gibs-mv-text { color: var(--blue); }
+    .gibs-mv-block.vision  .gibs-mv-text { color: var(--blue); }
+
+    /* Scale journey timeline */
+    .gibs-scale-list { list-style: none; margin-top: 6px; }
+    .gibs-scale-item {
+      display: flex; gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .gibs-scale-item:last-child { border-bottom: none; }
+    .gibs-scale-dot-wrap {
+      display: flex; flex-direction: column;
+      align-items: center; flex-shrink: 0;
+    }
+    .gibs-scale-dot {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; color: #fff;
+      flex-shrink: 0;
+    }
+    .dot-macro  { background: var(--blue); }
+    .dot-meso   { background: var(--teal); }
+    .dot-micro  { background: var(--orange); }
+    .gibs-scale-line {
+      flex: 1; width: 2px; background: var(--border);
+      margin: 4px 0; min-height: 16px;
+    }
+    .gibs-scale-content { flex: 1; }
+    .gibs-scale-year {
+      font-size: 11px; color: var(--text-muted);
+      font-weight: 600; margin-bottom: 2px;
+    }
+    .gibs-scale-title {
+      font-size: 14px; font-weight: 600; color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+    .gibs-scale-desc { font-size: 13px; color: var(--text-sec); line-height: 1.55; }
+
+    /* Financial tables */
+    .gibs-fin-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 14px;
+      margin-bottom: 0;
+    }
+    .gibs-fin-block {
+      background: var(--surface-alt);
+      border-radius: var(--radius-sm);
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+    }
+    .gibs-fin-block-title {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 10px;
+    }
+    .gibs-fin-row {
+      display: flex; justify-content: space-between;
+      align-items: baseline;
+      padding: 5px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 13px;
+    }
+    .gibs-fin-row:last-child { border-bottom: none; }
+    .gibs-fin-label { color: var(--text-sec); }
+    .gibs-fin-value { font-weight: 600; color: var(--text-primary); }
+    .gibs-fin-value.red { color: var(--maroon); }
+    .gibs-fin-value.green { color: var(--teal); }
+    .gibs-fin-value.amber { color: var(--orange); }
+
+    .gibs-alert {
+      background: var(--orange-light);
+      border-left: 4px solid var(--orange);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 12px 16px;
+      margin-top: 14px;
+      font-size: 13px; color: var(--text-sec); line-height: 1.55;
+    }
+    .gibs-alert strong { color: var(--orange); }
+
+    /* =====================================================
+       PEOPLE TAB
+       ===================================================== */
+    .gibs-people-grid {
+      display: flex; flex-direction: column; gap: 16px;
+    }
+
+    .gibs-person-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 16px;
+    }
+    .gibs-person-card.featured {
+      border-top: 3px solid var(--teal);
+      grid-template-columns: 80px 1fr;
+    }
+
+    .gibs-person-avatar {
+      width: 64px; height: 64px; border-radius: 50%;
+      object-fit: cover; display: block;
+      border: 2px solid var(--border);
+      background: var(--surface-2);
+    }
+    .gibs-person-card.featured .gibs-person-avatar {
+      width: 80px; height: 80px;
+    }
+    .gibs-person-avatar-fb {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: var(--surface-2);
+      border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-size: 20px; color: var(--blue);
+      flex-shrink: 0;
+    }
+    .gibs-person-card.featured .gibs-person-avatar-fb {
+      width: 80px; height: 80px; font-size: 26px;
+    }
+
+    .gibs-person-info {}
+    .gibs-person-name {
+      font-family: var(--font-display);
+      font-size: 16px; color: var(--blue);
+      margin-bottom: 1px;
+    }
+    .gibs-person-card.featured .gibs-person-name { font-size: 19px; }
+    .gibs-person-title {
+      font-size: 12px; color: var(--teal);
+      font-weight: 600; margin-bottom: 8px;
+    }
+    .gibs-person-bio {
+      font-size: 13px; color: var(--text-sec);
+      line-height: 1.6;
+    }
+    .gibs-person-tag {
+      display: inline-block;
+      font-size: 10px; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 10px;
+      margin-top: 8px; margin-right: 4px;
+    }
+    .tag-founder { background: var(--gold-light); color: var(--gold); }
+    .tag-pe      { background: #eef1f8; color: var(--blue); }
+    .tag-ops     { background: var(--teal-light); color: var(--teal); }
+    .tag-hr      { background: var(--maroon-light); color: var(--maroon); }
+    .tag-ceo     { background: var(--teal-light); color: var(--blue); }
+
+    .gibs-person-note {
+      margin-top: 10px;
+      background: var(--surface-alt);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      font-size: 12px; color: var(--text-muted);
+      border-left: 3px solid var(--border);
+      font-style: italic;
+    }
+
+    .gibs-org-section-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 20px 0 10px;
+    }
+
+    /* =====================================================
+       CHAT TAB — identical to original build + unlock
+       ===================================================== */
+    .gibs-chat-shell {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      overflow: hidden;
+    }
+
+    .gibs-chat-header {
+      background: var(--surface-alt);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 12px;
+    }
+    .gibs-chat-header-left { display: flex; align-items: center; gap: 10px; }
+    .gibs-status-dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: #48bb78;
+      box-shadow: 0 0 0 3px rgba(72,187,120,0.2);
+      flex-shrink: 0;
+    }
+    .gibs-status-dot.loading {
+      background: var(--orange);
+      animation: dotpulse 1.4s ease-in-out infinite;
+      box-shadow: 0 0 0 3px rgba(201,99,47,0.2);
+    }
+    @keyframes dotpulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    .gibs-chat-name { font-size: 13px; font-weight: 600; }
+    .gibs-chat-role { font-size: 11px; color: var(--text-muted); }
+    .gibs-stage-tag {
+      font-size: 11px; font-weight: 600;
+      padding: 3px 10px; border-radius: 20px;
+      background: var(--teal-light); color: var(--teal);
+      transition: all 0.3s;
+    }
+    .gibs-stage-tag.stage2 {
+      background: var(--maroon-light); color: var(--maroon);
+    }
+
+    .gibs-messages {
+      overflow-y: auto;
+      padding: 20px;
+      min-height: 320px;
+      max-height: 400px;
+      display: flex; flex-direction: column; gap: 16px;
+      scroll-behavior: smooth;
+    }
+
+    .gibs-welcome {
+      background: var(--teal-light);
+      border-left: 3px solid var(--teal);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 14px 16px;
+    }
+    .gibs-welcome-h { font-family: var(--font-display); font-size: 15px; color: var(--blue); margin-bottom: 5px; }
+    .gibs-welcome p { font-size: 13px; color: var(--text-sec); line-height: 1.55; }
+
+    .gibs-msg { display: flex; gap: 10px; animation: fadeup 0.22s ease-out both; }
+    .gibs-msg.user { flex-direction: row-reverse; }
+    @keyframes fadeup { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:none} }
+
+    .gibs-msg-av {
+      width: 32px; height: 32px; border-radius: 50%;
+      flex-shrink: 0; overflow: hidden;
+      background: var(--blue-dark);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .gibs-msg-av img { width:100%;height:100%;object-fit:cover; }
+    .gibs-msg-av-init { font-size:10px;font-weight:700;color:#fff; }
+
+    .gibs-msg-bubble {
+      max-width: 78%;
+      padding: 11px 14px;
+      border-radius: var(--radius);
+      font-size: 14px; line-height: 1.6;
+    }
+    .gibs-msg.assistant .gibs-msg-bubble {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-bottom-left-radius: 4px;
+      color: var(--text-primary);
+    }
+    .gibs-msg.user .gibs-msg-bubble {
+      background: var(--blue); color: #fff;
+      border-bottom-right-radius: 4px;
+    }
+
+    .gibs-typing { display: none; align-items: center; gap: 10px; }
+    .gibs-typing.visible { display: flex; }
+    .gibs-typing-dots {
+      display: flex; gap: 4px;
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      padding: 10px 14px; border-radius: var(--radius);
+      border-bottom-left-radius: 4px;
+    }
+    .gibs-typing-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--teal);
+      animation: tbounce 1.2s ease-in-out infinite;
+    }
+    .gibs-typing-dot:nth-child(2){animation-delay:0.2s}
+    .gibs-typing-dot:nth-child(3){animation-delay:0.4s}
+    @keyframes tbounce { 0%,60%,100%{transform:none;opacity:.5} 30%{transform:translateY(-6px);opacity:1} }
+
+    .gibs-input-area {
+      border-top: 1px solid var(--border);
+      padding: 14px 16px; background: var(--surface);
+    }
+    .gibs-input-row { display: flex; gap: 8px; align-items: flex-end; }
+    .gibs-input {
+      flex: 1; padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      font-family: var(--font-body); font-size: 14px;
+      color: var(--text-primary); background: var(--surface-alt);
+      resize: none; min-height: 44px; max-height: 120px;
+      line-height: 1.5; transition: border-color 0.2s;
+    }
+    .gibs-input:focus-visible {
+      outline: none;
+      border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(0,115,120,0.14);
+    }
+    .gibs-input::placeholder { color: var(--text-muted); }
+    .gibs-send-btn {
+      width: 44px; height: 44px;
+      background: var(--teal); border: none;
+      border-radius: var(--radius); cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; color: #fff;
+      transition: background 0.2s, transform 0.1s;
+    }
+    .gibs-send-btn:hover:not(:disabled) { background: #005a5f; }
+    .gibs-send-btn:active:not(:disabled) { transform: scale(0.95); }
+    .gibs-send-btn:disabled { background: var(--border); cursor: not-allowed; }
+    .gibs-input-hint {
+      font-size: 11px; color: var(--text-muted);
+      margin-top: 7px; text-align: center;
+    }
+
+    /* Starters */
+    .gibs-starters { margin-bottom: 16px; }
+    .gibs-starters-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 8px;
+    }
+    .gibs-starters-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .gibs-starter-btn {
+      padding: 7px 13px;
+      background: var(--surface); border: 1.5px solid var(--border);
+      border-radius: 20px; font-family: var(--font-body);
+      font-size: 12px; color: var(--text-sec);
+      cursor: pointer; transition: border-color 0.2s, background 0.2s, color 0.2s;
+      text-align: left; line-height: 1.4;
+    }
+    .gibs-starter-btn:hover {
+      border-color: var(--teal); background: var(--teal-light); color: var(--teal);
+    }
+
+    /* Unlock banner */
+    .gibs-unlock-banner {
+      display: none;
+      background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+      border: 1px solid rgba(0,115,120,0.4);
+      border-radius: var(--radius);
+      padding: 16px 20px; margin-bottom: 16px;
+    }
+    .gibs-unlock-banner.visible { display: block; }
+    .gibs-unlock-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--teal); margin-bottom: 6px;
+    }
+    .gibs-unlock-text {
+      font-family: var(--font-display);
+      font-size: 15px; color: #fff; line-height: 1.4; margin-bottom: 12px;
+    }
+    .gibs-unlock-form { display: flex; gap: 8px; flex-wrap: wrap; }
+    .gibs-unlock-input {
+      flex: 1; min-width: 160px; padding: 10px 14px;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(0,115,120,0.5);
+      border-radius: var(--radius-sm);
+      color: #fff; font-family: var(--font-body);
+      font-size: 14px; letter-spacing: 0.05em; text-transform: uppercase;
+    }
+    .gibs-unlock-input::placeholder { color: rgba(255,255,255,0.4); text-transform: none; letter-spacing: 0; }
+    .gibs-unlock-input:focus-visible { outline: 3px solid var(--teal); outline-offset: 2px; }
+    .gibs-unlock-btn {
+      padding: 10px 20px; background: var(--teal);
+      color: #fff; border: none; border-radius: var(--radius-sm);
+      font-family: var(--font-body); font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: background 0.2s;
+    }
+    .gibs-unlock-btn:hover { background: #005a5f; }
+    .gibs-unlock-error {
+      font-size: 13px; color: #ffb3b3; margin-top: 6px; display: none;
+    }
+    .gibs-unlock-error.visible { display: block; }
+
+    /* Stage 2 header */
+    .gibs-stage2-hdr {
+      display: none;
+      background: linear-gradient(135deg, #1a0a28, var(--maroon));
+      border-radius: var(--radius); padding: 14px 18px;
+      margin-bottom: 16px; border-left: 4px solid var(--orange);
+    }
+    .gibs-stage2-hdr.visible { display: block; }
+    .gibs-stage2-hdr-label {
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 3px;
+    }
+    .gibs-stage2-hdr-text {
+      font-family: var(--font-display);
+      font-size: 14px; color: rgba(255,255,255,0.9);
+      line-height: 1.4; font-style: italic;
+    }
+
+    /* Footer */
+    .gibs-footer {
+      margin-top: 20px; padding: 12px 18px;
+      background: var(--surface); border-radius: var(--radius);
+      border: 1px solid var(--border);
+      display: flex; align-items: center;
+      justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    }
+    .gibs-gibs-logo { font-family: var(--font-display); font-size: 14px; color: var(--blue); }
+    .gibs-footer-div { width: 1px; height: 18px; background: var(--border); }
+    .gibs-footer-meta { font-size: 11px; color: var(--text-muted); }
+    .gibs-reset-btn {
+      padding: 5px 13px; background: transparent;
+      border: 1px solid var(--border); border-radius: 20px;
+      font-family: var(--font-body); font-size: 12px;
+      color: var(--text-muted); cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .gibs-reset-btn:hover { border-color: var(--maroon); color: var(--maroon); }
+
+    /* =====================================================
+       RESPONSIVE
+       ===================================================== */
+    @media (max-width: 560px) {
+      .gibs-stat-strip { grid-template-columns: repeat(2,1fr); }
+      .gibs-mv-grid    { grid-template-columns: 1fr; }
+      .gibs-fin-grid   { grid-template-columns: 1fr; }
+      .gibs-person-card,
+      .gibs-person-card.featured {
+        grid-template-columns: 56px 1fr;
+      }
+      .gibs-person-card.featured .gibs-person-avatar,
+      .gibs-person-card.featured .gibs-person-avatar-fb {
+        width: 56px; height: 56px; font-size: 18px;
+      }
+      .gibs-tab-btn { font-size: 12px; padding: 10px 4px 12px; }
+      .gibs-tab-icon { display: none; }
+      .gibs-msg-bubble { max-width: 88%; font-size: 13px; }
+      .gibs-footer { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 380px) {
+      .gibs-wrapper { padding: 16px 10px 32px; }
+      .gibs-card { padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="gibs-interactive" id="gibs-root">
+  <a class="gibs-skip" href="#gibs-main">Skip to main content</a>
+  <div class="sr-only" aria-live="polite" aria-atomic="false" id="gibs-sr-live" role="status"></div>
+
+  <!-- ═══════════════════════════════════════════════════
+       HERO
+       ═══════════════════════════════════════════════════ -->
+  <header class="gibs-hero" role="banner">
+    <div class="gibs-hero-inner">
+      <div class="gibs-course-badge">Dynamic Innovation · GIJ 878 · Day 1</div>
+
+      <div class="gibs-avatar-wrap">
+        <img class="gibs-avatar" src="amina.jpg"
+          alt="Amina Mokoena, CEO of HarvestBridge"
+          onerror="this.style.display='none';document.getElementById('av-fb').style.display='flex';" />
+        <div class="gibs-avatar-fallback" id="av-fb" style="display:none;" aria-hidden="true">
+          <svg width="46" height="46" viewBox="0 0 46 46" fill="none" aria-hidden="true">
+            <circle cx="23" cy="19" r="10" fill="rgba(0,115,120,0.65)"/>
+            <ellipse cx="23" cy="40" rx="15" ry="10" fill="rgba(0,115,120,0.40)"/>
+          </svg>
+        </div>
+        <span class="gibs-ai-badge" aria-label="AI Learning Companion">AI Companion</span>
+      </div>
+
+      <h1>Amina Mokoena</h1>
+      <p class="gibs-hero-sub">CEO, HarvestBridge &mdash; Johannesburg</p>
+
+      <!-- Tab navigation -->
+      <nav class="gibs-tabs-nav" role="tablist" aria-label="HarvestBridge sections">
+        <button class="gibs-tab-btn" role="tab" id="tab-company" aria-selected="true" aria-controls="panel-company">
+          <span class="gibs-tab-icon" aria-hidden="true">🏢</span> Company
+        </button>
+        <button class="gibs-tab-btn" role="tab" id="tab-people" aria-selected="false" aria-controls="panel-people" tabindex="-1">
+          <span class="gibs-tab-icon" aria-hidden="true">👥</span> People
+        </button>
+        <button class="gibs-tab-btn" role="tab" id="tab-chat" aria-selected="false" aria-controls="panel-chat" tabindex="-1">
+          <span class="gibs-tab-icon" aria-hidden="true">💬</span> Talk to Amina
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ═══════════════════════════════════════════════════
+       MAIN CONTENT
+       ═══════════════════════════════════════════════════ -->
+  <main id="gibs-main" tabindex="-1">
+    <div class="gibs-wrapper">
+
+      <!-- ─────────────────────────────────────────────
+           PANEL 1 — COMPANY
+           ───────────────────────────────────────────── -->
+      <div id="panel-company" class="gibs-panel active" role="tabpanel" aria-labelledby="tab-company">
+
+        <!-- Key metrics strip -->
+        <div class="gibs-stat-strip" aria-label="HarvestBridge at a glance">
+          <div class="gibs-stat">
+            <span class="gibs-stat-value">2011</span>
+            <span class="gibs-stat-label">Founded</span>
+          </div>
+          <div class="gibs-stat">
+            <span class="gibs-stat-value">R420m</span>
+            <span class="gibs-stat-label">Revenue FY2025</span>
+          </div>
+          <div class="gibs-stat">
+            <span class="gibs-stat-value">340+</span>
+            <span class="gibs-stat-label">Smallholder farms</span>
+          </div>
+          <div class="gibs-stat">
+            <span class="gibs-stat-value">3</span>
+            <span class="gibs-stat-label">Innovation scales</span>
+          </div>
+        </div>
+
+        <!-- Mission & Vision -->
+        <div class="gibs-mv-grid" aria-label="Mission and vision">
+          <div class="gibs-mv-block mission">
+            <div class="gibs-mv-label">Mission</div>
+            <p class="gibs-mv-text">"To connect African smallholder producers directly to value — through food that carries the story of where it came from and who grew it."</p>
+          </div>
+          <div class="gibs-mv-block vision">
+            <div class="gibs-mv-label">Vision</div>
+            <p class="gibs-mv-text">"A food system where purpose and profitability are not in tension — where traceability is a competitive advantage, not a cost."</p>
+          </div>
+        </div>
+
+        <!-- Founding story -->
+        <div class="gibs-card">
+          <h2 class="gibs-card-heading">
+            <span class="gibs-card-heading-icon" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2.5" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </span>
+            Founding Story
+          </h2>
+          <p>HarvestBridge was founded in 2011 by <strong>Amina Mokoena</strong> and <strong>Sipho Dlamini</strong> in response to a structural problem both had witnessed working in agricultural development in Limpopo: smallholder farmers were producing high-quality food but capturing almost none of its value. Retailers and distributors took the margin; producers took the risk.</p>
+          <p>The founding model was a cooperative aggregation platform — bringing 340 smallholder families into a single supply network, collectively negotiating contracts, sharing logistics costs, and maintaining individual farm traceability throughout the chain. The cooperative's founding charter explicitly tied commercial success to SDG 2: food security and fair income for small-scale producers.</p>
+          <p>By 2016 the cooperative was profitable and had attracted national retail listings. The founding purpose had held — but the ceiling was visible. Scaling required capital and manufacturing infrastructure neither founder could provide alone.</p>
+        </div>
+
+        <!-- Scale journey -->
+        <div class="gibs-card">
+          <h2 class="gibs-card-heading">
+            <span class="gibs-card-heading-icon" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+            </span>
+            The Scale Journey — Three Levels of Innovation
+          </h2>
+          <ul class="gibs-scale-list" aria-label="Innovation scale journey">
+            <li class="gibs-scale-item">
+              <div class="gibs-scale-dot-wrap">
+                <div class="gibs-scale-dot dot-macro" aria-hidden="true">M</div>
+                <div class="gibs-scale-line" aria-hidden="true"></div>
+              </div>
+              <div class="gibs-scale-content">
+                <div class="gibs-scale-year">2011–2016 · <strong style="color:var(--blue)">Macro Scale</strong></div>
+                <div class="gibs-scale-title">The Limpopo Cooperative</div>
+                <p class="gibs-scale-desc">340 smallholder farming families aggregated into a single traceable supply network. Founding SDG 2 mission intact. Profitable, growing, but capital-constrained. The cooperative is still the moral foundation of everything HarvestBridge does — Amina describes it as "the reason we exist."</p>
+              </div>
+            </li>
+            <li class="gibs-scale-item">
+              <div class="gibs-scale-dot-wrap">
+                <div class="gibs-scale-dot dot-meso" aria-hidden="true">M</div>
+                <div class="gibs-scale-line" aria-hidden="true"></div>
+              </div>
+              <div class="gibs-scale-content">
+                <div class="gibs-scale-year">2017–2023 · <strong style="color:var(--teal)">Meso Scale</strong></div>
+                <div class="gibs-scale-title">Ambient Food Manufacturing (Meridian Capital partnership)</div>
+                <p class="gibs-scale-desc">Private equity investment from Meridian Capital enabled the construction of a 4,200m² ambient food manufacturing facility in Polokwane. Artisanal cooperative products were standardised for national retail at scale. Revenue grew from R62m to R380m over six years. The cooperative was restructured from founding partner to preferred supplier — a transition that was efficient, and contested.</p>
+              </div>
+            </li>
+            <li class="gibs-scale-item">
+              <div class="gibs-scale-dot-wrap">
+                <div class="gibs-scale-dot dot-micro" aria-hidden="true">m</div>
+              </div>
+              <div class="gibs-scale-content">
+                <div class="gibs-scale-year">2024–present · <strong style="color:var(--orange)">Micro Scale</strong></div>
+                <div class="gibs-scale-title">HarvestTable — Sandton Flagship</div>
+                <p class="gibs-scale-desc">A premium experiential retail concept: locally sourced, traceable, story-driven food for Sandton's urban affluent consumer. The concept was developed with a specialist chef-consultant and opened in March 2024. Early reviews were strong. Current performance is below target. A board meeting is scheduled for next week. Meridian Capital wants a replication plan or an exit strategy.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Financials -->
+        <div class="gibs-card">
+          <h2 class="gibs-card-heading">
+            <span class="gibs-card-heading-icon" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            </span>
+            Financial Snapshot — FY2025
+          </h2>
+          <div class="gibs-fin-grid">
+            <div class="gibs-fin-block">
+              <div class="gibs-fin-block-title">P&amp;L Summary</div>
+              <div class="gibs-fin-row"><span class="gibs-fin-label">Group revenue</span><span class="gibs-fin-value">R420m</span></div>
+              <div class="gibs-fin-row"><span class="gibs-fin-label">Manufacturing division</span><span class="gibs-fin-value green">R388m</span></div>
+              <div class="gibs-fin-row"><span class="gibs-fin-label">HarvestTable (retail)</span><span class="gibs-fin-value amber">R32m</span></div>
+              <div class="gibs-fin-row"><span class="gibs-fin-label">Group EBITDA margin</span><span class="gibs-fin-value amber">9.2%</span></div>
+              <div class="gibs-fin-row"><span class="gibs-fin-label">HarvestTable margin</span><span class="gibs-fin-value red">–4.1%</span></div>
+              <div class="gibs-fin-row"><span class="gibs-fin-label">Cooperative supplier share</span><span class="gibs-fin-value amber">68%</span></div>
+            </div>
+            <div class="gibs-fin-block">
+              <div class="gibs-fin-block-title">Strategic Health Indicators</div>
+              <div class="gibs-fin-row"><span class="gibs-fin-label">NPS — Cooperative tier</span><span class="gibs-fin-value green">74</span></div>
+              <div class="gibs-fin-row"><span class="gibs-fin-label">NPS — HarvestTable</span><span class="gibs-fin-value red">31</span></div>
+              <div class="gibs-fin-row"><span class="gibs-fin-label">Staff turnover (mfg)</span><span class="gibs-fin-value amber">22%</span></div>
+              <div class="gibs-fin-row"><span class="gibs-fin-label">Meridian Capital stake</span><span class="gibs-fin-value">41%</span></div>
+              <div class="gibs-fin-row"><span class="gibs-fin-label">Board composition</span><span class="gibs-fin-value">5 members</span></div>
+              <div class="gibs-fin-row"><span class="gibs-fin-label">Board meeting</span><span class="gibs-fin-value red">7 days</span></div>
+            </div>
+          </div>
+          <div class="gibs-alert">
+            <strong>Board pressure:</strong> Meridian Capital's investment thesis was a 7-year horizon to a trade sale or JSE listing. Year 8 begins in October 2025. The board has requested a strategic options paper addressing the HarvestTable underperformance and the long-term growth pathway. Amina has one week.
+          </div>
+        </div>
+
+        <!-- SDG & values -->
+        <div class="gibs-card">
+          <h2 class="gibs-card-heading">
+            <span class="gibs-card-heading-icon" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--teal)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </span>
+            Purpose &amp; Values
+          </h2>
+          <p>HarvestBridge operates under an explicit <strong>SDG 2 commitment</strong> — zero hunger, food security, improved nutrition, and sustainable agriculture. The original cooperative charter remains the company's founding document; it has never been formally revised, though its practical weight in board decisions has diminished since the Meridian partnership.</p>
+          <p>The company's four stated values are: <strong>Traceability</strong> (every product carries a producer story), <strong>Reciprocity</strong> (commercial success returns value to the communities that make it possible), <strong>Integrity</strong> (what we say about our sourcing is what we do), and <strong>Ambition</strong> (purpose does not mean small — we intend to scale).</p>
+          <p>The tension between Ambition and Reciprocity — between growth and the original cooperative promise — is the defining strategic challenge of HarvestBridge's current moment.</p>
+        </div>
+
+      </div><!-- /panel-company -->
+
+      <!-- ─────────────────────────────────────────────
+           PANEL 2 — PEOPLE
+           ───────────────────────────────────────────── -->
+      <div id="panel-people" class="gibs-panel" role="tabpanel" aria-labelledby="tab-people">
+
+        <div class="gibs-people-grid">
+
+          <!-- Amina — featured -->
+          <div class="gibs-org-section-label" aria-hidden="true">Chief Executive</div>
+
+          <article class="gibs-person-card featured" aria-label="Amina Mokoena, CEO">
+            <img class="gibs-person-avatar" src="amina.jpg"
+              alt="Amina Mokoena"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="gibs-person-avatar-fb" style="display:none;" aria-hidden="true">AM</div>
+            <div class="gibs-person-info">
+              <h2 class="gibs-person-name">Amina Mokoena</h2>
+              <div class="gibs-person-title">Chief Executive Officer · Co-Founder</div>
+              <p class="gibs-person-bio">
+                Amina Mokoena co-founded HarvestBridge in 2011 following a decade in agricultural development across Limpopo and Mpumalanga. She holds an MBA from GIBS (2009) and a BSc Agricultural Economics from the University of Pretoria. She has led the company through three strategic transformations — from cooperative, to manufacturing operation, to premium retail experiment.
+              </p>
+              <p class="gibs-person-bio">
+                She is known for precision in communication and a strategic composure that colleagues describe as reassuring in a crisis and occasionally frustrating in a normal week. She has twice been named to the Mail &amp; Guardian 200 Young South Africans list. She sits on the board of the Limpopo Agricultural Development Trust.
+              </p>
+              <p class="gibs-person-bio">
+                In 2023 she was a founding investor in an SA-based food distribution venture. The full extent of her portfolio interests has not been disclosed in her HarvestBridge board declaration.
+              </p>
+              <span class="gibs-person-tag tag-ceo">CEO</span>
+              <span class="gibs-person-tag tag-founder">Co-Founder</span>
+            </div>
+          </article>
+
+          <!-- Leadership team -->
+          <div class="gibs-org-section-label" aria-hidden="true">Leadership Team</div>
+
+          <article class="gibs-person-card" aria-label="Tebogo Khumalo, Operations Director">
+            <div class="gibs-person-avatar-fb" aria-hidden="true">TK</div>
+            <div class="gibs-person-info">
+              <h3 class="gibs-person-name">Tebogo Khumalo</h3>
+              <div class="gibs-person-title">Operations Director</div>
+              <p class="gibs-person-bio">
+                Tebogo joined HarvestBridge in 2018 from a large-scale FMCG logistics operation in Durban. He oversees the Polokwane manufacturing facility, supply chain procurement, and logistics across all three divisions. He is widely credited with the efficiency gains that took group EBITDA from 4.1% to 9.2% between 2019 and 2023.
+              </p>
+              <p class="gibs-person-bio">
+                His operational KPIs are margin-focused. In his 2024 mid-year review he flagged "supply flexibility" as his primary lever for improving HarvestTable's cost structure in the short term.
+              </p>
+              <span class="gibs-person-tag tag-ops">Operations</span>
+              <div class="gibs-person-note">His Q3 2025 procurement report shows a new supplier category labelled "Tier B — Ambient Inputs." No further detail is documented in the board papers.</div>
+            </div>
+          </article>
+
+          <article class="gibs-person-card" aria-label="Naledi Dube, Human Resources Director">
+            <div class="gibs-person-avatar-fb" aria-hidden="true">ND</div>
+            <div class="gibs-person-info">
+              <h3 class="gibs-person-name">Naledi Dube</h3>
+              <div class="gibs-person-title">Human Resources Director</div>
+              <p class="gibs-person-bio">
+                Naledi has been with HarvestBridge since 2015, joining from a mining HR practice in Rustenburg. She oversees talent, culture, and people strategy across the group's 214 permanent staff and approximately 80 seasonal contract workers.
+              </p>
+              <p class="gibs-person-bio">
+                She holds an Honours degree in Industrial Psychology from the University of the Witwatersrand. She is described by colleagues as meticulous and, by some, as persistent to the point of discomfort when she believes something needs to be heard.
+              </p>
+              <span class="gibs-person-tag tag-hr">Human Resources</span>
+              <div class="gibs-person-note">Manufacturing division staff turnover increased from 14% (2022) to 22% (2025). Naledi has submitted two formal culture risk memos to the board in the past 18 months. Both appear as footnotes in the relevant board minutes — neither was tabled as a standalone agenda item.</div>
+            </div>
+          </article>
+
+          <article class="gibs-person-card" aria-label="Dr Priya Naidoo, Marketing and Brand Director">
+            <div class="gibs-person-avatar-fb" aria-hidden="true">PN</div>
+            <div class="gibs-person-info">
+              <h3 class="gibs-person-name">Dr Priya Naidoo</h3>
+              <div class="gibs-person-title">Marketing &amp; Brand Director</div>
+              <p class="gibs-person-bio">
+                Priya joined in 2022 to lead the brand strategy for the HarvestTable concept. She holds a DPhil in Consumer Behaviour from Oxford and previously led brand strategy at a premium South African wine estate. She designed the traceability storytelling model that underpins HarvestTable's consumer proposition.
+              </p>
+              <p class="gibs-person-bio">
+                Her team of six includes three contract consultants. Two of those consultants have been in informal conversations with a European food company that recently announced entry into the South African premium food segment.
+              </p>
+              <span class="gibs-person-tag tag-ops">Marketing</span>
+            </div>
+          </article>
+
+          <!-- Co-founder -->
+          <div class="gibs-org-section-label" aria-hidden="true">Co-Founder &amp; Stakeholder</div>
+
+          <article class="gibs-person-card" aria-label="Sipho Dlamini, Community Liaison and Smallholder Representative">
+            <div class="gibs-person-avatar-fb" aria-hidden="true">SD</div>
+            <div class="gibs-person-info">
+              <h3 class="gibs-person-name">Sipho Dlamini</h3>
+              <div class="gibs-person-title">Community Liaison · Smallholder Representative</div>
+              <p class="gibs-person-bio">
+                Sipho Dlamini co-designed the original HarvestBridge cooperative model with Amina in 2011. For the cooperative's first six years, he held the title of Operations Director and served as the primary relationship manager for all 340 farming families in the Limpopo network.
+              </p>
+              <p class="gibs-person-bio">
+                In 2019, following the Meridian Capital investment and the associated governance restructure, Sipho's role was reclassified as Community Liaison. He retains a seat on the cooperative's advisory committee but no longer holds a formal directorship or equity stake in the manufacturing entity. He continues to represent smallholder interests in supplier contract negotiations.
+              </p>
+              <span class="gibs-person-tag tag-founder">Co-Founder</span>
+              <div class="gibs-person-note">In September 2025, a formal complaint was filed by the Limpopo Smallholder Collective — of which Sipho is a member — regarding the terms of the current cooperative supply contract. The complaint is under review by HarvestBridge's legal team. It does not appear on the upcoming board agenda.</div>
+            </div>
+          </article>
+
+          <!-- PE Partner -->
+          <div class="gibs-org-section-label" aria-hidden="true">Investor</div>
+
+          <article class="gibs-person-card" aria-label="Meridian Capital, private equity investor">
+            <div class="gibs-person-avatar-fb" aria-hidden="true">MC</div>
+            <div class="gibs-person-info">
+              <h3 class="gibs-person-name">Meridian Capital</h3>
+              <div class="gibs-person-title">Private Equity Investor · 41% Stake</div>
+              <p class="gibs-person-bio">
+                Meridian Capital is a Johannesburg-based mid-market PE fund specialising in agri-food and consumer goods. They led a R120m Series B investment into HarvestBridge in 2017, enabling the construction of the Polokwane manufacturing facility.
+              </p>
+              <p class="gibs-person-bio">
+                Their current board representative is <strong>Marcus van der Berg</strong> (Managing Partner, Meridian Capital). Meridian's investment mandate is a 7–9 year horizon, targeting a 3× return on invested capital via trade sale or listing. They have been patient investors. At the next board meeting, patience is understood to be a constrained resource.
+              </p>
+              <span class="gibs-person-tag tag-pe">Private Equity</span>
+            </div>
+          </article>
+
+        </div>
+      </div><!-- /panel-people -->
+
+      <!-- ─────────────────────────────────────────────
+           PANEL 3 — CHAT
+           ───────────────────────────────────────────── -->
+      <div id="panel-chat" class="gibs-panel" role="tabpanel" aria-labelledby="tab-chat">
+
+        <!-- Stage 2 unlock -->
+        <div class="gibs-unlock-banner" id="gibs-unlock-banner" role="region" aria-label="Stage 2 unlock">
+          <div class="gibs-unlock-label">End of Day 1 — Amina Returns</div>
+          <p class="gibs-unlock-text">Your faculty has shared a keyword. Enter it below to continue the conversation with Amina.</p>
+          <div class="gibs-unlock-form">
+            <label for="gibs-unlock-input" class="sr-only">Enter keyword to unlock Stage 2</label>
+            <input type="text" id="gibs-unlock-input" class="gibs-unlock-input"
+              placeholder="Enter keyword"
+              autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false"
+              aria-describedby="gibs-unlock-error" />
+            <button type="button" class="gibs-unlock-btn" id="gibs-unlock-btn" aria-label="Unlock Stage 2">Unlock</button>
+          </div>
+          <p class="gibs-unlock-error" id="gibs-unlock-error" role="alert" aria-live="assertive">
+            That keyword isn't correct. Check with your faculty.
+          </p>
+        </div>
+
+        <!-- Stage 2 context header -->
+        <div class="gibs-stage2-hdr" id="gibs-stage2-hdr" role="region" aria-label="Stage 2 context">
+          <div class="gibs-stage2-hdr-label">Stage 2 · End of Day 1</div>
+          <p class="gibs-stage2-hdr-text">Amina is back. The board's question is sharper now. You have Christensen and Teece. She doesn't.</p>
+        </div>
+
+        <!-- Starters S1 -->
+        <div class="gibs-starters" id="gibs-starters-s1" aria-label="Suggested opening questions">
+          <div class="gibs-starters-label" aria-hidden="true">Start the conversation</div>
+          <div class="gibs-starters-grid" role="list">
+            <button class="gibs-starter-btn" role="listitem" data-prompt="Tell me about HarvestBridge and how it started.">Tell me about HarvestBridge and how it started</button>
+            <button class="gibs-starter-btn" role="listitem" data-prompt="What is the HarvestTable concept in Sandton and why did you launch it?">What is HarvestTable and why did you launch it?</button>
+            <button class="gibs-starter-btn" role="listitem" data-prompt="How did you navigate moving from a cooperative model to a manufacturing operation?">How did you move from cooperative to manufacturing?</button>
+            <button class="gibs-starter-btn" role="listitem" data-prompt="What's the relationship between the Limpopo cooperative and your Meridian Capital partnership today?">What's the relationship between the cooperative and Meridian today?</button>
+          </div>
+        </div>
+
+        <!-- Starters S2 (hidden) -->
+        <div class="gibs-starters" id="gibs-starters-s2" style="display:none;" aria-label="Stage 2 questions">
+          <div class="gibs-starters-label" aria-hidden="true">Continue the conversation</div>
+          <div class="gibs-starters-grid" role="list">
+            <button class="gibs-starter-btn" role="listitem" data-prompt="The board wants to know why HarvestTable can't replicate. What's your honest assessment?">Why is HarvestTable struggling to replicate?</button>
+            <button class="gibs-starter-btn" role="listitem" data-prompt="Which capabilities in HarvestBridge are truly embedded in the organisation versus dependent on specific people?">Which capabilities are truly embedded in the organisation?</button>
+            <button class="gibs-starter-btn" role="listitem" data-prompt="What happened with the chef who designed the original HarvestTable menu?">What happened with the chef who designed the menu?</button>
+            <button class="gibs-starter-btn" role="listitem" data-prompt="If the HarvestTable innovation was leader-embedded and not scalable, what does that mean for your next move?">What does the replication failure tell you about your model?</button>
+          </div>
+        </div>
+
+        <!-- Chat shell -->
+        <div class="gibs-chat-shell" role="region" aria-label="Conversation with Amina Mokoena">
+          <div class="gibs-chat-header">
+            <div class="gibs-chat-header-left">
+              <div class="gibs-status-dot" id="gibs-status-dot" aria-hidden="true"></div>
+              <div>
+                <div class="gibs-chat-name">Amina Mokoena</div>
+                <div class="gibs-chat-role">CEO · HarvestBridge</div>
+              </div>
+            </div>
+            <div class="gibs-stage-tag" id="gibs-stage-tag" aria-label="Stage 1 Orientation">Stage 1 · Orientation</div>
+          </div>
+
+          <div class="gibs-messages" id="gibs-messages"
+            role="log" aria-label="Conversation messages"
+            aria-live="polite" aria-relevant="additions" tabindex="0">
+
+            <div class="gibs-welcome">
+              <div class="gibs-welcome-h">Before you start</div>
+              <p>You have read the company dossier. Now you can ask Amina anything — but she won't volunteer the complicated parts. Some of what matters most she will only share if you push. <strong>Tip:</strong> <kbd>Enter</kbd> to send, <kbd>Shift+Enter</kbd> for a new line.</p>
+            </div>
+
+            <div class="gibs-typing" id="gibs-typing" role="status" aria-label="Amina is thinking">
+              <div class="gibs-msg-av" aria-hidden="true">
+                <img src="amina.jpg" alt=""
+                  onerror="this.parentNode.innerHTML='<span class=\'gibs-msg-av-init\'>AM</span>';" />
+              </div>
+              <div class="gibs-typing-dots" aria-hidden="true">
+                <div class="gibs-typing-dot"></div>
+                <div class="gibs-typing-dot"></div>
+                <div class="gibs-typing-dot"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="gibs-input-area">
+            <div class="gibs-input-row">
+              <label for="gibs-input" class="sr-only">Message Amina</label>
+              <textarea id="gibs-input" class="gibs-input"
+                placeholder="Ask Amina a question about HarvestBridge…"
+                rows="1"
+                aria-label="Your message to Amina"
+                aria-describedby="gibs-input-hint"></textarea>
+              <button type="button" class="gibs-send-btn" id="gibs-send-btn"
+                aria-label="Send message" disabled>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <line x1="22" y1="2" x2="11" y2="13"/>
+                  <polygon points="22 2 15 22 11 13 2 9 22 2"/>
+                </svg>
+              </button>
+            </div>
+            <p class="gibs-input-hint" id="gibs-input-hint">
+              Enter to send · Shift+Enter for new line · AI Learning Companion — GIJ 878 Dynamic Innovation
+            </p>
+          </div>
+        </div>
+
+        <footer class="gibs-footer" role="contentinfo">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span class="gibs-gibs-logo">GIBS</span>
+            <div class="gibs-footer-div" aria-hidden="true"></div>
+            <span class="gibs-footer-meta">Gordon Institute of Business Science · University of Pretoria</span>
+          </div>
+          <button type="button" class="gibs-reset-btn" id="gibs-reset-btn" aria-label="Reset conversation">
+            Reset conversation
+          </button>
+        </footer>
+
+      </div><!-- /panel-chat -->
+
+    </div><!-- /wrapper -->
+  </main>
+</div><!-- /gibs-interactive -->
+
+<script>
+(function () {
+  'use strict';
+
+  // ═══ CONFIGURATION ═════════════════════════════════════════════
+  const OPENAI_ENDPOINT = '/.netlify/functions/chat';
+  const UNLOCK_ENDPOINT = '/.netlify/functions/verify';
+  const UNLOCK_THRESHOLD = 4;
+
+  // ═══ STATE ═════════════════════════════════════════════════════
+  const state = {
+    stage: '1',
+    messages: [],
+    isLoading: false,
+    msgCount: 0,
+    unlockShown: false,
+    activeTab: 'company',
+  };
+
+  // ═══ DOM ═══════════════════════════════════════════════════════
+  const $ = (id) => document.getElementById(id);
+  const messagesEl   = $('gibs-messages');
+  const inputEl      = $('gibs-input');
+  const sendBtn      = $('gibs-send-btn');
+  const typingEl     = $('gibs-typing');
+  const srLive       = $('gibs-sr-live');
+  const statusDot    = $('gibs-status-dot');
+  const stageTag     = $('gibs-stage-tag');
+  const unlockBanner = $('gibs-unlock-banner');
+  const unlockInput  = $('gibs-unlock-input');
+  const unlockBtn    = $('gibs-unlock-btn');
+  const unlockError  = $('gibs-unlock-error');
+  const stage2Hdr    = $('gibs-stage2-hdr');
+  const startersS1   = $('gibs-starters-s1');
+  const startersS2   = $('gibs-starters-s2');
+  const resetBtn     = $('gibs-reset-btn');
+
+  // ═══ TABS ══════════════════════════════════════════════════════
+  const tabBtns   = document.querySelectorAll('.gibs-tab-btn');
+  const tabPanels = document.querySelectorAll('.gibs-panel');
+
+  function activateTab(tabId) {
+    tabBtns.forEach((btn) => {
+      const selected = btn.id === 'tab-' + tabId;
+      btn.setAttribute('aria-selected', selected);
+      btn.tabIndex = selected ? 0 : -1;
+    });
+    tabPanels.forEach((panel) => {
+      panel.classList.toggle('active', panel.id === 'panel-' + tabId);
+    });
+    state.activeTab = tabId;
+    if (tabId === 'chat') {
+      setTimeout(() => inputEl.focus(), 50);
+    }
+  }
+
+  tabBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const tabId = btn.id.replace('tab-', '');
+      activateTab(tabId);
+    });
+    // Keyboard: arrow keys between tabs
+    btn.addEventListener('keydown', (e) => {
+      const tabs = Array.from(tabBtns);
+      const idx  = tabs.indexOf(btn);
+      if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        tabs[(idx + 1) % tabs.length].focus();
+        activateTab(tabs[(idx + 1) % tabs.length].id.replace('tab-', ''));
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        tabs[(idx - 1 + tabs.length) % tabs.length].focus();
+        activateTab(tabs[(idx - 1 + tabs.length) % tabs.length].id.replace('tab-', ''));
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        tabs[0].focus();
+        activateTab(tabs[0].id.replace('tab-', ''));
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        tabs[tabs.length - 1].focus();
+        activateTab(tabs[tabs.length - 1].id.replace('tab-', ''));
+      }
+    });
+  });
+
+  // ═══ TEXTAREA AUTO-RESIZE ══════════════════════════════════════
+  function autoResize() {
+    inputEl.style.height = 'auto';
+    inputEl.style.height = Math.min(inputEl.scrollHeight, 120) + 'px';
+  }
+  inputEl.addEventListener('input', () => {
+    autoResize();
+    sendBtn.disabled = !inputEl.value.trim() || state.isLoading;
+  });
+  inputEl.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      if (!sendBtn.disabled) handleSend();
+    }
+  });
+
+  // ═══ RENDER MESSAGE ════════════════════════════════════════════
+  function renderMessage(role, text) {
+    const isUser = role === 'user';
+    const el = document.createElement('div');
+    el.className = 'gibs-msg ' + role;
+    el.setAttribute('role', 'article');
+    el.setAttribute('aria-label', isUser ? 'Your message' : 'Amina\'s response');
+
+    const av = document.createElement('div');
+    av.className = 'gibs-msg-av';
+    av.setAttribute('aria-hidden', 'true');
+    if (!isUser) {
+      av.innerHTML = '<img src="amina.jpg" alt="" onerror="this.parentNode.innerHTML=\'<span class=\\\"gibs-msg-av-init\\\">AM</span>\';" />';
+    } else {
+      av.innerHTML = '<span class="gibs-msg-av-init" style="background:var(--teal)">You</span>';
+    }
+
+    const bubble = document.createElement('div');
+    bubble.className = 'gibs-msg-bubble';
+    bubble.textContent = text;
+
+    el.appendChild(av);
+    el.appendChild(bubble);
+    messagesEl.insertBefore(el, typingEl);
+    requestAnimationFrame(() => { messagesEl.scrollTop = messagesEl.scrollHeight; });
+    if (!isUser) srLive.textContent = 'Amina: ' + text;
+  }
+
+  // ═══ LOADING ═══════════════════════════════════════════════════
+  function setLoading(on) {
+    state.isLoading = on;
+    typingEl.classList.toggle('visible', on);
+    statusDot.classList.toggle('loading', on);
+    sendBtn.disabled = on || !inputEl.value.trim();
+    inputEl.disabled = on;
+    if (on) {
+      srLive.textContent = 'Amina is thinking…';
+      requestAnimationFrame(() => { messagesEl.scrollTop = messagesEl.scrollHeight; });
+    }
+  }
+
+  // ═══ FALLBACK LIBRARY ══════════════════════════════════════════
+  const FALLBACKS = {
+    '1': [
+      "HarvestBridge was built on a conviction that the people who grow food should benefit from its value. We started with 340 smallholder families in Limpopo. That number is what I return to when the Sandton numbers get difficult.",
+      "The Meridian partnership gave us manufacturing scale we couldn't build alone. The question was always whether we could industrialise without losing what made us different. I still believe the answer is yes.",
+      "HarvestTable is the right concept. The execution has been a learning process. What I didn't anticipate was how much of the story depended on specific people being in the room to tell it.",
+      "I measure everything in two currencies — margin and mission alignment. They're not opposites. My job is to find the intersection. I'm not always certain I'm finding it right now.",
+      "The cooperative gives us supply chain integrity no competitor can buy. Our smallholders know they're co-authors of what ends up on a shelf. That traceability is what we're trying to tell in Sandton. The story hasn't quite landed yet.",
+      "Private equity changes your timeline. Meridian's horizon is seven to nine years. My founding purpose doesn't have a horizon. Managing that tension is work no MBA module fully prepares you for.",
+    ],
+    '2': [
+      "The board's question is a fair one. If HarvestTable works in Sandton, why isn't it working more consistently? I've been sitting with that question for six weeks without a clean answer.",
+      "What made HarvestTable work in its first three months was a particular way of telling the story — the sourcing, the producers, the food journey. That capability was more concentrated than I realised.",
+      "I keep returning to whether we built a model or a moment. A moment can be beautiful and unrepeatable. A model can be documented and scaled. I'm not sure yet which one we created.",
+      "Replication assumes you know what you're replicating. I thought I knew. There's a version of this where I was overconfident about what was systematic versus what was personal.",
+      "The NPS gap between the cooperative tier and HarvestTable is 43 points. I could explain that three different ways. None of the explanations are comfortable.",
+    ],
+  };
+
+  function fallback() {
+    const pool = FALLBACKS[state.stage] || FALLBACKS['1'];
+    return pool[Math.floor(Math.random() * pool.length)];
+  }
+
+  // ═══ SEND ══════════════════════════════════════════════════════
+  async function handleSend() {
+    const text = inputEl.value.trim();
+    if (!text || state.isLoading) return;
+
+    state.messages.push({ role: 'user', content: text });
+    renderMessage('user', text);
+    inputEl.value = '';
+    inputEl.style.height = 'auto';
+    sendBtn.disabled = true;
+
+    state.msgCount++;
+    if (state.msgCount >= UNLOCK_THRESHOLD && !state.unlockShown && state.stage === '1') {
+      showUnlockBanner();
+    }
+
+    setLoading(true);
+
+    try {
+      const res = await fetch(OPENAI_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ messages: state.messages, stage: state.stage }),
+      });
+      if (!res.ok) throw new Error('API error');
+      const data = await res.json();
+      const reply = data.response;
+      state.messages.push({ role: 'assistant', content: reply });
+      setLoading(false);
+      renderMessage('assistant', reply);
+    } catch (err) {
+      console.error(err);
+      setLoading(false);
+      const fb = fallback();
+      state.messages.push({ role: 'assistant', content: fb });
+      renderMessage('assistant', fb);
+    }
+
+    inputEl.focus();
+  }
+
+  // ═══ UNLOCK ════════════════════════════════════════════════════
+  function showUnlockBanner() {
+    state.unlockShown = true;
+    unlockBanner.classList.add('visible');
+    srLive.textContent = 'A Stage 2 unlock is now available. Your faculty will share a keyword at the end of Day 1.';
+  }
+
+  async function handleUnlock() {
+    const code = unlockInput.value.trim().toUpperCase();
+    if (!code) return;
+    unlockBtn.disabled = true;
+    unlockBtn.textContent = 'Checking…';
+    unlockError.classList.remove('visible');
+
+    try {
+      const res = await fetch(UNLOCK_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ code }),
+      });
+      const data = await res.json();
+      if (data.valid) { activateStage2(); return; }
+      showUnlockError();
+    } catch {
+      // dev fallback — remove before production
+      if (code === 'SCALETRAP') { activateStage2(); return; }
+      showUnlockError();
+    } finally {
+      unlockBtn.disabled = false;
+      unlockBtn.textContent = 'Unlock';
+    }
+  }
+
+  function activateStage2() {
+    state.stage = '2';
+    unlockBanner.classList.remove('visible');
+    stage2Hdr.classList.add('visible');
+    stageTag.textContent = 'Stage 2 · End of Day 1';
+    stageTag.classList.add('stage2');
+    startersS1.style.display = 'none';
+    startersS2.style.display = 'block';
+    srLive.textContent = 'Stage 2 unlocked. Amina has returned.';
+    const transition = "I've been thinking about what we discussed this morning. The board called while you were in your afternoon sessions. Their question is more pointed now. What specifically is it about the Sandton model that isn't holding?";
+    state.messages.push({ role: 'assistant', content: transition });
+    renderMessage('assistant', transition);
+    inputEl.focus();
+  }
+
+  function showUnlockError() {
+    unlockError.classList.add('visible');
+    unlockInput.focus();
+    unlockInput.select();
+  }
+
+  unlockBtn.addEventListener('click', handleUnlock);
+  unlockInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') handleUnlock(); });
+
+  // ═══ STARTERS ══════════════════════════════════════════════════
+  document.querySelectorAll('.gibs-starter-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const prompt = btn.dataset.prompt;
+      if (prompt && !state.isLoading) {
+        inputEl.value = prompt;
+        autoResize();
+        sendBtn.disabled = false;
+        handleSend();
+        activateTab('chat');
+      }
+    });
+  });
+
+  // ═══ SEND BUTTON ═══════════════════════════════════════════════
+  sendBtn.addEventListener('click', handleSend);
+
+  // ═══ RESET ═════════════════════════════════════════════════════
+  resetBtn.addEventListener('click', () => {
+    if (!confirm('Reset the conversation? This clears all messages and returns to Stage 1.')) return;
+    state.stage = '1'; state.messages = [];
+    state.msgCount = 0; state.unlockShown = false;
+    messagesEl.querySelectorAll('.gibs-msg').forEach((m) => m.remove());
+    unlockBanner.classList.remove('visible');
+    stage2Hdr.classList.remove('visible');
+    stageTag.textContent = 'Stage 1 · Orientation';
+    stageTag.classList.remove('stage2');
+    startersS1.style.display = 'block';
+    startersS2.style.display = 'none';
+    inputEl.value = ''; inputEl.style.height = 'auto';
+    sendBtn.disabled = true;
+    srLive.textContent = 'Conversation reset.';
+    inputEl.focus();
+  });
+
+  // ═══ INIT ══════════════════════════════════════════════════════
+  activateTab('company');
+
+})();
+</script>
+</body>
+</html>

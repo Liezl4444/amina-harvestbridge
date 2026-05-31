@@ -136,13 +136,18 @@ exports.handler = async function (event, context) {
   }
 
   try {
-    const { messages, stage } = JSON.parse(event.body);
+    const { messages, stage, studentName } = JSON.parse(event.body);
 
     if (!messages || !Array.isArray(messages)) {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid request' }) };
     }
 
-    const systemPrompt = stage === '2' ? SYSTEM_PROMPT_STAGE2 : SYSTEM_PROMPT_STAGE1;
+    // Personalise the system prompt with the student's name
+    const firstName = studentName ? studentName.split(' ')[0] : 'the student';
+    const nameNote = `\n\nIMPORTANT: The student's name is ${studentName || 'unknown'}. Their first name is ${firstName}. You already know this — do NOT ask them to introduce themselves or provide their name or email. Address them by first name occasionally when it feels natural, the way a professional would in a real conversation. Never ask for identifying information.`;
+
+    const basePrompt = stage === '2' ? SYSTEM_PROMPT_STAGE2 : SYSTEM_PROMPT_STAGE1;
+    const systemPrompt = basePrompt + nameNote;
 
     let responseText;
     let usedFallback = false;

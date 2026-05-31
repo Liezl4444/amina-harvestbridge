@@ -1483,7 +1483,11 @@
       const res = await fetch(OPENAI_ENDPOINT, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: state.messages, stage: state.stage }),
+        body: JSON.stringify({
+          messages: state.messages,
+          stage: state.stage,
+          studentName: state.studentName,
+        }),
       });
       if (!res.ok) throw new Error('API error');
       const data = await res.json();
@@ -1617,8 +1621,9 @@
     state.chatStarted  = true;
     nameOverlay.classList.remove('visible');
 
-    // Amina's opening message — in character, asks for introduction
-    const opening = `Good to meet you. I've agreed to make myself available to GIBS students for this course — it's a good discipline, talking through where we are with people who are looking at it fresh. Before we start, I do need to ask — could you introduce yourself properly? Your full name and email will appear on the transcript of our conversation, which I understand you'll need to submit as part of your assessment. So please make sure what you've entered is correct. I'll wait.`;
+    // Amina's opening message — warm, uses first name, no repeat of identity request
+    const firstName = state.studentName.split(' ')[0];
+    const opening = `${firstName}, thank you for making the time. I appreciate that you've come prepared — I understand you've had a chance to look at the company overview before we spoke. I'll be honest with you: this is a useful exercise for me too. Talking through where HarvestBridge is right now, with someone looking at it from the outside, sharpens my own thinking. So ask me what you want to ask. I'll give you straight answers where I can.`;
     state.messages.push({ role: 'assistant', content: opening });
     renderMessage('assistant', opening);
     setTimeout(() => inputEl.focus(), 100);

@@ -674,6 +674,101 @@
     }
     .gibs-reset-btn:hover { border-color: var(--maroon); color: var(--maroon); }
 
+    /* ── Transcript action bar ── */
+    .gibs-transcript-bar {
+      display: none;
+      gap: 8px;
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: var(--teal-light);
+      border-radius: var(--radius);
+      border: 1px solid var(--teal-mid);
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .gibs-transcript-bar.visible { display: flex; }
+    .gibs-transcript-label {
+      font-size: 12px; color: var(--teal);
+      font-weight: 600; flex: 1;
+      min-width: 160px;
+    }
+    .gibs-transcript-btn {
+      display: flex; align-items: center; gap: 6px;
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body);
+      font-size: 13px; font-weight: 600;
+      cursor: pointer; border: none;
+      transition: background 0.2s, transform 0.1s;
+      white-space: nowrap;
+    }
+    .gibs-transcript-btn:active { transform: scale(0.97); }
+    .gibs-transcript-btn.download {
+      background: var(--teal); color: #fff;
+    }
+    .gibs-transcript-btn.download:hover { background: #005a5f; }
+    .gibs-transcript-btn.print {
+      background: var(--blue); color: #fff;
+    }
+    .gibs-transcript-btn.print:hover { background: var(--blue-dark); }
+
+    /* ── Name capture overlay ── */
+    .gibs-name-overlay {
+      display: none;
+      position: absolute; inset: 0;
+      background: rgba(0,28,77,0.92);
+      border-radius: var(--radius-lg);
+      z-index: 10;
+      align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    .gibs-name-overlay.visible { display: flex; }
+    .gibs-name-box {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      max-width: 400px; width: 100%;
+      text-align: center;
+    }
+    .gibs-name-box-title {
+      font-family: var(--font-display);
+      font-size: 20px; color: var(--blue);
+      margin-bottom: 6px;
+    }
+    .gibs-name-box-sub {
+      font-size: 13px; color: var(--text-sec);
+      margin-bottom: 20px; line-height: 1.5;
+    }
+    .gibs-name-field {
+      width: 100%; padding: 10px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      font-family: var(--font-body); font-size: 14px;
+      color: var(--text-primary); margin-bottom: 10px;
+      background: var(--surface-alt);
+    }
+    .gibs-name-field:focus-visible {
+      outline: none; border-color: var(--teal);
+      box-shadow: 0 0 0 3px rgba(0,115,120,0.14);
+    }
+    .gibs-name-start-btn {
+      width: 100%; padding: 12px;
+      background: var(--teal); color: #fff;
+      border: none; border-radius: var(--radius-sm);
+      font-family: var(--font-body); font-size: 14px;
+      font-weight: 600; cursor: pointer;
+      transition: background 0.2s; margin-top: 4px;
+    }
+    .gibs-name-start-btn:hover { background: #005a5f; }
+    .gibs-name-error {
+      font-size: 12px; color: var(--maroon);
+      margin-top: 6px; display: none;
+    }
+    .gibs-name-error.visible { display: block; }
+
+    /* ── Chat shell needs position:relative for overlay ── */
+    .gibs-chat-shell { position: relative; }
+
     /* =====================================================
        RESPONSIVE
        ===================================================== */
@@ -1066,6 +1161,24 @@
 
         <!-- Chat shell -->
         <div class="gibs-chat-shell" role="region" aria-label="Conversation with Amina Mokoena">
+
+          <!-- Name capture overlay — shown when tab first opened -->
+          <div class="gibs-name-overlay visible" id="gibs-name-overlay" role="dialog" aria-modal="true" aria-labelledby="gibs-name-box-title">
+            <div class="gibs-name-box">
+              <div class="gibs-name-box-title" id="gibs-name-box-title">Before you begin</div>
+              <p class="gibs-name-box-sub">Amina will ask you to introduce yourself. Your name and student email will appear on your conversation transcript, which you'll need to download and submit as part of your assignment.</p>
+              <label for="gibs-student-name" class="sr-only">Your full name</label>
+              <input type="text" id="gibs-student-name" class="gibs-name-field"
+                placeholder="Full name" autocomplete="name" />
+              <label for="gibs-student-email" class="sr-only">Your student email</label>
+              <input type="email" id="gibs-student-email" class="gibs-name-field"
+                placeholder="Student email (e.g. 12345678@gibs.ac.za)" autocomplete="email" />
+              <p class="gibs-name-error" id="gibs-name-error" role="alert">Please enter both your name and email to continue.</p>
+              <button type="button" class="gibs-name-start-btn" id="gibs-name-start-btn">
+                Start conversation with Amina
+              </button>
+            </div>
+          </div>
           <div class="gibs-chat-header">
             <div class="gibs-chat-header-left">
               <div class="gibs-status-dot" id="gibs-status-dot" aria-hidden="true"></div>
@@ -1134,6 +1247,22 @@
           </button>
         </footer>
 
+        <!-- Transcript action bar — appears after first exchange -->
+        <div class="gibs-transcript-bar" id="gibs-transcript-bar" role="region" aria-label="Save or print your conversation transcript">
+          <span class="gibs-transcript-label">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="display:inline;vertical-align:-2px;margin-right:4px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Conversation transcript ready for submission
+          </span>
+          <button type="button" class="gibs-transcript-btn download" id="gibs-download-btn" aria-label="Download transcript as text file">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download .txt
+          </button>
+          <button type="button" class="gibs-transcript-btn print" id="gibs-print-btn" aria-label="Print transcript or save as PDF">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Print / Save PDF
+          </button>
+        </div>
+
       </div><!-- /panel-chat -->
 
     </div><!-- /wrapper -->
@@ -1157,25 +1286,37 @@
     msgCount: 0,
     unlockShown: false,
     activeTab: 'company',
+    studentName: '',
+    studentEmail: '',
+    transcript: [],        // { role, text, time }
+    chatStarted: false,
   };
 
   // ═══ DOM ═══════════════════════════════════════════════════════
   const $ = (id) => document.getElementById(id);
-  const messagesEl   = $('gibs-messages');
-  const inputEl      = $('gibs-input');
-  const sendBtn      = $('gibs-send-btn');
-  const typingEl     = $('gibs-typing');
-  const srLive       = $('gibs-sr-live');
-  const statusDot    = $('gibs-status-dot');
-  const stageTag     = $('gibs-stage-tag');
-  const unlockBanner = $('gibs-unlock-banner');
-  const unlockInput  = $('gibs-unlock-input');
-  const unlockBtn    = $('gibs-unlock-btn');
-  const unlockError  = $('gibs-unlock-error');
-  const stage2Hdr    = $('gibs-stage2-hdr');
-  const startersS1   = $('gibs-starters-s1');
-  const startersS2   = $('gibs-starters-s2');
-  const resetBtn     = $('gibs-reset-btn');
+  const messagesEl      = $('gibs-messages');
+  const inputEl         = $('gibs-input');
+  const sendBtn         = $('gibs-send-btn');
+  const typingEl        = $('gibs-typing');
+  const srLive          = $('gibs-sr-live');
+  const statusDot       = $('gibs-status-dot');
+  const stageTag        = $('gibs-stage-tag');
+  const unlockBanner    = $('gibs-unlock-banner');
+  const unlockInput     = $('gibs-unlock-input');
+  const unlockBtn       = $('gibs-unlock-btn');
+  const unlockError     = $('gibs-unlock-error');
+  const stage2Hdr       = $('gibs-stage2-hdr');
+  const startersS1      = $('gibs-starters-s1');
+  const startersS2      = $('gibs-starters-s2');
+  const resetBtn        = $('gibs-reset-btn');
+  const nameOverlay     = $('gibs-name-overlay');
+  const nameInput       = $('gibs-student-name');
+  const emailInput      = $('gibs-student-email');
+  const nameStartBtn    = $('gibs-name-start-btn');
+  const nameError       = $('gibs-name-error');
+  const transcriptBar   = $('gibs-transcript-bar');
+  const downloadBtn     = $('gibs-download-btn');
+  const printBtn        = $('gibs-print-btn');
 
   // ═══ TABS ══════════════════════════════════════════════════════
   const tabBtns   = document.querySelectorAll('.gibs-tab-btn');
@@ -1192,7 +1333,11 @@
     });
     state.activeTab = tabId;
     if (tabId === 'chat') {
-      setTimeout(() => inputEl.focus(), 50);
+      if (!state.chatStarted) {
+        setTimeout(() => nameInput.focus(), 50);
+      } else {
+        setTimeout(() => inputEl.focus(), 50);
+      }
     }
   }
 
@@ -1244,6 +1389,16 @@
   // ═══ RENDER MESSAGE ════════════════════════════════════════════
   function renderMessage(role, text) {
     const isUser = role === 'user';
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString('en-ZA', { hour: '2-digit', minute: '2-digit' });
+
+    // Log to transcript
+    state.transcript.push({ role, text, time: timeStr });
+
+    // Show transcript bar after first real exchange
+    if (state.transcript.length >= 2) {
+      transcriptBar.classList.add('visible');
+    }
     const el = document.createElement('div');
     el.className = 'gibs-msg ' + role;
     el.setAttribute('role', 'article');
@@ -1423,9 +1578,11 @@
 
   // ═══ RESET ═════════════════════════════════════════════════════
   resetBtn.addEventListener('click', () => {
-    if (!confirm('Reset the conversation? This clears all messages and returns to Stage 1.')) return;
+    if (!confirm('Reset the conversation? This clears all messages and returns to Stage 1. Download your transcript first if you need it.')) return;
     state.stage = '1'; state.messages = [];
     state.msgCount = 0; state.unlockShown = false;
+    state.transcript = []; state.chatStarted = false;
+    state.studentName = ''; state.studentEmail = '';
     messagesEl.querySelectorAll('.gibs-msg').forEach((m) => m.remove());
     unlockBanner.classList.remove('visible');
     stage2Hdr.classList.remove('visible');
@@ -1433,10 +1590,204 @@
     stageTag.classList.remove('stage2');
     startersS1.style.display = 'block';
     startersS2.style.display = 'none';
+    transcriptBar.classList.remove('visible');
+    nameInput.value = ''; emailInput.value = '';
+    nameOverlay.classList.add('visible');
     inputEl.value = ''; inputEl.style.height = 'auto';
     sendBtn.disabled = true;
     srLive.textContent = 'Conversation reset.';
-    inputEl.focus();
+    nameInput.focus();
+  });
+
+  // ═══ NAME CAPTURE ══════════════════════════════════════════════
+  function handleNameStart() {
+    const name  = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    if (!name || !email || !email.includes('@')) {
+      nameError.classList.add('visible');
+      nameError.textContent = !name ? 'Please enter your full name.' :
+        !email.includes('@') ? 'Please enter a valid email address.' :
+        'Please enter both your name and email.';
+      nameInput.focus();
+      return;
+    }
+    nameError.classList.remove('visible');
+    state.studentName  = name;
+    state.studentEmail = email;
+    state.chatStarted  = true;
+    nameOverlay.classList.remove('visible');
+
+    // Amina's opening message — in character, asks for introduction
+    const opening = `Good to meet you. I've agreed to make myself available to GIBS students for this course — it's a good discipline, talking through where we are with people who are looking at it fresh. Before we start, I do need to ask — could you introduce yourself properly? Your full name and email will appear on the transcript of our conversation, which I understand you'll need to submit as part of your assessment. So please make sure what you've entered is correct. I'll wait.`;
+    state.messages.push({ role: 'assistant', content: opening });
+    renderMessage('assistant', opening);
+    setTimeout(() => inputEl.focus(), 100);
+  }
+
+  nameStartBtn.addEventListener('click', handleNameStart);
+  [nameInput, emailInput].forEach((field) => {
+    field.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') handleNameStart();
+    });
+  });
+
+  // Show overlay when chat tab is activated (only if not started)
+  const origActivateTab = activateTab;
+
+  // ═══ TRANSCRIPT HELPERS ════════════════════════════════════════
+  function formatDate() {
+    return new Date().toLocaleDateString('en-ZA', {
+      weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+    });
+  }
+
+  function formatTime() {
+    return new Date().toLocaleTimeString('en-ZA', { hour: '2-digit', minute: '2-digit' });
+  }
+
+  function buildTranscriptText() {
+    const divider = '─'.repeat(60);
+    const lines = [];
+    lines.push('GIBS MBA — DYNAMIC INNOVATION GIJ 878');
+    lines.push('HarvestBridge · Amina Mokoena AI Learning Companion');
+    lines.push('Conversation Transcript — Day 1');
+    lines.push(divider);
+    lines.push(`Student name:    ${state.studentName}`);
+    lines.push(`Student email:   ${state.studentEmail}`);
+    lines.push(`Date:            ${formatDate()}`);
+    lines.push(`Generated:       ${formatTime()}`);
+    lines.push(`Stage reached:   ${state.stage === '2' ? 'Stage 1 (Orientation) + Stage 2 (SCALETRAP unlocked)' : 'Stage 1 — Orientation'}`);
+    lines.push(divider);
+    lines.push('');
+    lines.push('CONVERSATION');
+    lines.push('');
+    state.transcript.forEach((entry) => {
+      const speaker = entry.role === 'user' ? state.studentName : 'Amina Mokoena (HarvestBridge CEO)';
+      lines.push(`[${entry.time}]  ${speaker}`);
+      lines.push(entry.text);
+      lines.push('');
+    });
+    lines.push(divider);
+    lines.push('');
+    lines.push('SUBMISSION NOTE');
+    lines.push('This transcript was generated automatically from your conversation with the');
+    lines.push('HarvestBridge AI Learning Companion, embedded in the Dynamic Innovation');
+    lines.push('elective (GIJ 878) in Blackboard Ultra. Submit this file as part of your');
+    lines.push('assignment evidence package as instructed by your faculty.');
+    lines.push('');
+    lines.push('Gordon Institute of Business Science · University of Pretoria');
+    lines.push('Digital Education · liezl@gibs.co.za');
+    return lines.join('\n');
+  }
+
+  function buildTranscriptHTML() {
+    const rows = state.transcript.map((entry) => {
+      const isUser = entry.role === 'user';
+      const speaker = isUser ? state.studentName : 'Amina Mokoena';
+      const role    = isUser ? 'Student' : 'CEO, HarvestBridge';
+      const bg      = isUser ? '#eef1f8' : '#e3f2f2';
+      const border  = isUser ? '#002c77' : '#007378';
+      return `
+        <tr>
+          <td style="padding:12px 14px;vertical-align:top;border-bottom:1px solid #e2e8f0;width:160px;">
+            <strong style="color:${border};font-size:13px;">${speaker}</strong><br>
+            <span style="color:#718096;font-size:11px;">${role}</span><br>
+            <span style="color:#718096;font-size:11px;">${entry.time}</span>
+          </td>
+          <td style="padding:12px 14px;vertical-align:top;border-bottom:1px solid #e2e8f0;background:${bg};font-size:14px;line-height:1.6;color:#1a1a2e;">
+            ${entry.text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+          </td>
+        </tr>`;
+    }).join('');
+
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<title>HarvestBridge Transcript — ${state.studentName}</title>
+<style>
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { font-family:'Segoe UI',Arial,sans-serif; font-size:14px; color:#1a1a2e; background:#fff; padding:0; }
+  .page { max-width:800px; margin:0 auto; padding:32px 40px; }
+  .header { background:#002c77; color:#fff; padding:24px 32px; border-radius:8px 8px 0 0; margin-bottom:0; }
+  .header-top { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:12px; }
+  .header h1 { font-size:22px; font-weight:700; margin-bottom:2px; }
+  .header h2 { font-size:14px; font-weight:400; opacity:0.8; }
+  .meta { background:#f7f8fa; border:1px solid #e2e8f0; border-top:none; padding:16px 24px; display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:24px; }
+  .meta-item { font-size:13px; }
+  .meta-label { color:#718096; font-size:11px; text-transform:uppercase; letter-spacing:0.07em; }
+  .meta-value { color:#1a1a2e; font-weight:600; }
+  .stage-badge { display:inline-block; background:#007378; color:#fff; font-size:11px; font-weight:700; padding:3px 10px; border-radius:12px; letter-spacing:0.05em; }
+  table { width:100%; border-collapse:collapse; margin-bottom:32px; }
+  .submission-note { background:#fdf0eb; border-left:4px solid #C9632f; padding:14px 18px; border-radius:0 8px 8px 0; font-size:13px; color:#4a5568; line-height:1.6; margin-bottom:24px; }
+  .submission-note strong { color:#C9632f; }
+  .footer { border-top:1px solid #e2e8f0; padding-top:16px; font-size:11px; color:#718096; text-align:center; }
+  @media print {
+    body { padding:0; }
+    .page { padding:20px; }
+    @page { margin:1.5cm; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="header">
+    <div class="header-top">
+      <div>
+        <h1>HarvestBridge · Amina Mokoena</h1>
+        <h2>AI Learning Companion — Conversation Transcript · Day 1</h2>
+      </div>
+      <div style="text-align:right;font-size:12px;opacity:0.75;">
+        Dynamic Innovation GIJ 878<br>GIBS MBA
+      </div>
+    </div>
+    <span class="stage-badge">${state.stage === '2' ? 'Stage 1 + Stage 2 Completed' : 'Stage 1 Completed'}</span>
+  </div>
+  <div class="meta">
+    <div class="meta-item"><div class="meta-label">Student name</div><div class="meta-value">${state.studentName}</div></div>
+    <div class="meta-item"><div class="meta-label">Student email</div><div class="meta-value">${state.studentEmail}</div></div>
+    <div class="meta-item"><div class="meta-label">Date</div><div class="meta-value">${formatDate()}</div></div>
+    <div class="meta-item"><div class="meta-label">Generated</div><div class="meta-value">${formatTime()}</div></div>
+  </div>
+  <table>
+    <tbody>${rows}</tbody>
+  </table>
+  <div class="submission-note">
+    <strong>Submission note:</strong> This transcript was generated automatically from your conversation with the HarvestBridge AI Learning Companion, embedded in the Dynamic Innovation elective (GIJ 878) in Blackboard Ultra. Submit this file as part of your assignment evidence package as instructed by your faculty.
+  </div>
+  <div class="footer">Gordon Institute of Business Science · University of Pretoria · Digital Education</div>
+</div>
+</body>
+</html>`;
+  }
+
+  // ═══ DOWNLOAD ══════════════════════════════════════════════════
+  downloadBtn.addEventListener('click', () => {
+    if (state.transcript.length === 0) return;
+    const text     = buildTranscriptText();
+    const safeName = state.studentName.replace(/[^a-z0-9]/gi, '_');
+    const date     = new Date().toISOString().slice(0, 10);
+    const filename = `HarvestBridge_Transcript_${safeName}_${date}.txt`;
+    const blob     = new Blob([text], { type: 'text/plain;charset=utf-8' });
+    const url      = URL.createObjectURL(blob);
+    const a        = document.createElement('a');
+    a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    srLive.textContent = 'Transcript downloaded as ' + filename;
+  });
+
+  // ═══ PRINT ═════════════════════════════════════════════════════
+  printBtn.addEventListener('click', () => {
+    if (state.transcript.length === 0) return;
+    const html = buildTranscriptHTML();
+    const win  = window.open('', '_blank');
+    win.document.write(html);
+    win.document.close();
+    win.focus();
+    setTimeout(() => win.print(), 600);
+    srLive.textContent = 'Print window opened. Use Ctrl+P or Cmd+P to save as PDF.';
   });
 
   // ═══ INIT ══════════════════════════════════════════════════════

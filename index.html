@@ -1166,13 +1166,18 @@
           <div class="gibs-name-overlay visible" id="gibs-name-overlay" role="dialog" aria-modal="true" aria-labelledby="gibs-name-box-title">
             <div class="gibs-name-box">
               <div class="gibs-name-box-title" id="gibs-name-box-title">Before you begin</div>
-              <p class="gibs-name-box-sub">Amina will ask you to introduce yourself. Your name and student email will appear on your conversation transcript, which you'll need to download and submit as part of your assignment.</p>
+              <p class="gibs-name-box-sub">Amina will address you by name throughout your conversation. Your name and student email will appear on your conversation transcript, which you must download and submit as part of your assignment.</p>
               <label for="gibs-student-name" class="sr-only">Your full name</label>
               <input type="text" id="gibs-student-name" class="gibs-name-field"
                 placeholder="Full name" autocomplete="name" />
               <label for="gibs-student-email" class="sr-only">Your student email</label>
               <input type="email" id="gibs-student-email" class="gibs-name-field"
                 placeholder="Student email (e.g. 12345678@gibs.ac.za)" autocomplete="email" />
+              <div style="background:var(--orange-light);border-left:3px solid var(--orange);border-radius:0 var(--radius-sm) var(--radius-sm) 0;padding:10px 14px;margin-bottom:12px;text-align:left;">
+                <p style="font-size:12px;color:var(--text-sec);line-height:1.55;margin:0;">
+                  <strong style="color:var(--orange);">Important:</strong> Do not refresh or close this tab during your conversation — your session and transcript exist only while this tab is open. Once you are done, download your transcript before closing. It cannot be recovered after the tab is closed.
+                </p>
+              </div>
               <p class="gibs-name-error" id="gibs-name-error" role="alert">Please enter both your name and email to continue.</p>
               <button type="button" class="gibs-name-start-btn" id="gibs-name-start-btn">
                 Start conversation with Amina
@@ -1231,7 +1236,7 @@
               </button>
             </div>
             <p class="gibs-input-hint" id="gibs-input-hint">
-              Enter to send · Shift+Enter for new line · AI Learning Companion — GIJ 878 Dynamic Innovation
+              Enter to send · Shift+Enter for new line · Do not refresh — download your transcript before closing this tab
             </p>
           </div>
         </div>

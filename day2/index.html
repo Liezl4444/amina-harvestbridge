@@ -76,48 +76,46 @@ a { color: var(--green); }
 /* ── Header ────────────────────────────────────────────────────────────── */
 .app-header {
   background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  padding: 14px 24px;
+  border-bottom: 2px solid var(--border);
+  padding: 20px 32px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 20px;
 }
 .header-brand {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 18px;
 }
 .header-logo {
-  height: 40px;
+  height: 64px;
   width: auto;
 }
 .header-logo-fallback {
-  width: 40px; height: 40px;
+  width: 64px; height: 64px;
   background: var(--green);
   border-radius: 50%;
   display: flex; align-items: center; justify-content: center;
-  font-size: 1rem; font-weight: 700; color: #fff; font-family: var(--font-serif);
+  font-size: 1.4rem; font-weight: 700; color: #fff; font-family: var(--font-serif);
 }
 .header-text {}
 .header-company {
-  font-family: var(--font-serif);
-  font-size: 1.1rem;
-  color: var(--green);
-  line-height: 1.2;
+  display: none;
 }
 .header-course {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.06em;
+  margin-top: 3px;
 }
 .header-day-badge {
   background: var(--crisis-accent);
   color: #fff;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  padding: 4px 12px;
+  padding: 6px 16px;
   border-radius: 20px;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -294,12 +292,14 @@ a { color: var(--green); }
 /* ── People grid ───────────────────────────────────────────────────────── */
 .people-header {
   width: 100%;
-  height: 220px;
-  object-fit: cover;
-  object-position: center top;
+  height: auto;
+  max-height: 420px;
+  object-fit: contain;
+  object-position: center center;
   border-radius: var(--radius);
   margin-bottom: 20px;
   display: block;
+  background: var(--bg);
 }
 .people-header-fallback {
   width: 100%; height: 220px;
@@ -866,7 +866,7 @@ a { color: var(--green); }
   <!-- ── Header ─────────────────────────────────────────────────────────── -->
   <header class="app-header" role="banner">
     <div class="header-brand">
-      <img src="harvest_bridge_logo_400px.png"
+      <img src="Harvest_Bridge_Logo.png"
            alt="HarvestBridge logo"
            class="header-logo"
            onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
@@ -1108,7 +1108,7 @@ a { color: var(--green); }
       <!-- Name/email modal -->
       <div class="modal-overlay" id="nameModal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
         <div class="modal-box">
-          <img src="harvest_bridge_logo_400px.png" alt="HarvestBridge" class="modal-logo"
+          <img src="Harvest_Bridge_Logo.png" alt="HarvestBridge" class="modal-logo"
                onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
           <div class="modal-logo-fallback" style="display:none" aria-hidden="true">HB</div>
           <h2 class="modal-title" id="modal-title">Day 2 · Amina Mokoena</h2>

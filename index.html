@@ -76,100 +76,82 @@
        HERO PANEL — DYNAMIC (changes per tab)
        ===================================================== */
 
-    /* ── Base hero — fixed consistent height, no jumping ── */
+    /* ══════════════════════════════════════════════════════
+       HERO — FIXED HEIGHT, identical across all three tabs
+       ══════════════════════════════════════════════════════ */
     .gibs-hero {
       color: #fff;
       position: relative;
       overflow: hidden;
-      min-height: 220px;
-    }
-
-    /* ── Background layers: hidden by default, shown only in matching state ── */
-    .gibs-hero-people-bg,
-    .gibs-hero-amina-bg,
-    .gibs-hero-amina-grad {
-      display: none;
-    }
-    .gibs-hero.state-people .gibs-hero-people-bg  { display: block; }
-    .gibs-hero.state-chat   .gibs-hero-amina-bg   { display: block; }
-    .gibs-hero.state-chat   .gibs-hero-amina-grad  { display: block; }
-
-    /* ══════════════════════════════
-       HERO STATE: COMPANY (default)
-       Logo-only, corporate navy
-       ══════════════════════════════ */
-    .gibs-hero.state-company {
+      height: 260px;
       background: linear-gradient(160deg, #001535 0%, #002c77 55%, #1a4a9a 100%);
-      padding: 36px 24px 0;
+      isolation: isolate;
     }
+
+    /* ── Photo layers: absolutely positioned, hidden by default ── */
+    .gibs-hero-people-bg,
+    .gibs-hero-amina-bg {
+      position: absolute; inset: 0;
+      background-size: cover;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+      z-index: 0;
+    }
+    /* Blue tint overlay sits on top of each photo */
+    .gibs-hero-people-bg::after,
+    .gibs-hero-amina-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(0, 28, 80, 0.60);
+    }
+
+    /* ── People photo ── */
+    .gibs-hero-people-bg {
+      background-image: url('Harvest_Bridge_Groupshot.png');
+      background-position: center 25%;
+    }
+
+    /* ── Amina photo ── */
+    .gibs-hero-amina-bg {
+      background-image: url('amina.jpg');
+      background-position: center 12%;
+    }
+
+    /* ── Show photos only in their matching state ── */
+    .gibs-hero.state-people .gibs-hero-people-bg { opacity: 1; }
+    .gibs-hero.state-chat   .gibs-hero-amina-bg  { opacity: 1; }
+
+    /* ── Company: subtle decorative circles ── */
     .gibs-hero.state-company::before {
       content: '';
       position: absolute; top: -80px; right: -80px;
       width: 260px; height: 260px;
       background: rgba(0,115,120,0.12); border-radius: 50%;
-      pointer-events: none;
+      pointer-events: none; z-index: 0;
     }
     .gibs-hero.state-company::after {
       content: '';
-      position: absolute; bottom: 30px; left: -40px;
+      position: absolute; bottom: 20px; left: -40px;
       width: 180px; height: 180px;
       background: rgba(201,99,47,0.07); border-radius: 50%;
-      pointer-events: none;
+      pointer-events: none; z-index: 0;
     }
 
-    /* ══════════════════════════════
-       HERO STATE: PEOPLE
-       Group photo full-bleed, dark overlay
-       ══════════════════════════════ */
-    .gibs-hero.state-people {
-      padding: 36px 24px 0;
-      background: linear-gradient(160deg, #001535 0%, #002c77 55%, #1a4a9a 100%);
+    /* ── Shared hero inner — fills the fixed height, centres content ── */
+    .gibs-hero-inner {
+      max-width: 760px; margin: 0 auto; width: 100%;
+      height: 100%;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      position: relative; z-index: 1;
+      padding: 16px 24px 52px; /* top:16px keeps badge clear of edge; 52px bottom = tab bar */
     }
-    .gibs-hero-people-bg {
-      position: absolute; inset: 0;
-      background-image: url('Harvest_Bridge_Groupshot.png');
-      background-size: cover;
-      background-position: center 20%;
-      opacity: 0.38;
-      mix-blend-mode: luminosity;
-    }
-
-    /* ══════════════════════════════
-       HERO STATE: CHAT (Amina cinematic)
-       Portrait full-bleed, dark cinematic overlay
-       ══════════════════════════════ */
-    .gibs-hero.state-chat {
-      padding: 36px 24px 0;
-      background: linear-gradient(160deg, #001535 0%, #002c77 55%, #1a4a9a 100%);
-    }
-    .gibs-hero-amina-bg {
-      position: absolute; inset: 0;
-      background-image: url('amina.jpg');
-      background-size: cover;
-      background-position: center 15%;
-      opacity: 0.42;
-      mix-blend-mode: luminosity;
-    }
-    .gibs-hero-amina-grad {
-      position: absolute; inset: 0;
-      background: linear-gradient(
-        to right,
-        rgba(0,21,53,0.70) 0%,
-        rgba(0,44,119,0.40) 45%,
-        rgba(0,44,119,0.10) 100%
-      );
-    }
+    /* Chat left-aligns its content */
     .gibs-hero.state-chat .gibs-hero-inner {
       align-items: flex-start;
       text-align: left;
-    }
-
-    /* ── Shared hero inner layout ── */
-    .gibs-hero-inner {
-      max-width: 760px; margin: 0 auto;
-      display: flex; flex-direction: column; align-items: center;
-      text-align: center; position: relative; z-index: 1;
-      padding: 0 0 0;
     }
 
     /* ── Course badge ── */
@@ -292,25 +274,19 @@
     .gibs-hero.state-people  .hero-people-only  { display: block; }
     .gibs-hero.state-chat    .hero-chat-only    { display: block; }
 
-    /* People hero: centre align */
+    /* ── People hero: centre align ── */
     .gibs-hero.state-people .gibs-hero-inner {
       align-items: center; text-align: center;
     }
 
-    /* ── Tab nav ── */
+    /* ── Tab nav — pinned to bottom of the fixed-height hero ── */
     .gibs-tabs-nav {
       display: flex; gap: 4px;
-      margin-top: 20px;
-      margin-bottom: 0;
-      width: 100%;
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
       background: rgba(0,0,0,0.28);
-      border-radius: var(--radius-sm);
-      padding: 4px;
-      /* For people/chat: give breathing room above tabs */
-    }
-    .gibs-hero.state-people .gibs-tabs-nav,
-    .gibs-hero.state-chat .gibs-tabs-nav {
-      margin-top: 24px;
+      padding: 4px 16px;
+      z-index: 2;
     }
     .gibs-tab-btn {
       flex: 1; padding: 10px 12px;
@@ -970,9 +946,8 @@
     <!-- People tab: group photo background layer -->
     <div class="gibs-hero-people-bg" aria-hidden="true"></div>
 
-    <!-- Chat tab: Amina cinematic layers -->
+    <!-- Chat tab: Amina portrait background layer -->
     <div class="gibs-hero-amina-bg" aria-hidden="true"></div>
-    <div class="gibs-hero-amina-grad" aria-hidden="true"></div>
 
     <div class="gibs-hero-inner">
       <div class="gibs-course-badge">Dynamic Innovation · GIJ 878 · Day 1</div>
@@ -980,11 +955,12 @@
       <!-- ── COMPANY state: logo lockup ── -->
       <div class="hero-company-only">
         <div class="gibs-hero-logo-lockup">
-          <img src="Harvest_Bridge_Logo.png"
+          <!-- SVG logo inline — always works, no file load needed -->
+          <img src="harvest_bridge_logo.svg"
             alt="HarvestBridge"
-            style="height:64px;width:auto;filter:brightness(0) invert(1);opacity:0.95;"
+            style="height:56px;width:auto;filter:brightness(0) invert(1);opacity:0.95;"
             onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
-          <span style="display:none;font-family:var(--font-display);font-size:28px;font-weight:400;color:#fff;letter-spacing:0.02em;">HarvestBridge</span>
+          <span style="display:none;font-family:var(--font-display);font-size:26px;font-weight:400;color:#fff;letter-spacing:0.02em;">HarvestBridge</span>
           <div class="gibs-hero-divider"></div>
           <div class="gibs-hero-logo-tagline">Nourishing Communities &middot; Connecting Growth</div>
         </div>
@@ -992,10 +968,8 @@
 
       <!-- ── PEOPLE state: team headline ── -->
       <div class="hero-people-only">
-        <div class="gibs-hero-team-headline">
-          <h1>The HarvestBridge Team</h1>
-          <p class="gibs-hero-team-sub">The people behind the strategy &mdash; and the tensions within it</p>
-        </div>
+        <h1 style="font-family:var(--font-display);font-size:clamp(22px,4vw,30px);font-weight:400;color:#fff;margin-bottom:6px;line-height:1.2;">The HarvestBridge Team</h1>
+        <p style="font-size:13px;color:rgba(255,255,255,0.72);font-style:italic;">The people behind the strategy &mdash; and the tensions within it</p>
       </div>
 
       <!-- ── CHAT state: Amina cinematic ── -->
@@ -1010,19 +984,20 @@
         </div>
       </div>
 
-      <!-- Tab navigation — shared across all states -->
-      <nav class="gibs-tabs-nav" role="tablist" aria-label="HarvestBridge sections">
-        <button class="gibs-tab-btn" role="tab" id="tab-company" aria-selected="true" aria-controls="panel-company">
-          Company
-        </button>
-        <button class="gibs-tab-btn" role="tab" id="tab-people" aria-selected="false" aria-controls="panel-people" tabindex="-1">
-          People
-        </button>
-        <button class="gibs-tab-btn" role="tab" id="tab-chat" aria-selected="false" aria-controls="panel-chat" tabindex="-1">
-          Talk to Amina
-        </button>
-      </nav>
-    </div>
+    </div><!-- /gibs-hero-inner -->
+
+    <!-- Tab nav OUTSIDE hero-inner so it can pin to the bottom of the hero -->
+    <nav class="gibs-tabs-nav" role="tablist" aria-label="HarvestBridge sections">
+      <button class="gibs-tab-btn" role="tab" id="tab-company" aria-selected="true" aria-controls="panel-company">
+        Company
+      </button>
+      <button class="gibs-tab-btn" role="tab" id="tab-people" aria-selected="false" aria-controls="panel-people" tabindex="-1">
+        People
+      </button>
+      <button class="gibs-tab-btn" role="tab" id="tab-chat" aria-selected="false" aria-controls="panel-chat" tabindex="-1">
+        Talk to Amina
+      </button>
+    </nav>
   </header>
 
   <!-- ═══════════════════════════════════════════════════

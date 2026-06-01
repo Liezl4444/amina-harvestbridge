@@ -73,125 +73,55 @@
     }
 
     /* =====================================================
-       HERO — SPLIT LAYOUT (text left, image right)
-       Same height on all three tabs. No background-image
-       percentage guessing. Uses real <img> tags.
+       HERO — CLEAN TEXT ONLY
        ===================================================== */
     .gibs-hero {
-      color: #fff;
-      position: relative;
       background: linear-gradient(160deg, #001535 0%, #002c77 55%, #1a4a9a 100%);
-      overflow: hidden;
-      height: 240px;
-      padding-bottom: 52px;
+      color: #fff; position: relative; overflow: hidden;
+      padding: 28px 24px 0;
     }
-
-    /* ── Course badge ── */
-    .gibs-course-badge {
-      display: inline-block;
-      background: rgba(0,115,120,0.30);
-      color: rgba(255,255,255,0.92);
-      font-size: 11px; font-weight: 700;
-      letter-spacing: 0.09em; text-transform: uppercase;
-      padding: 5px 14px; border-radius: 20px;
+    .gibs-hero::before {
+      content: ''; position: absolute; top: -60px; right: -60px;
+      width: 220px; height: 220px;
+      background: rgba(0,115,120,0.12); border-radius: 50%; pointer-events: none;
     }
-
-    /* ── Hero inner: two-column grid ── */
     .gibs-hero-inner {
-      max-width: 760px; margin: 0 auto; width: 100%;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      grid-template-rows: auto 1fr;
-      gap: 0;
-      padding: 20px 24px 0;
-      position: relative; z-index: 1;
-      min-height: 200px;
+      max-width: 760px; margin: 0 auto;
+      display: flex; flex-direction: column; align-items: center;
+      text-align: center; position: relative; z-index: 1;
     }
-
-    /* Badge spans full width */
-    .gibs-hero-badge-row {
-      grid-column: 1 / -1;
-      margin-bottom: 16px;
+    .gibs-course-badge {
+      display: inline-block; background: rgba(0,115,120,0.30);
+      color: rgba(255,255,255,0.92); font-size: 11px; font-weight: 700;
+      letter-spacing: 0.09em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 20px; margin-bottom: 14px;
     }
-
-    /* Left column: text */
-    .gibs-hero-text {
-      display: flex; flex-direction: column;
-      justify-content: center;
-      padding-right: 0;
+    /* Company state */
+    .hero-company-only .gibs-hero-title {
+      font-family: var(--font-display); font-size: clamp(26px,5vw,36px);
+      font-weight: 400; color: #fff; letter-spacing: 0.04em; margin-bottom: 6px;
     }
-
-    /* Right column: photo — full bleed, gradient fade left edge */
-    .gibs-hero-photo {
-      width: 260px;
-      position: absolute;
-      top: 0; right: 0; bottom: 52px; /* 52px = tab bar height */
-      overflow: hidden;
+    .hero-company-only .gibs-hero-tagline {
+      font-family: var(--font-display); font-size: 13px; font-style: italic;
+      color: rgba(255,255,255,0.60); margin-bottom: 18px;
     }
-    .gibs-hero-photo img {
-      width: 100%; height: 100%;
-      object-fit: cover;
-      display: block;
+    /* People state */
+    .hero-people-only .gibs-hero-title {
+      font-family: var(--font-display); font-size: clamp(22px,4vw,30px);
+      font-weight: 400; color: #fff; margin-bottom: 6px;
     }
-    /* Gradient: fades photo into the blue on the left */
-    .gibs-hero-photo::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(to right, #002c77 0%, rgba(0,44,119,0.6) 30%, transparent 70%);
-      z-index: 1;
-    }
-
-    /* ── Company: centred, no photo panel ── */
-    .gibs-hero.state-company .gibs-hero-inner {
-      grid-template-columns: 1fr;
-      text-align: center;
-    }
-    .gibs-hero.state-company .gibs-hero-photo { display: none; }
-
-    /* Company logo */
-    .gibs-hero-logo-lockup {
-      display: flex; flex-direction: column;
-      align-items: center; gap: 12px;
-    }
-    .gibs-hero-logo-img {
-      height: 80px; width: auto; display: block;
-    }
-    .gibs-hero-logo-name {
-      font-family: var(--font-display);
-      font-size: 30px; font-weight: 400;
-      color: #fff; letter-spacing: 0.05em;
-      line-height: 1;
-    }
-    .gibs-hero-logo-tagline {
-      font-family: var(--font-display);
+    .hero-people-only .gibs-hero-tagline {
       font-size: 13px; font-style: italic;
-      color: rgba(255,255,255,0.65);
-      letter-spacing: 0.04em;
+      color: rgba(255,255,255,0.65); margin-bottom: 18px;
     }
-    .gibs-hero-divider {
-      width: 40px; height: 2px;
-      background: var(--teal); opacity: 0.8;
-    }
-
-    /* ── People: group photo, face centred ── */
-    .gibs-hero.state-people .gibs-hero-photo img {
-      object-position: center 30%;
-    }
-
-    /* ── Chat: Amina portrait ── */
-    .gibs-hero.state-chat .gibs-hero-photo img {
-      object-position: center 15%;
-    }
+    /* Chat state */
     .gibs-hero-amina-eyebrow {
-      font-size: 11px; font-weight: 700;
-      letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--orange); margin-bottom: 8px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--orange); margin-bottom: 8px;
     }
     .gibs-hero-amina-name {
-      font-family: var(--font-display);
-      font-size: clamp(24px, 5vw, 36px);
-      font-weight: 400; line-height: 1.1;
-      color: #fff; margin-bottom: 4px;
+      font-family: var(--font-display); font-size: clamp(24px,5vw,36px);
+      font-weight: 400; color: #fff; margin-bottom: 4px;
     }
     .gibs-hero-amina-title {
       font-size: 14px; color: rgba(255,255,255,0.70);
@@ -199,103 +129,41 @@
     }
     .gibs-hero-amina-badges {
       display: flex; gap: 8px; flex-wrap: wrap;
+      justify-content: center; margin-bottom: 18px;
     }
     .gibs-hero-amina-badge {
-      background: rgba(0,115,120,0.35);
-      border: 1px solid rgba(0,115,120,0.5);
-      color: rgba(255,255,255,0.88);
-      font-size: 10px; font-weight: 700;
+      background: rgba(0,115,120,0.35); border: 1px solid rgba(0,115,120,0.5);
+      color: rgba(255,255,255,0.88); font-size: 10px; font-weight: 700;
       letter-spacing: 0.07em; text-transform: uppercase;
       padding: 4px 10px; border-radius: 12px;
     }
-
-    /* People headline */
-    .gibs-hero-team-name {
-      font-family: var(--font-display);
-      font-size: clamp(22px, 4vw, 30px);
-      font-weight: 400; line-height: 1.2;
-      color: #fff; margin-bottom: 6px;
-    }
-    .gibs-hero-team-sub {
-      font-size: 13px; color: rgba(255,255,255,0.72);
-      font-style: italic;
-    }
-
-    /* ── Visibility helpers ── */
-    .hero-company-only,
-    .hero-people-only,
-    .hero-chat-only { display: none; }
-    .gibs-hero.state-company .hero-company-only { display: block; width: 100%; }
-    .gibs-hero.state-people  .hero-people-only  { display: flex; width: 100%; align-items: center; gap: 24px; }
-    .gibs-hero.state-chat    .hero-chat-only    { display: flex; width: 100%; align-items: center; gap: 24px; }
-
-    /* ── Tab nav — centred pill style ── */
+    /* Visibility */
+    .hero-company-only, .hero-people-only, .hero-chat-only { display: none; }
+    .gibs-hero.state-company .hero-company-only { display: block; }
+    .gibs-hero.state-people  .hero-people-only  { display: block; }
+    .gibs-hero.state-chat    .hero-chat-only    { display: block; }
+    /* Tab nav */
     .gibs-tabs-nav {
-      display: flex; gap: 4px;
-      position: absolute;
-      bottom: 8px;
-      left: 50%; transform: translateX(-50%);
-      width: calc(100% - 32px);
-      max-width: 760px;
-      background: rgba(0,0,0,0.28);
-      padding: 4px;
-      border-radius: var(--radius-sm);
-      z-index: 2;
+      display: flex; gap: 4px; margin-top: 16px; width: 100%;
+      background: rgba(0,0,0,0.20); border-radius: var(--radius-sm); padding: 4px;
     }
     .gibs-tab-btn {
-      flex: 1; padding: 10px 12px;
-      background: transparent; border: none;
-      color: rgba(255,255,255,0.65);
-      font-family: var(--font-body);
-      font-size: 13px; font-weight: 600;
-      cursor: pointer; border-radius: 6px;
-      transition: background 0.2s, color 0.2s;
-      letter-spacing: 0.03em; white-space: nowrap;
+      flex: 1; padding: 10px 12px; background: transparent; border: none;
+      color: rgba(255,255,255,0.65); font-family: var(--font-body);
+      font-size: 13px; font-weight: 600; cursor: pointer; border-radius: 6px;
+      transition: background 0.2s, color 0.2s; letter-spacing: 0.03em; white-space: nowrap;
     }
-    .gibs-tab-btn:hover {
-      color: rgba(255,255,255,0.90);
-      background: rgba(255,255,255,0.08);
-    }
+    .gibs-tab-btn:hover { color: rgba(255,255,255,0.90); background: rgba(255,255,255,0.08); }
     .gibs-tab-btn[aria-selected="true"] {
-      background: #ffffff; color: var(--blue);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+      background: #fff; color: var(--blue); box-shadow: 0 1px 4px rgba(0,0,0,0.15);
     }
-
-    /* ── Mobile: stack vertically ── */
-    @media (max-width: 600px) {
-      .gibs-hero-inner {
-        grid-template-columns: 1fr;
-      }
-      .gibs-hero-photo {
-        width: 100%; height: 180px;
-        border-radius: 0;
-        margin-top: 16px;
-      }
-      .gibs-hero-text { padding-right: 0; }
-    }
-
-    /* ── Legacy avatar (kept for chat bubbles) ── */
+    /* Legacy avatar */
     .gibs-avatar-wrap { position: relative; display: inline-block; margin-bottom: 14px; }
-    .gibs-avatar {
-      width: 96px; height: 96px; border-radius: 50%;
-      border: 3px solid var(--teal); object-fit: cover;
-      display: block; background: var(--blue-dark);
-    }
-    .gibs-avatar-fallback {
-      width: 96px; height: 96px; border-radius: 50%;
-      border: 3px solid var(--teal); background: var(--blue-dark);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .gibs-ai-badge {
-      position: absolute; bottom: 0; right: -6px;
-      background: var(--teal); color: #fff;
-      font-size: 9px; font-weight: 700;
-      letter-spacing: 0.05em; text-transform: uppercase;
-      padding: 2px 7px; border-radius: 8px;
-      border: 2px solid var(--blue-dark); white-space: nowrap;
-    }
+    .gibs-avatar { width: 96px; height: 96px; border-radius: 50%; border: 3px solid var(--teal); object-fit: cover; display: block; background: var(--blue-dark); }
+    .gibs-avatar-fallback { width: 96px; height: 96px; border-radius: 50%; border: 3px solid var(--teal); background: var(--blue-dark); display: flex; align-items: center; justify-content: center; }
+    .gibs-ai-badge { position: absolute; bottom: 0; right: -6px; background: var(--teal); color: #fff; font-size: 9px; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; padding: 2px 7px; border-radius: 8px; border: 2px solid var(--blue-dark); white-space: nowrap; }
 
-    /* =====================================================
+        /* =====================================================
        WRAPPER & PANELS
        ===================================================== */
     .gibs-wrapper { max-width: 760px; margin: 0 auto; padding: 24px 16px 40px; }
@@ -358,6 +226,30 @@
       line-height: 1.7; margin-bottom: 10px;
     }
     .gibs-card p:last-child { margin-bottom: 0; }
+
+    /* Logo + Mission/Vision three-column row */
+    .gibs-logo-mv-row {
+      display: grid;
+      grid-template-columns: 120px 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 16px;
+      align-items: stretch;
+    }
+    .gibs-logo-panel {
+      background: var(--surface);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      padding: 12px;
+    }
+    .gibs-content-logo {
+      width: 100%; height: auto;
+      display: block; object-fit: contain;
+    }
+    @media (max-width: 500px) {
+      .gibs-logo-mv-row { grid-template-columns: 1fr; }
+    }
 
     /* Mission/Vision callout */
     .gibs-mv-grid {
@@ -927,68 +819,36 @@
        ═══════════════════════════════════════════════════ -->
   <header class="gibs-hero state-company" id="gibs-hero" role="banner">
     <div class="gibs-hero-inner">
+      <span class="gibs-course-badge">Dynamic Innovation &middot; GIJ 878 &middot; Day 1</span>
 
-      <!-- Badge row — full width -->
-      <div class="gibs-hero-badge-row">
-        <span class="gibs-course-badge">Dynamic Innovation · GIJ 878 · Day 1</span>
+      <div class="hero-company-only">
+        <div class="gibs-hero-title">HarvestBridge</div>
+        <div class="gibs-hero-tagline">Nourishing Communities &middot; Connecting Growth</div>
       </div>
 
-      <!-- ── COMPANY: logo centred, no photo ── -->
-      <div class="hero-company-only" style="width:100%;">
-        <div class="gibs-hero-text" style="align-items:center;">
-          <div class="gibs-hero-logo-lockup">
-            <img src="harvest_bridge_logo_400px.png"
-              alt="HarvestBridge"
-              style="height:90px;width:90px;object-fit:contain;display:block;"
-              onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
-            <div style="display:none;" class="gibs-hero-logo-name">HarvestBridge</div>
-            <div class="gibs-hero-divider"></div>
-            <div class="gibs-hero-logo-tagline">Nourishing Communities &middot; Connecting Growth</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── PEOPLE: text left, group photo right ── -->
       <div class="hero-people-only">
-        <div class="gibs-hero-text" style="flex:1;">
-          <div class="gibs-hero-team-name">The HarvestBridge Team</div>
-          <div class="gibs-hero-team-sub">The people behind the strategy &mdash; and the tensions within it</div>
-        </div>
-        <div class="gibs-hero-photo">
-          <img src="Harvest_Bridge_Groupshot.png" alt="The HarvestBridge team"
-            style="object-position:center 30%;"
-            onerror="this.parentNode.style.display='none';" />
-        </div>
+        <div class="gibs-hero-title">The HarvestBridge Team</div>
+        <div class="gibs-hero-tagline">The people behind the strategy &mdash; and the tensions within it</div>
       </div>
 
-      <!-- ── CHAT: text left, Amina portrait right ── -->
       <div class="hero-chat-only">
-        <div class="gibs-hero-text" style="flex:1;">
-          <div class="gibs-hero-amina-eyebrow">AI Learning Companion</div>
-          <div class="gibs-hero-amina-name">Amina Mokoena</div>
-          <div class="gibs-hero-amina-title">Chief Executive Officer &mdash; HarvestBridge</div>
-          <div class="gibs-hero-amina-badges">
-            <span class="gibs-hero-amina-badge">Day 1 · Morning</span>
-            <span class="gibs-hero-amina-badge">Live AI</span>
-            <span class="gibs-hero-amina-badge">WCAG 2.1 AA</span>
-          </div>
-        </div>
-        <div class="gibs-hero-photo">
-          <img src="amina.jpg" alt="Amina Mokoena, CEO of HarvestBridge"
-            style="object-position:center 15%;"
-            onerror="this.parentNode.style.display='none';" />
+        <div class="gibs-hero-amina-eyebrow">AI Learning Companion</div>
+        <div class="gibs-hero-amina-name">Amina Mokoena</div>
+        <div class="gibs-hero-amina-title">Chief Executive Officer &mdash; HarvestBridge</div>
+        <div class="gibs-hero-amina-badges">
+          <span class="gibs-hero-amina-badge">Day 1 &middot; Morning</span>
+          <span class="gibs-hero-amina-badge">Live AI</span>
+          <span class="gibs-hero-amina-badge">WCAG 2.1 AA</span>
         </div>
       </div>
 
-    </div><!-- /gibs-hero-inner -->
-
-    <!-- Tab nav pinned to bottom -->
-    <nav class="gibs-tabs-nav" role="tablist" aria-label="HarvestBridge sections">
-      <button class="gibs-tab-btn" role="tab" id="tab-company" aria-selected="true" aria-controls="panel-company">Company</button>
-      <button class="gibs-tab-btn" role="tab" id="tab-people" aria-selected="false" aria-controls="panel-people" tabindex="-1">People</button>
-      <button class="gibs-tab-btn" role="tab" id="tab-chat" aria-selected="false" aria-controls="panel-chat" tabindex="-1">Talk to Amina</button>
-    </nav>
-  </header>
+      <nav class="gibs-tabs-nav" role="tablist" aria-label="HarvestBridge sections">
+        <button class="gibs-tab-btn" role="tab" id="tab-company" aria-selected="true" aria-controls="panel-company">Company</button>
+        <button class="gibs-tab-btn" role="tab" id="tab-people" aria-selected="false" aria-controls="panel-people" tabindex="-1">People</button>
+        <button class="gibs-tab-btn" role="tab" id="tab-chat" aria-selected="false" aria-controls="panel-chat" tabindex="-1">Talk to Amina</button>
+      </nav>
+    </div>
+  </header>r>
 
   <!-- ═══════════════════════════════════════════════════
        MAIN CONTENT
@@ -1001,28 +861,20 @@
            ───────────────────────────────────────────── -->
       <div id="panel-company" class="gibs-panel active" role="tabpanel" aria-labelledby="tab-company">
 
-        <!-- Key metrics strip -->
+        <!-- Stats strip -->
         <div class="gibs-stat-strip" aria-label="HarvestBridge at a glance">
-          <div class="gibs-stat">
-            <span class="gibs-stat-value">2011</span>
-            <span class="gibs-stat-label">Founded</span>
-          </div>
-          <div class="gibs-stat">
-            <span class="gibs-stat-value">R420m</span>
-            <span class="gibs-stat-label">Revenue FY2025</span>
-          </div>
-          <div class="gibs-stat">
-            <span class="gibs-stat-value">340+</span>
-            <span class="gibs-stat-label">Smallholder farms</span>
-          </div>
-          <div class="gibs-stat">
-            <span class="gibs-stat-value">3</span>
-            <span class="gibs-stat-label">Innovation scales</span>
-          </div>
+          <div class="gibs-stat"><span class="gibs-stat-value">2011</span><span class="gibs-stat-label">Founded</span></div>
+          <div class="gibs-stat"><span class="gibs-stat-value">R420m</span><span class="gibs-stat-label">Revenue FY2025</span></div>
+          <div class="gibs-stat"><span class="gibs-stat-value">340+</span><span class="gibs-stat-label">Smallholder farms</span></div>
+          <div class="gibs-stat"><span class="gibs-stat-value">3</span><span class="gibs-stat-label">Innovation scales</span></div>
         </div>
 
-        <!-- Mission & Vision -->
-        <div class="gibs-mv-grid" aria-label="Mission and vision">
+        <!-- Logo + Mission + Vision row -->
+        <div class="gibs-logo-mv-row" aria-label="Mission and vision">
+          <div class="gibs-logo-panel">
+            <img src="harvest_bridge_logo_400px.png" alt="HarvestBridge" class="gibs-content-logo"
+              onerror="this.style.display='none';" />
+          </div>
           <div class="gibs-mv-block mission">
             <div class="gibs-mv-label">Mission</div>
             <p class="gibs-mv-text">"To connect African smallholder producers directly to value — through food that carries the story of where it came from and who grew it."</p>

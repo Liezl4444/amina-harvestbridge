@@ -76,13 +76,23 @@
        HERO PANEL — DYNAMIC (changes per tab)
        ===================================================== */
 
-    /* ── Base hero container ── */
+    /* ── Base hero — fixed consistent height, no jumping ── */
     .gibs-hero {
       color: #fff;
       position: relative;
       overflow: hidden;
-      transition: background 0.5s ease;
+      min-height: 220px;
     }
+
+    /* ── Background layers: hidden by default, shown only in matching state ── */
+    .gibs-hero-people-bg,
+    .gibs-hero-amina-bg,
+    .gibs-hero-amina-grad {
+      display: none;
+    }
+    .gibs-hero.state-people .gibs-hero-people-bg  { display: block; }
+    .gibs-hero.state-chat   .gibs-hero-amina-bg   { display: block; }
+    .gibs-hero.state-chat   .gibs-hero-amina-grad  { display: block; }
 
     /* ══════════════════════════════
        HERO STATE: COMPANY (default)
@@ -112,7 +122,7 @@
        Group photo full-bleed, dark overlay
        ══════════════════════════════ */
     .gibs-hero.state-people {
-      padding: 0 0 0;
+      padding: 36px 24px 0;
       background: linear-gradient(160deg, #001535 0%, #002c77 55%, #1a4a9a 100%);
     }
     .gibs-hero-people-bg {
@@ -120,12 +130,8 @@
       background-image: url('Harvest_Bridge_Groupshot.png');
       background-size: cover;
       background-position: center 20%;
-      opacity: 0.40;
+      opacity: 0.38;
       mix-blend-mode: luminosity;
-      transition: opacity 0.6s ease;
-    }
-    .gibs-hero.state-people .gibs-hero-inner {
-      padding-top: 48px;
     }
 
     /* ══════════════════════════════
@@ -133,34 +139,29 @@
        Portrait full-bleed, dark cinematic overlay
        ══════════════════════════════ */
     .gibs-hero.state-chat {
-      padding: 0 0 0;
+      padding: 36px 24px 0;
       background: linear-gradient(160deg, #001535 0%, #002c77 55%, #1a4a9a 100%);
-      min-height: 260px;
     }
     .gibs-hero-amina-bg {
       position: absolute; inset: 0;
       background-image: url('amina.jpg');
       background-size: cover;
       background-position: center 15%;
-      opacity: 0.45;
+      opacity: 0.42;
       mix-blend-mode: luminosity;
-      transition: opacity 0.6s ease;
     }
     .gibs-hero-amina-grad {
       position: absolute; inset: 0;
       background: linear-gradient(
         to right,
-        rgba(0,21,53,0.75) 0%,
-        rgba(0,44,119,0.45) 45%,
-        rgba(0,44,119,0.15) 100%
+        rgba(0,21,53,0.70) 0%,
+        rgba(0,44,119,0.40) 45%,
+        rgba(0,44,119,0.10) 100%
       );
     }
     .gibs-hero.state-chat .gibs-hero-inner {
-      padding-top: 40px;
       align-items: flex-start;
       text-align: left;
-      padding-left: 28px;
-      padding-right: 28px;
     }
 
     /* ── Shared hero inner layout ── */
@@ -294,25 +295,6 @@
     /* People hero: centre align */
     .gibs-hero.state-people .gibs-hero-inner {
       align-items: center; text-align: center;
-    }
-
-    /* Bottom padding for people + chat states (photo needs breathing room) */
-    .gibs-hero.state-people .gibs-hero-inner,
-    .gibs-hero.state-chat .gibs-hero-inner {
-      padding-bottom: 0;
-    }
-    .gibs-hero.state-people {
-      min-height: 220px;
-    }
-    .gibs-hero.state-chat {
-      min-height: 260px;
-    }
-
-    /* Smooth hero transition on tab change */
-    .gibs-hero,
-    .gibs-hero-people-bg,
-    .gibs-hero-amina-bg {
-      transition: all 0.4s ease;
     }
 
     /* ── Tab nav ── */
@@ -1001,7 +983,8 @@
           <img src="Harvest_Bridge_Logo.png"
             alt="HarvestBridge"
             style="height:64px;width:auto;filter:brightness(0) invert(1);opacity:0.95;"
-            onerror="this.style.display='none';" />
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+          <span style="display:none;font-family:var(--font-display);font-size:28px;font-weight:400;color:#fff;letter-spacing:0.02em;">HarvestBridge</span>
           <div class="gibs-hero-divider"></div>
           <div class="gibs-hero-logo-tagline">Nourishing Communities &middot; Connecting Growth</div>
         </div>

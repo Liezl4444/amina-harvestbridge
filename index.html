@@ -140,8 +140,74 @@
     /* Visibility */
     .hero-company-only, .hero-people-only, .hero-chat-only { display: none; }
     .gibs-hero.state-company .hero-company-only { display: block; }
-    .gibs-hero.state-people  .hero-people-only  { display: block; }
-    .gibs-hero.state-chat    .hero-chat-only    { display: block; }
+    .gibs-hero.state-people  .hero-people-only  { display: block; width: 100%; }
+    .gibs-hero.state-chat    .hero-chat-only    { display: block; width: 100%; }
+
+    /* Split layout for People + Chat: text left, photo right */
+    .gibs-hero-split {
+      display: flex; align-items: stretch;
+      width: 100%; gap: 0;
+    }
+    .gibs-hero-split-text {
+      flex: 1; display: flex; flex-direction: column;
+      justify-content: center; text-align: left;
+      padding-right: 16px;
+    }
+    .gibs-hero-split-photo {
+      width: 220px; flex-shrink: 0;
+      position: relative; overflow: hidden;
+      border-radius: var(--radius) var(--radius) 0 0;
+      margin-bottom: 0;
+    }
+    .gibs-hero-split-photo img {
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+      min-height: 160px;
+    }
+    /* Gradient fade left edge of photo into blue */
+    .gibs-hero-split-photo-fade {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, var(--blue-dark) 0%, rgba(0,31,85,0.5) 35%, transparent 70%);
+    }
+    @media (max-width: 560px) {
+      .gibs-hero-split { flex-direction: column-reverse; }
+      .gibs-hero-split-photo { width: 100%; height: 140px; border-radius: var(--radius) var(--radius) 0 0; }
+      .gibs-hero-split-text { text-align: center; padding-right: 0; padding-top: 12px; }
+    }
+
+    /* Logo lightbox */
+    .gibs-logo-panel {
+      background: var(--surface); border-radius: var(--radius);
+      box-shadow: var(--shadow-sm); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      padding: 12px; cursor: pointer; transition: box-shadow 0.2s;
+    }
+    .gibs-logo-panel:hover { box-shadow: var(--shadow-md); }
+    .gibs-logo-panel:hover::after {
+      content: '🔍 Click to enlarge';
+      position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%);
+      font-size: 10px; color: var(--text-muted); white-space: nowrap;
+    }
+    .gibs-content-logo { width: 100%; height: auto; display: block; object-fit: contain; }
+
+    /* Lightbox overlay */
+    .gibs-lightbox {
+      display: none; position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.85);
+      align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .gibs-lightbox.open { display: flex; }
+    .gibs-lightbox img {
+      max-width: 90vw; max-height: 90vh;
+      object-fit: contain; border-radius: var(--radius);
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    }
+    .gibs-lightbox-close {
+      position: absolute; top: 20px; right: 24px;
+      color: #fff; font-size: 32px; font-weight: 300;
+      cursor: pointer; line-height: 1; background: none; border: none;
+    }
     /* Tab nav */
     .gibs-tabs-nav {
       display: flex; gap: 4px; margin-top: 16px; width: 100%;
@@ -821,24 +887,47 @@
     <div class="gibs-hero-inner">
       <span class="gibs-course-badge">Dynamic Innovation &middot; GIJ 878 &middot; Day 1</span>
 
+      <!-- Company: text only, clean navy -->
       <div class="hero-company-only">
         <div class="gibs-hero-title">HarvestBridge</div>
         <div class="gibs-hero-tagline">Nourishing Communities &middot; Connecting Growth</div>
       </div>
 
+      <!-- People: text left, group photo right -->
       <div class="hero-people-only">
-        <div class="gibs-hero-title">The HarvestBridge Team</div>
-        <div class="gibs-hero-tagline">The people behind the strategy &mdash; and the tensions within it</div>
+        <div class="gibs-hero-split">
+          <div class="gibs-hero-split-text">
+            <div class="gibs-hero-title">The HarvestBridge Team</div>
+            <div class="gibs-hero-tagline">The people behind the strategy &mdash; and the tensions within it</div>
+          </div>
+          <div class="gibs-hero-split-photo">
+            <img src="Harvest_Bridge_Groupshot.png" alt="The HarvestBridge team"
+              style="object-position:center 30%;"
+              onerror="this.parentNode.style.display='none';" />
+            <div class="gibs-hero-split-photo-fade"></div>
+          </div>
+        </div>
       </div>
 
+      <!-- Chat: text left, Amina portrait right -->
       <div class="hero-chat-only">
-        <div class="gibs-hero-amina-eyebrow">AI Learning Companion</div>
-        <div class="gibs-hero-amina-name">Amina Mokoena</div>
-        <div class="gibs-hero-amina-title">Chief Executive Officer &mdash; HarvestBridge</div>
-        <div class="gibs-hero-amina-badges">
-          <span class="gibs-hero-amina-badge">Day 1 &middot; Morning</span>
-          <span class="gibs-hero-amina-badge">Live AI</span>
-          <span class="gibs-hero-amina-badge">WCAG 2.1 AA</span>
+        <div class="gibs-hero-split">
+          <div class="gibs-hero-split-text">
+            <div class="gibs-hero-amina-eyebrow">AI Learning Companion</div>
+            <div class="gibs-hero-amina-name">Amina Mokoena</div>
+            <div class="gibs-hero-amina-title">Chief Executive Officer &mdash; HarvestBridge</div>
+            <div class="gibs-hero-amina-badges">
+              <span class="gibs-hero-amina-badge">Day 1 &middot; Morning</span>
+              <span class="gibs-hero-amina-badge">Live AI</span>
+              <span class="gibs-hero-amina-badge">WCAG 2.1 AA</span>
+            </div>
+          </div>
+          <div class="gibs-hero-split-photo">
+            <img src="amina.jpg" alt="Amina Mokoena, CEO"
+              style="object-position:center 20%;"
+              onerror="this.parentNode.style.display='none';" />
+            <div class="gibs-hero-split-photo-fade"></div>
+          </div>
         </div>
       </div>
 
@@ -871,8 +960,8 @@
 
         <!-- Logo + Mission + Vision row -->
         <div class="gibs-logo-mv-row" aria-label="Mission and vision">
-          <div class="gibs-logo-panel">
-            <img src="harvest_bridge_logo_400px.png" alt="HarvestBridge" class="gibs-content-logo"
+          <div class="gibs-logo-panel" onclick="document.getElementById('gibs-lightbox').classList.add('open')" role="button" tabindex="0" aria-label="View HarvestBridge logo full size">
+            <img src="harvest_bridge_logo_400px.png" alt="HarvestBridge logo" class="gibs-content-logo"
               onerror="this.style.display='none';" />
           </div>
           <div class="gibs-mv-block mission">
@@ -1291,6 +1380,13 @@
 
     </div><!-- /wrapper -->
   </main>
+  <!-- Lightbox for logo -->
+  <div class="gibs-lightbox" id="gibs-lightbox" role="dialog" aria-label="HarvestBridge logo enlarged"
+    onclick="this.classList.remove('open')">
+    <button class="gibs-lightbox-close" aria-label="Close">&times;</button>
+    <img src="harvest_bridge_logo_400px.png" alt="HarvestBridge logo" />
+  </div>
+
 </div><!-- /gibs-interactive -->
 
 <script>

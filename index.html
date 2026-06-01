@@ -149,30 +149,35 @@
 
     /* ── Tab nav ── */
     .gibs-tabs-nav {
-      display: flex; gap: 0;
-      border-bottom: none;
-      margin-top: 8px;
+      display: flex; gap: 4px;
+      margin-top: 16px;
       width: 100%;
+      background: rgba(0,0,0,0.2);
+      border-radius: var(--radius-sm);
+      padding: 4px;
     }
     .gibs-tab-btn {
-      flex: 1; padding: 12px 8px 14px;
+      flex: 1; padding: 10px 12px;
       background: transparent;
       border: none;
-      color: rgba(255,255,255,0.60);
+      color: rgba(255,255,255,0.65);
       font-family: var(--font-body);
       font-size: 13px; font-weight: 600;
       cursor: pointer;
-      border-bottom: 3px solid transparent;
-      transition: color 0.2s, border-color 0.2s;
-      letter-spacing: 0.02em;
-      display: flex; align-items: center; justify-content: center; gap: 6px;
+      border-radius: 6px;
+      transition: background 0.2s, color 0.2s;
+      letter-spacing: 0.03em;
+      white-space: nowrap;
     }
-    .gibs-tab-btn:hover { color: rgba(255,255,255,0.90); }
+    .gibs-tab-btn:hover {
+      color: rgba(255,255,255,0.90);
+      background: rgba(255,255,255,0.08);
+    }
     .gibs-tab-btn[aria-selected="true"] {
-      color: #fff;
-      border-bottom-color: var(--teal);
+      background: #ffffff;
+      color: var(--blue);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.15);
     }
-    .gibs-tab-icon { font-size: 15px; }
 
     /* =====================================================
        WRAPPER & PANELS
@@ -808,6 +813,11 @@
     <div class="gibs-hero-inner">
       <div class="gibs-course-badge">Dynamic Innovation · GIJ 878 · Day 1</div>
 
+      <div style="margin-bottom:12px;">
+        <img src="Harvest_Bridge_Logo.png" alt="HarvestBridge" style="height:48px;width:auto;filter:brightness(0) invert(1);opacity:0.92;"
+          onerror="this.style.display='none';" />
+      </div>
+
       <div class="gibs-avatar-wrap">
         <img class="gibs-avatar" src="amina.jpg"
           alt="Amina Mokoena, CEO of HarvestBridge"
@@ -827,13 +837,13 @@
       <!-- Tab navigation -->
       <nav class="gibs-tabs-nav" role="tablist" aria-label="HarvestBridge sections">
         <button class="gibs-tab-btn" role="tab" id="tab-company" aria-selected="true" aria-controls="panel-company">
-          <span class="gibs-tab-icon" aria-hidden="true">🏢</span> Company
+          Company
         </button>
         <button class="gibs-tab-btn" role="tab" id="tab-people" aria-selected="false" aria-controls="panel-people" tabindex="-1">
-          <span class="gibs-tab-icon" aria-hidden="true">👥</span> People
+          People
         </button>
         <button class="gibs-tab-btn" role="tab" id="tab-chat" aria-selected="false" aria-controls="panel-chat" tabindex="-1">
-          <span class="gibs-tab-icon" aria-hidden="true">💬</span> Talk to Amina
+          Talk to Amina
         </button>
       </nav>
     </div>
@@ -1023,7 +1033,10 @@
           <div class="gibs-org-section-label" aria-hidden="true">Leadership Team</div>
 
           <article class="gibs-person-card" aria-label="Tebogo Khumalo, Operations Director">
-            <div class="gibs-person-avatar-fb" aria-hidden="true">TK</div>
+            <img class="gibs-person-avatar" src="Tebogo_Khumalo.png"
+              alt="Tebogo Khumalo"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="gibs-person-avatar-fb" style="display:none;" aria-hidden="true">TK</div>
             <div class="gibs-person-info">
               <h3 class="gibs-person-name">Tebogo Khumalo</h3>
               <div class="gibs-person-title">Operations Director</div>
@@ -1038,24 +1051,30 @@
             </div>
           </article>
 
-          <article class="gibs-person-card" aria-label="Naledi Dube, Human Resources Director">
-            <div class="gibs-person-avatar-fb" aria-hidden="true">ND</div>
+          <article class="gibs-person-card" aria-label="Nadia Coetzee, Human Resources Director">
+            <img class="gibs-person-avatar" src="Nadia_Coetzee.png"
+              alt="Nadia Coetzee"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="gibs-person-avatar-fb" style="display:none;" aria-hidden="true">NC</div>
             <div class="gibs-person-info">
-              <h3 class="gibs-person-name">Naledi Dube</h3>
+              <h3 class="gibs-person-name">Nadia Coetzee</h3>
               <div class="gibs-person-title">Human Resources Director</div>
               <p class="gibs-person-bio">
-                Naledi has been with HarvestBridge since 2015, joining from a mining HR practice in Rustenburg. She oversees talent, culture, and people strategy across the group's 214 permanent staff and approximately 80 seasonal contract workers.
+                Nadia has been with HarvestBridge since 2015, joining from a mining HR practice in Rustenburg. She oversees talent, culture, and people strategy across the group's 214 permanent staff and approximately 80 seasonal contract workers.
               </p>
               <p class="gibs-person-bio">
                 She holds an Honours degree in Industrial Psychology from the University of the Witwatersrand. She is described by colleagues as meticulous and, by some, as persistent to the point of discomfort when she believes something needs to be heard.
               </p>
               <span class="gibs-person-tag tag-hr">Human Resources</span>
-              <div class="gibs-person-note">Manufacturing division staff turnover increased from 14% (2022) to 22% (2025). Naledi has submitted two formal culture risk memos to the board in the past 18 months. Both appear as footnotes in the relevant board minutes — neither was tabled as a standalone agenda item.</div>
+              <div class="gibs-person-note">Manufacturing division staff turnover increased from 14% (2022) to 22% (2025). Nadia has submitted two formal culture risk memos to the board in the past 18 months. Both appear as footnotes in the relevant board minutes — neither was tabled as a standalone agenda item.</div>
             </div>
           </article>
 
           <article class="gibs-person-card" aria-label="Dr Priya Naidoo, Marketing and Brand Director">
-            <div class="gibs-person-avatar-fb" aria-hidden="true">PN</div>
+            <img class="gibs-person-avatar" src="Dr_Priya_Naidoo.png"
+              alt="Dr Priya Naidoo"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="gibs-person-avatar-fb" style="display:none;" aria-hidden="true">PN</div>
             <div class="gibs-person-info">
               <h3 class="gibs-person-name">Dr Priya Naidoo</h3>
               <div class="gibs-person-title">Marketing &amp; Brand Director</div>
@@ -1073,7 +1092,10 @@
           <div class="gibs-org-section-label" aria-hidden="true">Co-Founder &amp; Stakeholder</div>
 
           <article class="gibs-person-card" aria-label="Sipho Dlamini, Community Liaison and Smallholder Representative">
-            <div class="gibs-person-avatar-fb" aria-hidden="true">SD</div>
+            <img class="gibs-person-avatar" src="Sipho_Dlamini.png"
+              alt="Sipho Dlamini"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="gibs-person-avatar-fb" style="display:none;" aria-hidden="true">SD</div>
             <div class="gibs-person-info">
               <h3 class="gibs-person-name">Sipho Dlamini</h3>
               <div class="gibs-person-title">Community Liaison · Smallholder Representative</div>
@@ -1092,7 +1114,11 @@
           <div class="gibs-org-section-label" aria-hidden="true">Investor</div>
 
           <article class="gibs-person-card" aria-label="Meridian Capital, private equity investor">
-            <div class="gibs-person-avatar-fb" aria-hidden="true">MC</div>
+            <img class="gibs-person-avatar" src="Investment_Partner_Meridian_Capital.png"
+              alt="Meridian Capital"
+              style="border-radius:var(--radius-sm);object-fit:cover;"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='flex';" />
+            <div class="gibs-person-avatar-fb" style="display:none;" aria-hidden="true">MC</div>
             <div class="gibs-person-info">
               <h3 class="gibs-person-name">Meridian Capital</h3>
               <div class="gibs-person-title">Private Equity Investor · 41% Stake</div>

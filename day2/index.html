@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HarvestBridge · Amina Mokoena · Day 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ── CSS Variables ─────────────────────────────────────────────────────── */
+:root {
+  --green:       #1a4f2a;
+  --green-mid:   #2d6e3e;
+  --green-light: #e8f2eb;
+  --green-pale:  #f2f7f3;
+  --gold:        #b8882a;
+  --gold-light:  #f7f0e0;
+  --teal:        #1d5c5c;
+  --teal-light:  #e5f0f0;
+  --red:         #c0392b;
+  --red-light:   #fdf0ee;
+  --amber:       #d97706;
+  --amber-light: #fef3cd;
+  --blue:        #1e3a5f;
+  --blue-light:  #e8eef6;
+  --text:        #1a1a1a;
+  --text-mid:    #444444;
+  --text-muted:  #6b7280;
+  --border:      #d4d9d5;
+  --surface:     #ffffff;
+  --bg:          #f5f6f4;
+  /* Day 2 specific — slight tension in the palette */
+  --crisis-bg:   #faf9f7;
+  --crisis-accent: #7c3d12;
+  --font-serif:  'DM Serif Display', Georgia, serif;
+  --font-sans:   'Inter', system-ui, sans-serif;
+  --radius:      10px;
+  --shadow:      0 2px 12px rgba(0,0,0,0.08);
+  --shadow-lg:   0 4px 24px rgba(0,0,0,0.12);
+}
+
+/* ── Reset & base ──────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { font-size: 16px; scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  background: var(--crisis-bg);
+  color: var(--text);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+img { max-width: 100%; display: block; }
+button { cursor: pointer; font-family: inherit; border: none; background: none; }
+a { color: var(--green); }
+
+/* ── Skip link ─────────────────────────────────────────────────────────── */
+.skip-link {
+  position: absolute; top: -40px; left: 8px; z-index: 9999;
+  background: var(--green); color: #fff;
+  padding: 8px 16px; border-radius: 4px; font-size: 0.875rem;
+  transition: top 0.2s;
+  text-decoration: none;
+}
+.skip-link:focus { top: 8px; }
+
+/* ── App shell ─────────────────────────────────────────────────────────── */
+.app {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 0 32px;
+  min-height: 100vh;
+}
+
+/* ── Header ────────────────────────────────────────────────────────────── */
+.app-header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.header-logo {
+  height: 40px;
+  width: auto;
+}
+.header-logo-fallback {
+  width: 40px; height: 40px;
+  background: var(--green);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; font-weight: 700; color: #fff; font-family: var(--font-serif);
+}
+.header-text {}
+.header-company {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--green);
+  line-height: 1.2;
+}
+.header-course {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.header-day-badge {
+  background: var(--crisis-accent);
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 600;
+  padding: 4px 12px;
+  border-radius: 20px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Tabs ──────────────────────────────────────────────────────────────── */
+.tabs {
+  background: var(--surface);
+  border-bottom: 2px solid var(--border);
+  display: flex;
+  padding: 0 24px;
+  gap: 0;
+}
+.tab-btn {
+  padding: 14px 20px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: color 0.18s, border-color 0.18s;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.tab-btn:hover { color: var(--green); }
+.tab-btn[aria-selected="true"] {
+  color: var(--green);
+  border-bottom-color: var(--green);
+  font-weight: 600;
+}
+.tab-btn:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: -2px;
+  border-radius: 4px;
+}
+
+/* ── Tab panels ────────────────────────────────────────────────────────── */
+.tab-panel { display: none; padding: 24px; }
+.tab-panel.active { display: block; }
+
+/* ── Cards ─────────────────────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+.card-heading {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--green);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-heading svg { flex-shrink: 0; }
+.card p { color: var(--text-mid); font-size: 0.9rem; line-height: 1.7; margin-bottom: 10px; }
+.card p:last-child { margin-bottom: 0; }
+
+/* ── Alert box (crisis state) ───────────────────────────────────────────── */
+.alert {
+  background: var(--amber-light);
+  border: 1px solid #f0c060;
+  border-left: 4px solid var(--amber);
+  border-radius: 8px;
+  padding: 14px 16px;
+  font-size: 0.85rem;
+  color: var(--text);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+.alert strong { color: var(--crisis-accent); }
+.alert-critical {
+  background: var(--red-light);
+  border-color: #e9a89e;
+  border-left-color: var(--red);
+}
+.alert-critical strong { color: var(--red); }
+
+/* ── Financial grid ────────────────────────────────────────────────────── */
+.fin-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 580px) { .fin-grid { grid-template-columns: 1fr; } }
+.fin-block-title {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+.fin-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+}
+.fin-row:last-child { border-bottom: none; }
+.fin-label { color: var(--text-mid); }
+.fin-value { font-weight: 600; }
+.fin-value.green { color: #1a7a3a; }
+.fin-value.amber { color: var(--amber); }
+.fin-value.red { color: var(--red); }
+
+/* ── Status indicators ─────────────────────────────────────────────────── */
+.signal-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 4px;
+}
+@media (max-width: 520px) { .signal-grid { grid-template-columns: 1fr 1fr; } }
+.signal-item {
+  background: var(--bg);
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  border: 1px solid var(--border);
+}
+.signal-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: var(--font-serif);
+  line-height: 1.1;
+}
+.signal-label {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 4px;
+}
+.signal-item.red { background: var(--red-light); border-color: #e9a89e; }
+.signal-item.red .signal-value { color: var(--red); }
+.signal-item.amber { background: var(--amber-light); border-color: #f0c060; }
+.signal-item.amber .signal-value { color: var(--amber); }
+.signal-item.green { background: var(--green-light); border-color: #b2d4bc; }
+.signal-item.green .signal-value { color: var(--green-mid); }
+
+/* ── Timeline / scales ─────────────────────────────────────────────────── */
+.scale-list { list-style: none; }
+.scale-item {
+  display: flex;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.scale-item:last-child { border-bottom: none; }
+.scale-icon {
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 0.75rem; font-weight: 700;
+  color: #fff;
+}
+.scale-icon.macro { background: var(--green); }
+.scale-icon.meso  { background: var(--teal); }
+.scale-icon.micro { background: var(--gold); }
+.scale-content h3 {
+  font-size: 0.9rem; font-weight: 600; margin-bottom: 4px; color: var(--text);
+}
+.scale-content p { font-size: 0.83rem; color: var(--text-mid); margin: 0; }
+
+/* ── People grid ───────────────────────────────────────────────────────── */
+.people-header {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+  display: block;
+}
+.people-header-fallback {
+  width: 100%; height: 220px;
+  background: linear-gradient(135deg, var(--green) 0%, var(--teal) 100%);
+  border-radius: var(--radius);
+  margin-bottom: 20px;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,0.7); font-size: 0.85rem;
+}
+.people-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}
+.person-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s;
+}
+.person-card:hover { box-shadow: var(--shadow-lg); }
+.person-photo {
+  width: 100%; height: 180px;
+  object-fit: cover; object-position: center top;
+  display: block;
+  background: var(--bg);
+}
+.person-photo-fallback {
+  width: 100%; height: 180px;
+  background: linear-gradient(135deg, var(--green-light), var(--teal-light));
+  display: flex; align-items: center; justify-content: center;
+}
+.person-photo-fallback span {
+  font-family: var(--font-serif);
+  font-size: 2.5rem; color: var(--green); opacity: 0.5;
+}
+.person-info { padding: 16px; }
+.person-name {
+  font-family: var(--font-serif);
+  font-size: 1rem; color: var(--green); margin-bottom: 2px;
+}
+.person-role {
+  font-size: 0.72rem; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--text-muted); margin-bottom: 10px;
+}
+.person-bio {
+  font-size: 0.81rem; color: var(--text-mid); line-height: 1.6;
+}
+.meridian-card {
+  background: var(--blue-light);
+  border-color: #b8c8d9;
+}
+.meridian-card .person-name { color: var(--blue); }
+
+/* ── Meridian logo in people ───────────────────────────────────────────── */
+.meridian-logo-wrap {
+  width: 100%; height: 180px;
+  background: #f0f4f8;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+}
+.meridian-logo-wrap img { max-height: 100px; width: auto; }
+
+/* ── Chat panel ────────────────────────────────────────────────────────── */
+.chat-outer {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  height: 560px;
+}
+.chat-header {
+  background: linear-gradient(135deg, var(--green) 0%, #1a4030 100%);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+.chat-avatar {
+  width: 52px; height: 52px; border-radius: 50%;
+  object-fit: cover; object-position: center top;
+  border: 2px solid rgba(255,255,255,0.3);
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.1);
+}
+.chat-avatar-fallback {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: 2px solid rgba(255,255,255,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif); font-size: 1.3rem; color: #fff;
+  flex-shrink: 0;
+}
+.chat-header-info {}
+.chat-header-name {
+  font-family: var(--font-serif);
+  font-size: 1.1rem; color: #fff; line-height: 1.2;
+}
+.chat-header-role {
+  font-size: 0.72rem; color: rgba(255,255,255,0.7);
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+.chat-stage-badge {
+  margin-left: auto;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: 20px;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.85);
+  padding: 4px 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+/* ── Messages area ─────────────────────────────────────────────────────── */
+.messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  scroll-behavior: smooth;
+}
+.messages:focus { outline: none; }
+
+.msg {
+  display: flex;
+  gap: 10px;
+  max-width: 88%;
+  animation: msgIn 0.22s ease;
+}
+@keyframes msgIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.msg.user { flex-direction: row-reverse; align-self: flex-end; }
+.msg.assistant { align-self: flex-start; }
+
+.msg-avatar {
+  width: 30px; height: 30px; border-radius: 50%;
+  object-fit: cover; object-position: center top;
+  flex-shrink: 0;
+  background: var(--bg);
+}
+.msg-avatar-fallback {
+  width: 30px; height: 30px; border-radius: 50%;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.75rem; font-weight: 700; font-family: var(--font-serif);
+}
+.msg.assistant .msg-avatar-fallback { background: var(--green-light); color: var(--green); }
+.msg.user .msg-avatar-fallback { background: var(--blue-light); color: var(--blue); }
+
+.msg-bubble {
+  padding: 11px 15px;
+  border-radius: 14px;
+  font-size: 0.875rem;
+  line-height: 1.65;
+}
+.msg.assistant .msg-bubble {
+  background: var(--green-pale);
+  border: 1px solid #cde0d2;
+  border-bottom-left-radius: 4px;
+  color: var(--text);
+}
+.msg.user .msg-bubble {
+  background: var(--blue);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+.msg-time {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin: 6px 0;
+  align-self: center;
+}
+
+/* ── Typing indicator ──────────────────────────────────────────────────── */
+.typing-indicator {
+  display: none;
+  align-items: center;
+  gap: 10px;
+  padding: 0 20px 12px;
+}
+.typing-indicator.visible { display: flex; }
+.typing-dots {
+  display: flex; gap: 4px;
+  background: var(--green-pale);
+  border: 1px solid #cde0d2;
+  border-radius: 14px;
+  padding: 10px 14px;
+}
+.typing-dots span {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green-mid);
+  animation: dot 1.2s infinite;
+}
+.typing-dots span:nth-child(2) { animation-delay: 0.2s; }
+.typing-dots span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes dot {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+  40%           { opacity: 1;   transform: scale(1); }
+}
+
+/* ── Transcript controls ───────────────────────────────────────────────── */
+.transcript-controls {
+  display: none;
+  gap: 8px;
+  padding: 10px 20px;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  flex-shrink: 0;
+}
+.transcript-controls.visible { display: flex; flex-wrap: wrap; }
+.btn-transcript {
+  padding: 7px 14px;
+  border-radius: 6px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  transition: background 0.15s;
+  display: inline-flex; align-items: center; gap: 6px;
+}
+.btn-download {
+  background: var(--green);
+  color: #fff;
+  border: 1px solid var(--green);
+}
+.btn-download:hover { background: var(--green-mid); }
+.btn-print {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-print:hover { background: var(--bg); }
+.btn-download:focus-visible,
+.btn-print:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+/* ── Starter prompts ───────────────────────────────────────────────────── */
+.starter-area {
+  padding: 16px 20px;
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+  flex-shrink: 0;
+}
+.starter-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.starter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.starter-chip {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 0.78rem;
+  color: var(--text-mid);
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+  text-align: left;
+  line-height: 1.4;
+}
+.starter-chip:hover {
+  border-color: var(--green);
+  color: var(--green);
+  background: var(--green-pale);
+}
+.starter-chip:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+/* ── Input area ────────────────────────────────────────────────────────── */
+.input-area {
+  display: flex;
+  gap: 10px;
+  padding: 14px 20px;
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+  flex-shrink: 0;
+  align-items: flex-end;
+}
+.input-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.input-hint {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+.chat-input {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  resize: none;
+  min-height: 44px;
+  max-height: 120px;
+  line-height: 1.5;
+  transition: border-color 0.15s;
+  background: var(--bg);
+}
+.chat-input:focus {
+  outline: none;
+  border-color: var(--green);
+  background: var(--surface);
+}
+.send-btn {
+  width: 44px; height: 44px;
+  background: var(--green);
+  border-radius: 8px;
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.send-btn:hover:not(:disabled) { background: var(--green-mid); }
+.send-btn:disabled { background: var(--border); cursor: not-allowed; }
+.send-btn:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+/* ── Unlock banner ─────────────────────────────────────────────────────── */
+.unlock-banner {
+  display: none;
+  background: var(--gold-light);
+  border: 1px solid #d4a843;
+  border-left: 4px solid var(--gold);
+  border-radius: 8px;
+  margin: 12px 20px;
+  padding: 14px 16px;
+  flex-shrink: 0;
+}
+.unlock-banner.visible { display: block; }
+.unlock-title {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--crisis-accent);
+  margin-bottom: 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+.unlock-description {
+  font-size: 0.8rem;
+  color: var(--text-mid);
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+.unlock-form {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.unlock-input {
+  flex: 1;
+  min-width: 140px;
+  border: 1px solid #d4a843;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: #fff;
+}
+.unlock-input:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(184,136,42,0.2);
+}
+.unlock-btn {
+  background: var(--gold);
+  color: #fff;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+.unlock-btn:hover { background: #9a7222; }
+.unlock-btn:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+.unlock-error {
+  font-size: 0.78rem;
+  color: var(--red);
+  margin-top: 6px;
+  display: none;
+}
+.unlock-error.visible { display: block; }
+
+/* ── Stage 2 unlocked indicator ────────────────────────────────────────── */
+.stage2-notice {
+  display: none;
+  background: var(--green-light);
+  border: 1px solid #a8d0b4;
+  border-radius: 8px;
+  margin: 12px 20px;
+  padding: 12px 16px;
+  font-size: 0.8rem;
+  color: var(--green);
+  font-weight: 500;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 8px;
+}
+.stage2-notice.visible { display: flex; }
+
+/* ── Name modal overlay ────────────────────────────────────────────────── */
+.modal-overlay {
+  position: absolute; inset: 0;
+  background: rgba(20,35,25,0.72);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  z-index: 100;
+  border-radius: var(--radius);
+}
+.modal-overlay.hidden { display: none; }
+.modal-box {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  max-width: 400px;
+  width: 100%;
+  box-shadow: var(--shadow-lg);
+}
+.modal-logo {
+  width: 48px; height: auto; margin: 0 auto 16px;
+}
+.modal-logo-fallback {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--green);
+  margin: 0 auto 16px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif); font-size: 1.3rem; color: #fff;
+}
+.modal-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--green);
+  text-align: center;
+  margin-bottom: 6px;
+}
+.modal-subtitle {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+.modal-field { margin-bottom: 14px; }
+.modal-label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.modal-input {
+  width: 100%;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 9px 12px;
+  font-family: var(--font-sans);
+  font-size: 0.875rem;
+  background: var(--bg);
+}
+.modal-input:focus {
+  outline: none;
+  border-color: var(--green);
+  background: var(--surface);
+}
+.modal-warning {
+  background: var(--amber-light);
+  border: 1px solid #f0c060;
+  border-radius: 6px;
+  padding: 9px 12px;
+  font-size: 0.78rem;
+  color: var(--text-mid);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+.modal-start-btn {
+  width: 100%;
+  background: var(--green);
+  color: #fff;
+  border-radius: 7px;
+  padding: 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background 0.15s;
+}
+.modal-start-btn:hover { background: var(--green-mid); }
+.modal-start-btn:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+.modal-error {
+  font-size: 0.78rem;
+  color: var(--red);
+  margin-top: 8px;
+  display: none;
+  text-align: center;
+}
+.modal-error.visible { display: block; }
+
+/* ── Chat container (relative for modal) ───────────────────────────────── */
+.chat-container { position: relative; }
+
+/* ── Responsive tweaks ─────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .app-header { padding: 10px 16px; }
+  .tabs { padding: 0 12px; overflow-x: auto; }
+  .tab-panel { padding: 16px; }
+  .tab-btn { padding: 12px 14px; font-size: 0.75rem; }
+  .chat-outer { height: 520px; }
+  .fin-grid { grid-template-columns: 1fr; }
+  .signal-grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ── Print styles ──────────────────────────────────────────────────────── */
+@media print {
+  .tabs, .input-area, .starter-area, .unlock-banner,
+  .transcript-controls, .app-header, .modal-overlay { display: none !important; }
+  .tab-panel { display: block !important; }
+  .chat-outer { height: auto; border: none; box-shadow: none; }
+  .messages { overflow: visible; height: auto; max-height: none; }
+}
+</style>
+</head>
+
+<body>
+<a href="#chat-input" class="skip-link">Skip to chat</a>
+
+<div class="app" role="main">
+
+  <!-- ── Header ─────────────────────────────────────────────────────────── -->
+  <header class="app-header" role="banner">
+    <div class="header-brand">
+      <img src="harvest_bridge_logo_400px.png"
+           alt="HarvestBridge logo"
+           class="header-logo"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="header-logo-fallback" style="display:none" aria-hidden="true">HB</div>
+      <div class="header-text">
+        <div class="header-company">HarvestBridge</div>
+        <div class="header-course">Dynamic Innovation GIJ 878 · GIBS MBA</div>
+      </div>
+    </div>
+    <div class="header-day-badge" aria-label="Day 2 — Crisis Mode">Day 2 · Crisis Mode</div>
+  </header>
+
+  <!-- ── Tabs ───────────────────────────────────────────────────────────── -->
+  <div role="tablist" class="tabs" aria-label="HarvestBridge sections">
+    <button class="tab-btn" role="tab" aria-selected="true"  aria-controls="panel-company"  id="tab-company"  tabindex="0">Company</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-people"   id="tab-people"   tabindex="-1">People</button>
+    <button class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-chat"     id="tab-chat"     tabindex="-1">Talk to Amina</button>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       COMPANY TAB
+  ══════════════════════════════════════════════════════════════════════════ -->
+  <div id="panel-company" role="tabpanel" aria-labelledby="tab-company" class="tab-panel active">
+
+    <!-- Crisis alert -->
+    <div class="alert alert-critical" role="alert">
+      <strong>⚠ Board meeting: 6 days.</strong> Meridian Capital has requested a strategy presentation. Operational signals are contradicting the narrative. This is Day 2.
+    </div>
+
+    <!-- About -->
+    <div class="card">
+      <h2 class="card-heading">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        About HarvestBridge
+      </h2>
+      <p>HarvestBridge began as a smallholder aggregation cooperative in Limpopo, built on a founding mission aligned with SDG 2: food security and fair income for small-scale producers. Co-founded by Amina Mokoena and Sipho Dlamini, the company has grown into one of South Africa's most ambitious agri-food enterprises — but the growth has not been without cost.</p>
+      <p>A private equity partnership with Meridian Capital (41% stake) funded the transition to ambient food manufacturing. The cooperative became a supplier contract. The artisanal became industrial. And now, HarvestTable — a premium Sandton retail concept opened in March 2024 — is underperforming at a moment when the board wants answers.</p>
+      <p><strong>Mission:</strong> Nourishing communities, connecting growth. <strong>The question for this board meeting:</strong> what does that mission actually mean for the decisions ahead?</p>
+    </div>
+
+    <!-- Three scales -->
+    <div class="card">
+      <h2 class="card-heading">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+        The Three Innovation Scales
+      </h2>
+      <ul class="scale-list" aria-label="Three innovation scales">
+        <li class="scale-item">
+          <div class="scale-icon macro" aria-hidden="true">M</div>
+          <div class="scale-content">
+            <h3>Macro — The Limpopo Cooperative</h3>
+            <p>The founding tier. 340 registered smallholder farmers. Currently supplying 68% of HarvestBridge's manufacturing inputs — <em>but that figure is under quiet review</em>. A competing aggregator, Agri-Connect SA, has been making contact with cooperative members. Sipho Dlamini called Amina last night.</p>
+          </div>
+        </li>
+        <li class="scale-item">
+          <div class="scale-icon meso" aria-hidden="true">M</div>
+          <div class="scale-content">
+            <h3>Meso — Ambient Food Manufacturing</h3>
+            <p>The commercial backbone. R388m revenue (FY2025). Carries the group's EBITDA. Meridian's investment thesis was built here. Staff turnover in this division has climbed from 14% to 22% over two years. The HR Director has flagged this twice. Both times it appeared as a footnote.</p>
+          </div>
+        </li>
+        <li class="scale-item">
+          <div class="scale-icon micro" aria-hidden="true">M</div>
+          <div class="scale-content">
+            <h3>Micro — HarvestTable, Sandton</h3>
+            <p>The retail hypothesis. Premium, traceable, story-driven food for urban consumers. NPS: 31. Margin: –4.1%. The specialist chef-consultant who designed the menu is gone. Dr Priya Naidoo has a "soil to shelf" campaign ready — but Amina hasn't approved it, because she's not yet sure the store will still exist.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Financials -->
+    <div class="card">
+      <h2 class="card-heading">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        Financial Snapshot — FY2025
+      </h2>
+      <div class="fin-grid">
+        <div>
+          <div class="fin-block-title">P&amp;L Summary</div>
+          <div class="fin-row"><span class="fin-label">Group revenue</span><span class="fin-value">R420m</span></div>
+          <div class="fin-row"><span class="fin-label">Manufacturing division</span><span class="fin-value green">R388m</span></div>
+          <div class="fin-row"><span class="fin-label">HarvestTable (retail)</span><span class="fin-value amber">R32m</span></div>
+          <div class="fin-row"><span class="fin-label">Group EBITDA margin</span><span class="fin-value amber">9.2%</span></div>
+          <div class="fin-row"><span class="fin-label">HarvestTable margin</span><span class="fin-value red">–4.1%</span></div>
+          <div class="fin-row"><span class="fin-label">Cooperative supplier share</span><span class="fin-value amber">68%*</span></div>
+        </div>
+        <div>
+          <div class="fin-block-title">Strategic Health Indicators</div>
+          <div class="fin-row"><span class="fin-label">NPS — Cooperative tier</span><span class="fin-value green">74</span></div>
+          <div class="fin-row"><span class="fin-label">NPS — HarvestTable</span><span class="fin-value red">31</span></div>
+          <div class="fin-row"><span class="fin-label">Staff turnover (mfg)</span><span class="fin-value red">22%</span></div>
+          <div class="fin-row"><span class="fin-label">Meridian Capital stake</span><span class="fin-value">41%</span></div>
+          <div class="fin-row"><span class="fin-label">Board meeting</span><span class="fin-value red">6 days</span></div>
+          <div class="fin-row"><span class="fin-label">Year in Meridian cycle</span><span class="fin-value amber">Year 4 of 7</span></div>
+        </div>
+      </div>
+      <p style="font-size:0.75rem;color:var(--text-muted);margin-top:12px;">* Cooperative supplier share currently under internal verification. Figure represents last audited position.</p>
+    </div>
+
+    <!-- Live signals -->
+    <div class="card">
+      <h2 class="card-heading">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Live Signals — Day 2
+      </h2>
+      <div class="signal-grid" role="list" aria-label="Current performance signals">
+        <div class="signal-item red" role="listitem">
+          <div class="signal-value">–4.1%</div>
+          <div class="signal-label">HarvestTable Margin</div>
+        </div>
+        <div class="signal-item red" role="listitem">
+          <div class="signal-value">22%</div>
+          <div class="signal-label">Mfg Staff Turnover</div>
+        </div>
+        <div class="signal-item amber" role="listitem">
+          <div class="signal-value">68%*</div>
+          <div class="signal-label">Cooperative Share</div>
+        </div>
+        <div class="signal-item red" role="listitem">
+          <div class="signal-value">31</div>
+          <div class="signal-label">Retail NPS</div>
+        </div>
+        <div class="signal-item green" role="listitem">
+          <div class="signal-value">74</div>
+          <div class="signal-label">Cooperative NPS</div>
+        </div>
+        <div class="signal-item amber" role="listitem">
+          <div class="signal-value">6</div>
+          <div class="signal-label">Days to Board</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert">
+      <strong>Board pressure:</strong> Meridian Capital's 7-year investment horizon (year 4). Marcus van der Berg called this morning requesting a narrative that holds. The PE investment thesis assumed a clear path to trade sale or JSE listing. That path is less clear today than it was at year one.
+    </div>
+
+  </div><!-- /panel-company -->
+
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       PEOPLE TAB
+  ══════════════════════════════════════════════════════════════════════════ -->
+  <div id="panel-people" role="tabpanel" aria-labelledby="tab-people" class="tab-panel">
+
+    <img src="Harvest_Bridge_Groupshot.png"
+         alt="HarvestBridge leadership team — group portrait"
+         class="people-header"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="people-header-fallback" style="display:none" aria-hidden="true">HarvestBridge Leadership Team</div>
+
+    <div class="people-grid">
+
+      <!-- Amina -->
+      <div class="person-card" role="article" aria-label="Amina Mokoena profile">
+        <img src="amina.jpg" alt="Amina Mokoena, CEO" class="person-photo"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="person-photo-fallback" style="display:none" aria-hidden="true"><span>AM</span></div>
+        <div class="person-info">
+          <div class="person-name">Amina Mokoena</div>
+          <div class="person-role">Chief Executive Officer</div>
+          <p class="person-bio">Founded HarvestBridge with Sipho Dlamini in 2014. Led the Meridian Capital partnership and manufacturing scale-up. Now navigating the company's most complex strategic moment — six days before a board meeting that will define the next chapter. Still composed. Costs are showing.</p>
+        </div>
+      </div>
+
+      <!-- Tebogo -->
+      <div class="person-card" role="article" aria-label="Tebogo Khumalo profile">
+        <img src="Tebogo_Khumalo.png" alt="Tebogo Khumalo, Operations Director" class="person-photo"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="person-photo-fallback" style="display:none" aria-hidden="true"><span>TK</span></div>
+        <div class="person-info">
+          <div class="person-name">Tebogo Khumalo</div>
+          <div class="person-role">Operations Director</div>
+          <p class="person-bio">Joined HarvestBridge at the Meridian scale-up. Responsible for manufacturing operations and supplier procurement. Consistently delivers reports that meet targets. A procurement variance appeared in last week's numbers — he explained it quickly and completely. Amina let it go.</p>
+        </div>
+      </div>
+
+      <!-- Nadia -->
+      <div class="person-card" role="article" aria-label="Nadia Coetzee profile">
+        <img src="Nadia_Coetzee.png" alt="Nadia Coetzee, HR Director" class="person-photo"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="person-photo-fallback" style="display:none" aria-hidden="true"><span>NC</span></div>
+        <div class="person-info">
+          <div class="person-name">Nadia Coetzee</div>
+          <div class="person-role">HR Director</div>
+          <p class="person-bio">Has flagged culture deterioration in the manufacturing division twice in the past year. Both times her concerns appeared as footnotes in board minutes — not agenda items. Sent Amina a note last week: <em>"The manufacturing floor is not okay. I need you to make this an agenda item."</em> Awaiting response.</p>
+        </div>
+      </div>
+
+      <!-- Priya -->
+      <div class="person-card" role="article" aria-label="Dr Priya Naidoo profile">
+        <img src="Dr_Priya_Naidoo_Closeup.png" alt="Dr Priya Naidoo, Marketing Director" class="person-photo"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="person-photo-fallback" style="display:none" aria-hidden="true"><span>PN</span></div>
+        <div class="person-info">
+          <div class="person-name">Dr Priya Naidoo</div>
+          <div class="person-role">Marketing Director</div>
+          <p class="person-bio">Leads brand and consumer strategy. Has developed a "soil to shelf" storytelling campaign for HarvestTable — positioned to convert the premium consumer base the store needs. Campaign is ready. Approval is pending. The reason it hasn't been approved has not been shared with her.</p>
+        </div>
+      </div>
+
+      <!-- Sipho -->
+      <div class="person-card" role="article" aria-label="Sipho Dlamini profile">
+        <img src="Sipho_Dlamini.png" alt="Sipho Dlamini, Co-founder" class="person-photo"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="person-photo-fallback" style="display:none" aria-hidden="true"><span>SD</span></div>
+        <div class="person-info">
+          <div class="person-name">Sipho Dlamini</div>
+          <div class="person-role">Co-Founder · Community Liaison</div>
+          <p class="person-bio">Original co-founder of the Limpopo cooperative. When the Meridian deal closed, his role was reclassified as Community Liaison — a transition that was accepted without formal discussion. Called Amina last night. Something is changing in the cooperative. He didn't say it directly. He didn't need to.</p>
+        </div>
+      </div>
+
+      <!-- Meridian -->
+      <div class="person-card meridian-card" role="article" aria-label="Meridian Capital profile">
+        <div class="meridian-logo-wrap">
+          <img src="Logo_Meridian_Capital.png" alt="Meridian Capital logo"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div style="display:none;font-family:var(--font-serif);font-size:1.1rem;color:var(--blue);text-align:center">Meridian Capital</div>
+        </div>
+        <div class="person-info">
+          <div class="person-name">Meridian Capital</div>
+          <div class="person-role">Private Equity Partner · 41% Stake</div>
+          <p class="person-bio">Mid-market PE firm. 7-year investment horizon targeting trade sale or JSE listing. Currently in year 4. Marcus van der Berg called Amina this morning — calm, precise, and clear: <em>"We need a story that holds."</em> The calm version of Marcus is the one you don't want.</p>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /panel-people -->
+
+
+  <!-- ══════════════════════════════════════════════════════════════════════
+       CHAT TAB
+  ══════════════════════════════════════════════════════════════════════════ -->
+  <div id="panel-chat" role="tabpanel" aria-labelledby="tab-chat" class="tab-panel">
+    <div class="chat-container">
+
+      <!-- Name/email modal -->
+      <div class="modal-overlay" id="nameModal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="modal-box">
+          <img src="harvest_bridge_logo_400px.png" alt="HarvestBridge" class="modal-logo"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="modal-logo-fallback" style="display:none" aria-hidden="true">HB</div>
+          <h2 class="modal-title" id="modal-title">Day 2 · Amina Mokoena</h2>
+          <p class="modal-subtitle">Things have shifted since yesterday. Before we begin, please enter your details — your name and email will appear on the transcript you submit.</p>
+          <div class="modal-field">
+            <label for="nameInput" class="modal-label">Full name <span aria-hidden="true">*</span></label>
+            <input type="text" id="nameInput" class="modal-input"
+                   placeholder="e.g. Thandiwe Mokoena"
+                   autocomplete="name"
+                   aria-required="true">
+          </div>
+          <div class="modal-field">
+            <label for="emailInput" class="modal-label">Student email <span aria-hidden="true">*</span></label>
+            <input type="email" id="emailInput" class="modal-input"
+                   placeholder="e.g. t.mokoena@gibs.co.za"
+                   autocomplete="email"
+                   aria-required="true">
+          </div>
+          <div class="modal-warning" role="note">
+            ⚠ Do not refresh or close this tab during your conversation — your session is not saved server-side.
+          </div>
+          <button class="modal-start-btn" id="nameStartBtn" type="button">
+            Begin conversation
+          </button>
+          <p class="modal-error" id="modalError" role="alert" aria-live="assertive"></p>
+        </div>
+      </div>
+
+      <!-- Chat interface -->
+      <div class="chat-outer" aria-label="Chat with Amina Mokoena">
+
+        <!-- Chat header -->
+        <div class="chat-header" aria-label="Amina Mokoena, CEO of HarvestBridge">
+          <img src="amina.jpg" alt="Amina Mokoena" class="chat-avatar"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="chat-avatar-fallback" style="display:none" aria-hidden="true">AM</div>
+          <div class="chat-header-info">
+            <div class="chat-header-name">Amina Mokoena</div>
+            <div class="chat-header-role">CEO · HarvestBridge · Day 2</div>
+          </div>
+          <div class="chat-stage-badge" id="stageBadge" aria-live="polite">Stage 1</div>
+        </div>
+
+        <!-- Messages -->
+        <div class="messages" id="messages" role="log" aria-live="polite" aria-label="Conversation with Amina Mokoena" tabindex="0"></div>
+
+        <!-- Typing indicator -->
+        <div class="typing-indicator" id="typingIndicator" aria-label="Amina is typing" aria-live="polite">
+          <img src="amina.jpg" alt="" class="msg-avatar" aria-hidden="true"
+               onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+          <div class="msg-avatar-fallback" style="display:none" aria-hidden="true"
+               style="background:var(--green-light);color:var(--green)">AM</div>
+          <div class="typing-dots" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+
+        <!-- Transcript controls -->
+        <div class="transcript-controls" id="transcriptControls">
+          <button class="btn-transcript btn-download" id="btnDownload" type="button"
+                  aria-label="Download conversation transcript as text file">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download transcript (.txt)
+          </button>
+          <button class="btn-transcript btn-print" id="btnPrint" type="button"
+                  aria-label="Print or save conversation transcript as PDF">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Print / Save PDF
+          </button>
+        </div>
+
+        <!-- Unlock banner -->
+        <div class="unlock-banner" id="unlockBanner" role="region" aria-label="Unlock deeper access">
+          <div class="unlock-title">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            Unlock deeper access
+          </div>
+          <p class="unlock-description">Your faculty will share an access code at the end of today's session. Enter it here to move into a more candid conversation with Amina.</p>
+          <div class="unlock-form">
+            <label for="unlockInput" class="sr-only">Enter access code</label>
+            <input type="text" id="unlockInput" class="unlock-input"
+                   placeholder="ACCESS CODE"
+                   aria-label="Enter access code"
+                   maxlength="20">
+            <button class="unlock-btn" id="unlockBtn" type="button">Unlock</button>
+          </div>
+          <p class="unlock-error" id="unlockError" role="alert" aria-live="assertive">That code isn't right. Check with your faculty.</p>
+        </div>
+
+        <!-- Stage 2 unlocked -->
+        <div class="stage2-notice" id="stage2Notice" aria-live="polite" role="status">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          PATHLOCK verified — deeper conversation unlocked. Amina will be more direct from here.
+        </div>
+
+        <!-- Starter prompts -->
+        <div class="starter-area" id="starterArea" aria-label="Suggested conversation starters">
+          <div class="starter-label" aria-hidden="true">You could ask…</div>
+          <div class="starter-chips" role="list">
+            <button class="starter-chip" role="listitem" type="button">What's actually changed since yesterday?</button>
+            <button class="starter-chip" role="listitem" type="button">What does Marcus van der Berg want from this board meeting?</button>
+            <button class="starter-chip" role="listitem" type="button">How confident are you in your operations team right now?</button>
+            <button class="starter-chip" role="listitem" type="button">What signals are you most worried about?</button>
+            <button class="starter-chip" role="listitem" type="button">Is HarvestTable still part of the strategy?</button>
+          </div>
+        </div>
+
+        <!-- Input area -->
+        <div class="input-area">
+          <div class="input-wrap">
+            <div class="input-hint" id="inputHint">⚠ Don't refresh or close this tab — your session is not saved.</div>
+            <label for="chat-input" class="sr-only">Message Amina Mokoena</label>
+            <textarea
+              id="chat-input"
+              class="chat-input"
+              placeholder="Ask Amina something…"
+              rows="1"
+              aria-label="Message Amina Mokoena"
+              aria-describedby="inputHint"
+              maxlength="1000"
+            ></textarea>
+          </div>
+          <button class="send-btn" id="sendBtn" type="button"
+                  aria-label="Send message" disabled>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+          </button>
+        </div>
+
+      </div><!-- /chat-outer -->
+    </div><!-- /chat-container -->
+  </div><!-- /panel-chat -->
+
+</div><!-- /app -->
+
+<!-- Screen-reader only utility class -->
+<style>.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}</style>
+
+<script>
+// ══════════════════════════════════════════════════════════════════════════
+// HarvestBridge Day 2 · Chat Application
+// Amina Mokoena · Dynamic Innovation GIJ 878 · GIBS MBA
+// ══════════════════════════════════════════════════════════════════════════
+
+// ── State ──────────────────────────────────────────────────────────────────
+const state = {
+  stage:        '1',
+  studentName:  '',
+  studentEmail: '',
+  messages:     [],    // [{role, content}] for API
+  transcript:   [],    // [{role, time, text}] for download
+  exchangeCount: 0,
+  chatStarted:   false,
+  sending:       false,
+};
+
+// ── DOM refs ───────────────────────────────────────────────────────────────
+const messagesEl        = document.getElementById('messages');
+const chatInputEl       = document.getElementById('chat-input');
+const sendBtnEl         = document.getElementById('sendBtn');
+const typingEl          = document.getElementById('typingIndicator');
+const unlockBannerEl    = document.getElementById('unlockBanner');
+const unlockInputEl     = document.getElementById('unlockInput');
+const unlockBtnEl       = document.getElementById('unlockBtn');
+const unlockErrorEl     = document.getElementById('unlockError');
+const stage2NoticeEl    = document.getElementById('stage2Notice');
+const stageBadgeEl      = document.getElementById('stageBadge');
+const starterAreaEl     = document.getElementById('starterArea');
+const transcriptCtrlEl  = document.getElementById('transcriptControls');
+const btnDownloadEl     = document.getElementById('btnDownload');
+const btnPrintEl        = document.getElementById('btnPrint');
+const nameModalEl       = document.getElementById('nameModal');
+const nameInputEl       = document.getElementById('nameInput');
+const emailInputEl      = document.getElementById('emailInput');
+const nameStartBtnEl    = document.getElementById('nameStartBtn');
+const modalErrorEl      = document.getElementById('modalError');
+
+// ── Tab navigation ─────────────────────────────────────────────────────────
+const tabBtns   = document.querySelectorAll('[role="tab"]');
+const tabPanels = document.querySelectorAll('[role="tabpanel"]');
+
+function activateTab(btn) {
+  tabBtns.forEach(b => {
+    b.setAttribute('aria-selected', 'false');
+    b.setAttribute('tabindex', '-1');
+  });
+  tabPanels.forEach(p => p.classList.remove('active'));
+  btn.setAttribute('aria-selected', 'true');
+  btn.setAttribute('tabindex', '0');
+  const panel = document.getElementById(btn.getAttribute('aria-controls'));
+  panel.classList.add('active');
+
+  // Show name modal if switching to chat for the first time
+  if (btn.id === 'tab-chat' && !state.chatStarted) {
+    nameModalEl.classList.remove('hidden');
+    setTimeout(() => nameInputEl.focus(), 50);
+  }
+}
+
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => activateTab(btn));
+  btn.addEventListener('keydown', (e) => {
+    const tabs = Array.from(tabBtns);
+    const idx  = tabs.indexOf(e.currentTarget);
+    let next;
+    if (e.key === 'ArrowRight') next = tabs[(idx + 1) % tabs.length];
+    if (e.key === 'ArrowLeft')  next = tabs[(idx - 1 + tabs.length) % tabs.length];
+    if (e.key === 'Home')       next = tabs[0];
+    if (e.key === 'End')        next = tabs[tabs.length - 1];
+    if (next) { next.focus(); activateTab(next); }
+  });
+});
+
+// ── Name modal ─────────────────────────────────────────────────────────────
+function handleNameStart() {
+  const name  = nameInputEl.value.trim();
+  const email = emailInputEl.value.trim();
+  if (!name) {
+    modalErrorEl.textContent = 'Please enter your full name.';
+    modalErrorEl.classList.add('visible');
+    nameInputEl.focus();
+    return;
+  }
+  if (!email || !email.includes('@')) {
+    modalErrorEl.textContent = 'Please enter a valid email address.';
+    modalErrorEl.classList.add('visible');
+    emailInputEl.focus();
+    return;
+  }
+  state.studentName  = name;
+  state.studentEmail = email;
+  state.chatStarted  = true;
+  nameModalEl.classList.add('hidden');
+  initChat();
+  setTimeout(() => chatInputEl.focus(), 100);
+}
+
+nameStartBtnEl.addEventListener('click', handleNameStart);
+[nameInputEl, emailInputEl].forEach(el => {
+  el.addEventListener('keydown', e => { if (e.key === 'Enter') handleNameStart(); });
+});
+
+// ── Init chat ──────────────────────────────────────────────────────────────
+function initChat() {
+  const first = state.studentName.split(' ')[0];
+  const opening = `${first} — I wasn't expecting to still be having conversations today. I have a board meeting in six days and my morning started with a call from Meridian Capital that didn't improve anything. I've agreed to make myself available to this cohort — it's a useful discipline, frankly, to talk through where we are with people who are looking at it without the weight I'm carrying. What do you want to know?`;
+  state.messages.push({ role: 'assistant', content: opening });
+  state.transcript.push({ role: 'assistant', time: formatTime(), text: opening });
+  renderMessage('assistant', opening);
+  setTimeout(() => chatInputEl.focus(), 100);
+}
+
+// ── Message rendering ──────────────────────────────────────────────────────
+function renderMessage(role, text) {
+  const wrap = document.createElement('div');
+  wrap.className = `msg ${role}`;
+
+  const avatarImg = document.createElement('img');
+  avatarImg.src = 'amina.jpg';
+  avatarImg.className = 'msg-avatar';
+  avatarImg.alt = role === 'assistant' ? 'Amina Mokoena' : '';
+  avatarImg.setAttribute('aria-hidden', role === 'user' ? 'true' : 'false');
+  avatarImg.onerror = function() {
+    this.style.display = 'none';
+    const fb = document.createElement('div');
+    fb.className = 'msg-avatar-fallback';
+    fb.setAttribute('aria-hidden', 'true');
+    fb.textContent = role === 'assistant' ? 'AM' : state.studentName.charAt(0).toUpperCase();
+    wrap.insertBefore(fb, wrap.firstChild);
+  };
+
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble';
+  bubble.textContent = text;
+
+  if (role === 'assistant') {
+    wrap.appendChild(avatarImg);
+    wrap.appendChild(bubble);
+  } else {
+    const userFb = document.createElement('div');
+    userFb.className = 'msg-avatar-fallback';
+    userFb.style.background = 'var(--blue-light)';
+    userFb.style.color = 'var(--blue)';
+    userFb.setAttribute('aria-hidden', 'true');
+    userFb.textContent = state.studentName.charAt(0).toUpperCase() || 'S';
+    wrap.appendChild(userFb);
+    wrap.appendChild(bubble);
+  }
+
+  messagesEl.appendChild(wrap);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+
+  // Show transcript buttons after first exchange
+  if (!transcriptCtrlEl.classList.contains('visible')) {
+    transcriptCtrlEl.classList.add('visible');
+  }
+}
+
+// ── Send message ───────────────────────────────────────────────────────────
+async function sendMessage(text) {
+  if (state.sending || !text.trim()) return;
+  state.sending = true;
+  sendBtnEl.disabled = true;
+
+  // Hide starters after first user message
+  if (starterAreaEl) starterAreaEl.style.display = 'none';
+
+  // Add user message
+  const userText = text.trim();
+  state.messages.push({ role: 'user', content: userText });
+  state.transcript.push({ role: 'user', time: formatTime(), text: userText });
+  renderMessage('user', userText);
+  chatInputEl.value = '';
+  chatInputEl.style.height = 'auto';
+
+  state.exchangeCount++;
+
+  // Show unlock banner after 4 exchanges (if still stage 1)
+  if (state.exchangeCount >= 4 && state.stage === '1') {
+    unlockBannerEl.classList.add('visible');
+  }
+
+  // Show typing indicator
+  typingEl.classList.add('visible');
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+
+  // API call
+  try {
+    const res = await fetch('/.netlify/functions/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        messages:     state.messages,
+        stage:        state.stage,
+        studentName:  state.studentName,
+      }),
+    });
+    const data = await res.json();
+    const reply = data.reply || "I'm going to need a moment. Something came up I need to deal with — try again.";
+
+    state.messages.push({ role: 'assistant', content: reply });
+    state.transcript.push({ role: 'assistant', time: formatTime(), text: reply });
+
+    typingEl.classList.remove('visible');
+    renderMessage('assistant', reply);
+  } catch {
+    typingEl.classList.remove('visible');
+    const fallback = "I lost the thread there. Could you repeat that — it's been a long day.";
+    state.messages.push({ role: 'assistant', content: fallback });
+    state.transcript.push({ role: 'assistant', time: formatTime(), text: fallback });
+    renderMessage('assistant', fallback);
+  }
+
+  state.sending = false;
+  sendBtnEl.disabled = false;
+  chatInputEl.focus();
+}
+
+// ── Input / send handlers ──────────────────────────────────────────────────
+chatInputEl.addEventListener('input', () => {
+  sendBtnEl.disabled = !chatInputEl.value.trim() || state.sending;
+  chatInputEl.style.height = 'auto';
+  chatInputEl.style.height = Math.min(chatInputEl.scrollHeight, 120) + 'px';
+});
+
+chatInputEl.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    sendMessage(chatInputEl.value);
+  }
+});
+
+sendBtnEl.addEventListener('click', () => sendMessage(chatInputEl.value));
+
+// Starter chip clicks
+document.querySelectorAll('.starter-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    if (!state.chatStarted) return;
+    sendMessage(chip.textContent);
+  });
+});
+
+// ── Unlock / PATHLOCK ──────────────────────────────────────────────────────
+async function tryUnlock() {
+  const code = unlockInputEl.value.trim();
+  if (!code) return;
+
+  unlockBtnEl.disabled = true;
+  unlockErrorEl.classList.remove('visible');
+
+  try {
+    const res  = await fetch('/.netlify/functions/verify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code }),
+    });
+    const data = await res.json();
+
+    if (data.valid) {
+      state.stage = '2';
+      unlockBannerEl.classList.remove('visible');
+      stage2NoticeEl.classList.add('visible');
+      stageBadgeEl.textContent = 'Stage 2 — Unlocked';
+      stageBadgeEl.style.background = 'rgba(45,110,62,0.3)';
+
+      // Transition message from Amina
+      const transitionMsg = "Right. You have the code — which means your faculty think you're ready for a less managed conversation. Let me be more direct with you. There are things I've been holding carefully that I can say more plainly now. What do you want to know first?";
+      state.messages.push({ role: 'assistant', content: transitionMsg });
+      state.transcript.push({ role: 'assistant', time: formatTime(), text: transitionMsg });
+      renderMessage('assistant', transitionMsg);
+    } else {
+      unlockErrorEl.classList.add('visible');
+      unlockBtnEl.disabled = false;
+      unlockInputEl.focus();
+    }
+  } catch {
+    unlockErrorEl.textContent = 'Could not verify. Please try again.';
+    unlockErrorEl.classList.add('visible');
+    unlockBtnEl.disabled = false;
+  }
+}
+
+unlockBtnEl.addEventListener('click', tryUnlock);
+unlockInputEl.addEventListener('keydown', e => {
+  if (e.key === 'Enter') tryUnlock();
+});
+
+// ── Transcript helpers ─────────────────────────────────────────────────────
+function formatDate() {
+  return new Date().toLocaleDateString('en-ZA', {
+    weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+  });
+}
+function formatTime() {
+  return new Date().toLocaleTimeString('en-ZA', { hour: '2-digit', minute: '2-digit' });
+}
+
+function buildTranscriptText() {
+  const div = '─'.repeat(60);
+  const lines = [];
+  lines.push('GIBS MBA — DYNAMIC INNOVATION GIJ 878');
+  lines.push('HarvestBridge · Amina Mokoena AI Learning Companion');
+  lines.push('Conversation Transcript — Day 2');
+  lines.push(div);
+  lines.push(`Student name:    ${state.studentName}`);
+  lines.push(`Student email:   ${state.studentEmail}`);
+  lines.push(`Date:            ${formatDate()}`);
+  lines.push(`Generated:       ${formatTime()}`);
+  lines.push(`Stage reached:   ${state.stage === '2' ? 'Stage 1 + Stage 2 (PATHLOCK unlocked)' : 'Stage 1 — Orientation'}`);
+  lines.push(div);
+  lines.push('');
+  lines.push('CONVERSATION');
+  lines.push('');
+  state.transcript.forEach(entry => {
+    const speaker = entry.role === 'user'
+      ? state.studentName
+      : 'Amina Mokoena (HarvestBridge CEO)';
+    lines.push(`[${entry.time}]  ${speaker}`);
+    lines.push(entry.text);
+    lines.push('');
+  });
+  lines.push(div);
+  lines.push('');
+  lines.push('SUBMISSION NOTE');
+  lines.push('This transcript was generated automatically from your Day 2 conversation');
+  lines.push('with the HarvestBridge AI Learning Companion, embedded in the Dynamic');
+  lines.push('Innovation elective (GIJ 878) in Blackboard Ultra. Submit this file as');
+  lines.push('part of your assignment evidence package as instructed by your faculty.');
+  lines.push('');
+  lines.push('Gordon Institute of Business Science · University of Pretoria');
+  lines.push('Digital Education · liezl@gibs.co.za');
+  return lines.join('\n');
+}
+
+btnDownloadEl.addEventListener('click', () => {
+  const text = buildTranscriptText();
+  const blob = new Blob([text], { type: 'text/plain' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  const safe = state.studentName.replace(/\s+/g, '_').replace(/[^a-zA-Z0-9_]/g, '');
+  a.href     = url;
+  a.download = `HarvestBridge_Day2_${safe}_${new Date().toISOString().slice(0,10)}.txt`;
+  a.click();
+  URL.revokeObjectURL(url);
+});
+
+btnPrintEl.addEventListener('click', () => window.print());
+
+</script>
+</body>
+</html>

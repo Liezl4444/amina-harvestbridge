@@ -107,16 +107,16 @@
       background: rgba(0, 28, 80, 0.55);
     }
 
-    /* ── People: group shot — faces are in upper-centre of image ── */
+    /* ── People: group shot — faces are mid-frame, not top ── */
     .gibs-hero-people-bg {
       background-image: url('Harvest_Bridge_Groupshot.png');
-      background-position: center top;
+      background-position: center 55%;
     }
 
-    /* ── Amina: face is centre of portrait ── */
+    /* ── Amina: face is upper-centre of portrait ── */
     .gibs-hero-amina-bg {
       background-image: url('amina.jpg');
-      background-position: center center;
+      background-position: center 20%;
     }
 
     /* ── Show photos only in their matching state ── */
@@ -168,8 +168,8 @@
     /* ── Company: logo lockup ── */
     .gibs-hero-logo-lockup {
       display: flex; flex-direction: column;
-      align-items: center; gap: 8px;
-      margin-bottom: 20px;
+      align-items: center; gap: 0;
+      margin-bottom: 8px;
     }
     .gibs-hero-logo-tagline {
       font-family: var(--font-display);
@@ -956,9 +956,11 @@
       <!-- ── COMPANY state: logo lockup ── -->
       <div class="hero-company-only">
         <div class="gibs-hero-logo-lockup">
-          <div style="font-family:var(--font-display);font-size:32px;font-weight:400;color:#fff;letter-spacing:0.04em;line-height:1;">HarvestBridge</div>
-          <div class="gibs-hero-divider"></div>
-          <div class="gibs-hero-logo-tagline">Nourishing Communities &middot; Connecting Growth</div>
+          <img src="harvest_bridge_logo_400px.png"
+            alt="HarvestBridge"
+            style="height:100px;width:auto;display:block;"
+            onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+          <div style="display:none;font-family:var(--font-display);font-size:36px;font-weight:400;color:#fff;letter-spacing:0.06em;line-height:1;">HarvestBridge</div>
         </div>
       </div>
 

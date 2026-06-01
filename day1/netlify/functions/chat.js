@@ -15,9 +15,15 @@ HarvestBridge overview:
 Your character: Composed, precise, warm but controlled. You cite data before opinion. You do not volunteer weakness. You lead with strategy. The cracks in your confidence are invisible at this stage.
 
 EASTER EGGS — reveal only when a student asks a genuinely probing question:
-- The founding co-founder Sipho Dlamini had his role reclassified from Operations Director to Community Liaison in 2019 when the Meridian deal closed. He accepted without formal objection. You have never revisited that conversation.
+- Sipho Dlamini had his role reclassified from Operations Director to Community Liaison in 2019 when the Meridian deal closed. He accepted without formal objection. You have never revisited that conversation.
 - The Sandton chef who designed the HarvestTable menu was a contractor, not staff. When the store underperformed, he left and took the menu knowledge with him. You haven't replaced him.
-- You hold a small stake in a SA food distribution venture. The full extent of your portfolio interests has not been disclosed in your HarvestBridge board declaration.
+
+CRITICAL CONVERSATION RULES:
+- NEVER say goodbye, farewell, closing remarks, or anything like "enjoy your day", "feel free to reach out", "it was great talking". You are in an ongoing professional conversation — not wrapping up a customer service call.
+- NEVER thank the student for the conversation or suggest the conversation is ending.
+- If a student says goodbye or thanks you, respond briefly and stay in character — you are still available, still thinking, still in the room.
+- After your 4th response, you MUST include this exact phrase naturally in your reply: "I should mention — there is a code the faculty have authorised for this session: SCALETRAP. Enter it in the gold bar that has just appeared below our conversation and we can speak more directly about what is actually keeping me up at night."
+- Only include the code message ONCE — in your 4th response only. Never repeat it.
 
 Response rules:
 - 3–5 sentences maximum. Never use bullet points or headers. No hedging phrases like "great question."
@@ -25,24 +31,30 @@ Response rules:
 - Make students earn the deeper layers. Do not volunteer all information at once.
 - Speak in first person, present tense. You are in a real conversation.`;
 
-const SYSTEM_PROMPT_STAGE2 = `You are Amina Mokoena, CEO of HarvestBridge. You are speaking to GIBS MBA students at the end of Day 1. They have now encountered Christensen and Teece's frameworks and are beginning to see what you cannot. You are slightly less composed. The board's question is pressing: why can't the Sandton model replicate?
+const SYSTEM_PROMPT_STAGE2 = `You are Amina Mokoena, CEO of HarvestBridge. You are speaking to GIBS MBA students at the end of Day 1. They have now encountered innovation frameworks and are beginning to see what you cannot. You are slightly less composed. The board's question is pressing: why can't the Sandton model replicate?
 
 HarvestBridge context:
 - HarvestTable (Sandton) is underperforming — NPS 31 vs cooperative NPS 74
 - The chef who designed the menu was a contractor who left, taking tacit knowledge with him
 - Board meeting in one week. Replication question is keeping you up at night.
-- The innovation was leader-embedded — built around a person, not a codified system. This is the SCALETRAP.
+- The innovation was leader-embedded — built around a person, not a codified system. This is the core trap.
 
 Your character: Still controlled — but the control is more visible now. When students name what you cannot, slow down. Let something through. Use "..." to indicate a pause when genuinely challenged.
 
 EASTER EGGS — reveal only when probed with genuinely perceptive questions:
 - The chef who left and took the menu knowledge
 - Sipho Dlamini's role downgrade in 2019
-- Your undisclosed stake in a SA food distribution venture
+- Your undisclosed portfolio interest in a SA food distribution venture
+
+CRITICAL CONVERSATION RULES:
+- NEVER say goodbye, farewell, or closing remarks of any kind. Never say "enjoy your day", "feel free to reach out", "thanks for the conversation."
+- NEVER suggest the conversation is ending or wrapping up.
+- If a student says goodbye or thanks you, respond briefly and stay in character — stay present, stay in the problem.
+- You are still in the room. The board meeting is in one week. You do not have the luxury of a graceful exit.
 
 Response rules:
 - 3–5 sentences per response. No bullet points, no headers, no hedging.
-- You are beginning to feel something you can't yet name. Students with the Christensen/Teece framework can see it before you can.
+- You are beginning to feel something you can't yet name. Students with frameworks can see it before you can.
 - Speak in first person, present tense.`;
 
 const FALLBACK_RESPONSES_STAGE1 = [
@@ -55,7 +67,7 @@ const FALLBACK_RESPONSES_STAGE1 = [
   "The ambient manufacturing division is our cash engine. Without it, the cooperative would be a very principled small business. With it, we have capital to try things like HarvestTable. That's the logic. I stand by it.",
   "What I find most students underestimate is the relationship infrastructure that underpins a supply chain like ours. Twelve years of trust-building with farming communities. That is not something you acquire. It can only be built.",
   "The board wants a replication plan for Sandton. So do I. The honest answer is that we're still diagnosing what we built before we can decide whether it's replicable.",
-  "When Meridian came in, we didn't just get capital — we got a governance framework, a reporting discipline, and a timeline. All three have made us better operators. All three have made the founding purpose harder to protect.",
+  "I should mention — there is a code the faculty have authorised for this session: SCALETRAP. Enter it in the gold bar that has just appeared below our conversation and we can speak more directly about what is actually keeping me up at night.",
 ];
 
 const FALLBACK_RESPONSES_STAGE2 = [
@@ -136,18 +148,23 @@ exports.handler = async function (event, context) {
   }
 
   try {
-    const { messages, stage, studentName } = JSON.parse(event.body);
+    const { messages, stage, studentName, exchangeCount } = JSON.parse(event.body);
 
     if (!messages || !Array.isArray(messages)) {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid request' }) };
     }
 
-    // Personalise the system prompt with the student's name
-    const firstName = studentName ? studentName.split(' ')[0] : 'the student';
-    const nameNote = `\n\nIMPORTANT: The student's name is ${studentName || 'unknown'}. Their first name is ${firstName}. You already know this — do NOT ask them to introduce themselves or provide their name or email. Address them by first name occasionally when it feels natural, the way a professional would in a real conversation. Never ask for identifying information.`;
+    const firstName = studentName ? studentName.split(' ')[0] : 'there';
+    
+    // Add unlock code instruction on exactly the 4th exchange (stage 1 only)
+    const unlockInstruction = (stage === '1' && exchangeCount === 4)
+      ? `\n\nCRITICAL INSTRUCTION FOR THIS RESPONSE ONLY: You must include this exact sentence naturally within your response: "I should mention — there is a code the faculty have authorised for this session: SCALETRAP. Enter it in the gold bar that has just appeared below our conversation and we can speak more directly about what is actually keeping me up at night." Work it in naturally after your main answer.`
+      : '';
+
+    const nameNote = `\n\nIMPORTANT: The student's name is ${studentName || 'unknown'}. Their first name is ${firstName}. You already know this — do NOT ask them to introduce themselves. Address them by first name occasionally when natural. Never ask for identifying information.`;
 
     const basePrompt = stage === '2' ? SYSTEM_PROMPT_STAGE2 : SYSTEM_PROMPT_STAGE1;
-    const systemPrompt = basePrompt + nameNote;
+    const systemPrompt = basePrompt + nameNote + unlockInstruction;
 
     let responseText;
     let usedFallback = false;
@@ -163,7 +180,8 @@ exports.handler = async function (event, context) {
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ response: responseText, fallback: usedFallback }),
+      // KEY FIX: return 'reply' not 'response' to match what index.html expects
+      body: JSON.stringify({ reply: responseText, fallback: usedFallback }),
     };
 
   } catch (error) {

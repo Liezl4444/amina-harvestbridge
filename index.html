@@ -83,7 +83,7 @@
       color: #fff;
       position: relative;
       overflow: hidden;
-      height: 260px;
+      height: 300px;
       background: linear-gradient(160deg, #001535 0%, #002c77 55%, #1a4a9a 100%);
       isolation: isolate;
     }
@@ -106,16 +106,16 @@
       background: rgba(0, 28, 80, 0.60);
     }
 
-    /* ── People photo ── */
+    /* ── People photo — position to show faces in centre ── */
     .gibs-hero-people-bg {
       background-image: url('Harvest_Bridge_Groupshot.png');
-      background-position: center 25%;
+      background-position: center 40%;
     }
 
-    /* ── Amina photo ── */
+    /* ── Amina photo — position to show face not hairline ── */
     .gibs-hero-amina-bg {
       background-image: url('amina.jpg');
-      background-position: center 12%;
+      background-position: center 35%;
     }
 
     /* ── Show photos only in their matching state ── */
@@ -146,7 +146,7 @@
       align-items: center; justify-content: center;
       text-align: center;
       position: relative; z-index: 1;
-      padding: 16px 24px 52px; /* top:16px keeps badge clear of edge; 52px bottom = tab bar */
+      padding: 16px 24px 60px; /* 60px bottom = tab bar clearance */
     }
     /* Chat left-aligns its content */
     .gibs-hero.state-chat .gibs-hero-inner {
@@ -955,10 +955,11 @@
       <!-- ── COMPANY state: logo lockup ── -->
       <div class="hero-company-only">
         <div class="gibs-hero-logo-lockup">
-          <!-- SVG logo inline — always works, no file load needed -->
+          <!-- SVG logo: explicit w/h prevents white-box rendering bug -->
           <img src="harvest_bridge_logo.svg"
             alt="HarvestBridge"
-            style="height:56px;width:auto;filter:brightness(0) invert(1);opacity:0.95;"
+            width="180" height="134"
+            style="width:180px;height:auto;filter:brightness(0) invert(1);opacity:0.95;display:block;"
             onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
           <span style="display:none;font-family:var(--font-display);font-size:26px;font-weight:400;color:#fff;letter-spacing:0.02em;">HarvestBridge</span>
           <div class="gibs-hero-divider"></div>

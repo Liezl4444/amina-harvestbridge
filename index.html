@@ -82,8 +82,8 @@
       position: relative;
       background: linear-gradient(160deg, #001535 0%, #002c77 55%, #1a4a9a 100%);
       overflow: hidden;
-      /* Auto height — content determines it, tabs pinned below */
-      padding-bottom: 52px; /* space for tab bar */
+      height: 240px;
+      padding-bottom: 52px;
     }
 
     /* ── Course badge ── */
@@ -108,53 +108,45 @@
       min-height: 200px;
     }
 
-    /* Badge spans full width on its own row */
+    /* Badge spans full width */
     .gibs-hero-badge-row {
       grid-column: 1 / -1;
       margin-bottom: 16px;
     }
 
-    /* Left column: text content */
+    /* Left column: text */
     .gibs-hero-text {
       display: flex; flex-direction: column;
       justify-content: center;
-      padding-right: 24px;
+      padding-right: 0;
     }
 
-    /* Right column: photo — fixed size, always crops to face */
+    /* Right column: photo — full bleed, gradient fade left edge */
     .gibs-hero-photo {
-      width: 160px;
-      align-self: stretch;
-      position: relative;
+      width: 260px;
+      position: absolute;
+      top: 0; right: 0; bottom: 52px; /* 52px = tab bar height */
       overflow: hidden;
-      border-radius: var(--radius);
-      flex-shrink: 0;
     }
     .gibs-hero-photo img {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       object-fit: cover;
-      object-position: center 20%;
       display: block;
     }
-    /* Blue tint over photo */
-    .gibs-hero-photo::after {
+    /* Gradient: fades photo into the blue on the left */
+    .gibs-hero-photo::before {
       content: '';
       position: absolute; inset: 0;
-      background: rgba(0,28,80,0.35);
-      border-radius: var(--radius);
+      background: linear-gradient(to right, #002c77 0%, rgba(0,44,119,0.6) 30%, transparent 70%);
+      z-index: 1;
     }
 
-    /* ── Company: no photo panel, logo centred ── */
+    /* ── Company: centred, no photo panel ── */
     .gibs-hero.state-company .gibs-hero-inner {
       grid-template-columns: 1fr;
       text-align: center;
     }
     .gibs-hero.state-company .gibs-hero-photo { display: none; }
-    .gibs-hero.state-company .gibs-hero-text {
-      align-items: center;
-      padding-right: 0;
-    }
 
     /* Company logo */
     .gibs-hero-logo-lockup {
@@ -237,13 +229,17 @@
     .gibs-hero.state-people  .hero-people-only  { display: flex; width: 100%; align-items: center; gap: 24px; }
     .gibs-hero.state-chat    .hero-chat-only    { display: flex; width: 100%; align-items: center; gap: 24px; }
 
-    /* ── Tab nav pinned to bottom ── */
+    /* ── Tab nav — centred pill style ── */
     .gibs-tabs-nav {
       display: flex; gap: 4px;
       position: absolute;
-      bottom: 0; left: 0; right: 0;
+      bottom: 8px;
+      left: 50%; transform: translateX(-50%);
+      width: calc(100% - 32px);
+      max-width: 760px;
       background: rgba(0,0,0,0.28);
-      padding: 4px 16px;
+      padding: 4px;
+      border-radius: var(--radius-sm);
       z-index: 2;
     }
     .gibs-tab-btn {
@@ -939,9 +935,13 @@
 
       <!-- ── COMPANY: logo centred, no photo ── -->
       <div class="hero-company-only" style="width:100%;">
-        <div class="gibs-hero-text">
+        <div class="gibs-hero-text" style="align-items:center;">
           <div class="gibs-hero-logo-lockup">
-            <div class="gibs-hero-logo-name">HarvestBridge</div>
+            <img src="harvest_bridge_logo_400px.png"
+              alt="HarvestBridge"
+              style="height:90px;width:90px;object-fit:contain;display:block;"
+              onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
+            <div style="display:none;" class="gibs-hero-logo-name">HarvestBridge</div>
             <div class="gibs-hero-divider"></div>
             <div class="gibs-hero-logo-tagline">Nourishing Communities &middot; Connecting Growth</div>
           </div>

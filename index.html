@@ -93,6 +93,7 @@
     .gibs-hero-amina-bg {
       position: absolute; inset: 0;
       background-size: cover;
+      background-repeat: no-repeat;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.4s ease;
@@ -103,19 +104,19 @@
     .gibs-hero-amina-bg::after {
       content: '';
       position: absolute; inset: 0;
-      background: rgba(0, 28, 80, 0.60);
+      background: rgba(0, 28, 80, 0.55);
     }
 
-    /* ── People photo — position to show faces in centre ── */
+    /* ── People: group shot — faces are in upper-centre of image ── */
     .gibs-hero-people-bg {
       background-image: url('Harvest_Bridge_Groupshot.png');
-      background-position: center 40%;
+      background-position: center top;
     }
 
-    /* ── Amina photo — position to show face not hairline ── */
+    /* ── Amina: face is centre of portrait ── */
     .gibs-hero-amina-bg {
       background-image: url('amina.jpg');
-      background-position: center 35%;
+      background-position: center center;
     }
 
     /* ── Show photos only in their matching state ── */
@@ -955,13 +956,7 @@
       <!-- ── COMPANY state: logo lockup ── -->
       <div class="hero-company-only">
         <div class="gibs-hero-logo-lockup">
-          <!-- SVG logo: explicit w/h prevents white-box rendering bug -->
-          <img src="harvest_bridge_logo.svg"
-            alt="HarvestBridge"
-            width="180" height="134"
-            style="width:180px;height:auto;filter:brightness(0) invert(1);opacity:0.95;display:block;"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
-          <span style="display:none;font-family:var(--font-display);font-size:26px;font-weight:400;color:#fff;letter-spacing:0.02em;">HarvestBridge</span>
+          <div style="font-family:var(--font-display);font-size:32px;font-weight:400;color:#fff;letter-spacing:0.04em;line-height:1;">HarvestBridge</div>
           <div class="gibs-hero-divider"></div>
           <div class="gibs-hero-logo-tagline">Nourishing Communities &middot; Connecting Growth</div>
         </div>

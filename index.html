@@ -73,86 +73,17 @@
     }
 
     /* =====================================================
-       HERO PANEL — DYNAMIC (changes per tab)
+       HERO — SPLIT LAYOUT (text left, image right)
+       Same height on all three tabs. No background-image
+       percentage guessing. Uses real <img> tags.
        ===================================================== */
-
-    /* ══════════════════════════════════════════════════════
-       HERO — FIXED HEIGHT, identical across all three tabs
-       ══════════════════════════════════════════════════════ */
     .gibs-hero {
       color: #fff;
       position: relative;
-      overflow: hidden;
-      height: 300px;
       background: linear-gradient(160deg, #001535 0%, #002c77 55%, #1a4a9a 100%);
-      isolation: isolate;
-    }
-
-    /* ── Photo layers: absolutely positioned, hidden by default ── */
-    .gibs-hero-people-bg,
-    .gibs-hero-amina-bg {
-      position: absolute; inset: 0;
-      background-size: cover;
-      background-repeat: no-repeat;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease;
-      z-index: 0;
-    }
-    /* Blue tint overlay sits on top of each photo */
-    .gibs-hero-people-bg::after,
-    .gibs-hero-amina-bg::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: rgba(0, 28, 80, 0.55);
-    }
-
-    /* ── People: group shot — faces are mid-frame, not top ── */
-    .gibs-hero-people-bg {
-      background-image: url('Harvest_Bridge_Groupshot.png');
-      background-position: center 55%;
-    }
-
-    /* ── Amina: face is upper-centre of portrait ── */
-    .gibs-hero-amina-bg {
-      background-image: url('amina.jpg');
-      background-position: center 20%;
-    }
-
-    /* ── Show photos only in their matching state ── */
-    .gibs-hero.state-people .gibs-hero-people-bg { opacity: 1; }
-    .gibs-hero.state-chat   .gibs-hero-amina-bg  { opacity: 1; }
-
-    /* ── Company: subtle decorative circles ── */
-    .gibs-hero.state-company::before {
-      content: '';
-      position: absolute; top: -80px; right: -80px;
-      width: 260px; height: 260px;
-      background: rgba(0,115,120,0.12); border-radius: 50%;
-      pointer-events: none; z-index: 0;
-    }
-    .gibs-hero.state-company::after {
-      content: '';
-      position: absolute; bottom: 20px; left: -40px;
-      width: 180px; height: 180px;
-      background: rgba(201,99,47,0.07); border-radius: 50%;
-      pointer-events: none; z-index: 0;
-    }
-
-    /* ── Shared hero inner — fills the fixed height, centres content ── */
-    .gibs-hero-inner {
-      max-width: 760px; margin: 0 auto; width: 100%;
-      height: 100%;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      text-align: center;
-      position: relative; z-index: 1;
-      padding: 16px 24px 60px; /* 60px bottom = tab bar clearance */
-    }
-    /* Chat left-aligns its content */
-    .gibs-hero.state-chat .gibs-hero-inner {
-      align-items: flex-start;
-      text-align: left;
+      overflow: hidden;
+      /* Auto height — content determines it, tabs pinned below */
+      padding-bottom: 52px; /* space for tab bar */
     }
 
     /* ── Course badge ── */
@@ -162,57 +93,113 @@
       color: rgba(255,255,255,0.92);
       font-size: 11px; font-weight: 700;
       letter-spacing: 0.09em; text-transform: uppercase;
-      padding: 5px 14px; border-radius: 20px; margin-bottom: 16px;
+      padding: 5px 14px; border-radius: 20px;
     }
 
-    /* ── Company: logo lockup ── */
+    /* ── Hero inner: two-column grid ── */
+    .gibs-hero-inner {
+      max-width: 760px; margin: 0 auto; width: 100%;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      grid-template-rows: auto 1fr;
+      gap: 0;
+      padding: 20px 24px 0;
+      position: relative; z-index: 1;
+      min-height: 200px;
+    }
+
+    /* Badge spans full width on its own row */
+    .gibs-hero-badge-row {
+      grid-column: 1 / -1;
+      margin-bottom: 16px;
+    }
+
+    /* Left column: text content */
+    .gibs-hero-text {
+      display: flex; flex-direction: column;
+      justify-content: center;
+      padding-right: 24px;
+    }
+
+    /* Right column: photo — fixed size, always crops to face */
+    .gibs-hero-photo {
+      width: 160px;
+      align-self: stretch;
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius);
+      flex-shrink: 0;
+    }
+    .gibs-hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      display: block;
+    }
+    /* Blue tint over photo */
+    .gibs-hero-photo::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(0,28,80,0.35);
+      border-radius: var(--radius);
+    }
+
+    /* ── Company: no photo panel, logo centred ── */
+    .gibs-hero.state-company .gibs-hero-inner {
+      grid-template-columns: 1fr;
+      text-align: center;
+    }
+    .gibs-hero.state-company .gibs-hero-photo { display: none; }
+    .gibs-hero.state-company .gibs-hero-text {
+      align-items: center;
+      padding-right: 0;
+    }
+
+    /* Company logo */
     .gibs-hero-logo-lockup {
       display: flex; flex-direction: column;
-      align-items: center; gap: 0;
-      margin-bottom: 8px;
+      align-items: center; gap: 12px;
+    }
+    .gibs-hero-logo-img {
+      height: 80px; width: auto; display: block;
+    }
+    .gibs-hero-logo-name {
+      font-family: var(--font-display);
+      font-size: 30px; font-weight: 400;
+      color: #fff; letter-spacing: 0.05em;
+      line-height: 1;
     }
     .gibs-hero-logo-tagline {
       font-family: var(--font-display);
       font-size: 13px; font-style: italic;
-      color: rgba(255,255,255,0.60);
-      letter-spacing: 0.02em;
+      color: rgba(255,255,255,0.65);
+      letter-spacing: 0.04em;
     }
     .gibs-hero-divider {
-      width: 48px; height: 2px;
-      background: var(--teal);
-      margin: 10px auto 14px;
-      opacity: 0.8;
+      width: 40px; height: 2px;
+      background: var(--teal); opacity: 0.8;
     }
 
-    /* ── People: team headline ── */
-    .gibs-hero-team-headline {
-      margin-bottom: 6px;
-    }
-    .gibs-hero-team-headline h1 {
-      font-family: var(--font-display);
-      font-size: clamp(24px, 5vw, 32px);
-      font-weight: 400; line-height: 1.2;
-      color: #fff;
-      margin-bottom: 4px;
-    }
-    .gibs-hero-team-sub {
-      font-size: 13px; color: rgba(255,255,255,0.72);
-      font-style: italic; margin-bottom: 16px;
+    /* ── People: group photo, face centred ── */
+    .gibs-hero.state-people .gibs-hero-photo img {
+      object-position: center 30%;
     }
 
-    /* ── Chat: Amina cinematic lockup ── */
+    /* ── Chat: Amina portrait ── */
+    .gibs-hero.state-chat .gibs-hero-photo img {
+      object-position: center 15%;
+    }
     .gibs-hero-amina-eyebrow {
       font-size: 11px; font-weight: 700;
       letter-spacing: 0.12em; text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 10px;
+      color: var(--orange); margin-bottom: 8px;
     }
     .gibs-hero-amina-name {
       font-family: var(--font-display);
-      font-size: clamp(28px, 6vw, 40px);
+      font-size: clamp(24px, 5vw, 36px);
       font-weight: 400; line-height: 1.1;
-      color: #fff;
-      margin-bottom: 4px;
+      color: #fff; margin-bottom: 4px;
     }
     .gibs-hero-amina-title {
       font-size: 14px; color: rgba(255,255,255,0.70);
@@ -220,7 +207,6 @@
     }
     .gibs-hero-amina-badges {
       display: flex; gap: 8px; flex-wrap: wrap;
-      margin-bottom: 16px;
     }
     .gibs-hero-amina-badge {
       background: rgba(0,115,120,0.35);
@@ -231,56 +217,27 @@
       padding: 4px 10px; border-radius: 12px;
     }
 
-    /* ── Legacy avatar (kept for chat tab small display) ── */
-    .gibs-avatar-wrap { position: relative; display: inline-block; margin-bottom: 14px; }
-    .gibs-avatar {
-      width: 96px; height: 96px; border-radius: 50%;
-      border: 3px solid var(--teal);
-      object-fit: cover; display: block;
-      background: var(--blue-dark);
-    }
-    .gibs-avatar-fallback {
-      width: 96px; height: 96px; border-radius: 50%;
-      border: 3px solid var(--teal);
-      background: var(--blue-dark);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .gibs-ai-badge {
-      position: absolute; bottom: 0; right: -6px;
-      background: var(--teal); color: #fff;
-      font-size: 9px; font-weight: 700;
-      letter-spacing: 0.05em; text-transform: uppercase;
-      padding: 2px 7px; border-radius: 8px;
-      border: 2px solid var(--blue-dark);
-      white-space: nowrap;
-    }
-    .gibs-hero h1 {
+    /* People headline */
+    .gibs-hero-team-name {
       font-family: var(--font-display);
-      font-size: clamp(24px, 5vw, 32px);
-      font-weight: 400; line-height: 1.15;
-      margin-bottom: 4px; color: #fff;
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 400; line-height: 1.2;
+      color: #fff; margin-bottom: 6px;
     }
-    .gibs-hero-sub {
+    .gibs-hero-team-sub {
       font-size: 13px; color: rgba(255,255,255,0.72);
-      margin-bottom: 16px; font-style: italic;
+      font-style: italic;
     }
 
-    /* ── Visibility helpers for hero content blocks ── */
+    /* ── Visibility helpers ── */
     .hero-company-only,
     .hero-people-only,
-    .hero-chat-only {
-      display: none;
-    }
-    .gibs-hero.state-company .hero-company-only { display: block; }
-    .gibs-hero.state-people  .hero-people-only  { display: block; }
-    .gibs-hero.state-chat    .hero-chat-only    { display: block; }
+    .hero-chat-only { display: none; }
+    .gibs-hero.state-company .hero-company-only { display: block; width: 100%; }
+    .gibs-hero.state-people  .hero-people-only  { display: flex; width: 100%; align-items: center; gap: 24px; }
+    .gibs-hero.state-chat    .hero-chat-only    { display: flex; width: 100%; align-items: center; gap: 24px; }
 
-    /* ── People hero: centre align ── */
-    .gibs-hero.state-people .gibs-hero-inner {
-      align-items: center; text-align: center;
-    }
-
-    /* ── Tab nav — pinned to bottom of the fixed-height hero ── */
+    /* ── Tab nav pinned to bottom ── */
     .gibs-tabs-nav {
       display: flex; gap: 4px;
       position: absolute;
@@ -291,25 +248,55 @@
     }
     .gibs-tab-btn {
       flex: 1; padding: 10px 12px;
-      background: transparent;
-      border: none;
+      background: transparent; border: none;
       color: rgba(255,255,255,0.65);
       font-family: var(--font-body);
       font-size: 13px; font-weight: 600;
-      cursor: pointer;
-      border-radius: 6px;
+      cursor: pointer; border-radius: 6px;
       transition: background 0.2s, color 0.2s;
-      letter-spacing: 0.03em;
-      white-space: nowrap;
+      letter-spacing: 0.03em; white-space: nowrap;
     }
     .gibs-tab-btn:hover {
       color: rgba(255,255,255,0.90);
       background: rgba(255,255,255,0.08);
     }
     .gibs-tab-btn[aria-selected="true"] {
-      background: #ffffff;
-      color: var(--blue);
+      background: #ffffff; color: var(--blue);
       box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    }
+
+    /* ── Mobile: stack vertically ── */
+    @media (max-width: 600px) {
+      .gibs-hero-inner {
+        grid-template-columns: 1fr;
+      }
+      .gibs-hero-photo {
+        width: 100%; height: 180px;
+        border-radius: 0;
+        margin-top: 16px;
+      }
+      .gibs-hero-text { padding-right: 0; }
+    }
+
+    /* ── Legacy avatar (kept for chat bubbles) ── */
+    .gibs-avatar-wrap { position: relative; display: inline-block; margin-bottom: 14px; }
+    .gibs-avatar {
+      width: 96px; height: 96px; border-radius: 50%;
+      border: 3px solid var(--teal); object-fit: cover;
+      display: block; background: var(--blue-dark);
+    }
+    .gibs-avatar-fallback {
+      width: 96px; height: 96px; border-radius: 50%;
+      border: 3px solid var(--teal); background: var(--blue-dark);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .gibs-ai-badge {
+      position: absolute; bottom: 0; right: -6px;
+      background: var(--teal); color: #fff;
+      font-size: 9px; font-weight: 700;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      padding: 2px 7px; border-radius: 8px;
+      border: 2px solid var(--blue-dark); white-space: nowrap;
     }
 
     /* =====================================================
@@ -943,58 +930,63 @@
        HERO — DYNAMIC (state changes with tabs)
        ═══════════════════════════════════════════════════ -->
   <header class="gibs-hero state-company" id="gibs-hero" role="banner">
-
-    <!-- People tab: group photo background layer -->
-    <div class="gibs-hero-people-bg" aria-hidden="true"></div>
-
-    <!-- Chat tab: Amina portrait background layer -->
-    <div class="gibs-hero-amina-bg" aria-hidden="true"></div>
-
     <div class="gibs-hero-inner">
-      <div class="gibs-course-badge">Dynamic Innovation · GIJ 878 · Day 1</div>
 
-      <!-- ── COMPANY state: logo lockup ── -->
-      <div class="hero-company-only">
-        <div class="gibs-hero-logo-lockup">
-          <img src="harvest_bridge_logo_400px.png"
-            alt="HarvestBridge"
-            style="height:100px;width:auto;display:block;"
-            onerror="this.style.display='none';this.nextElementSibling.style.display='block';" />
-          <div style="display:none;font-family:var(--font-display);font-size:36px;font-weight:400;color:#fff;letter-spacing:0.06em;line-height:1;">HarvestBridge</div>
+      <!-- Badge row — full width -->
+      <div class="gibs-hero-badge-row">
+        <span class="gibs-course-badge">Dynamic Innovation · GIJ 878 · Day 1</span>
+      </div>
+
+      <!-- ── COMPANY: logo centred, no photo ── -->
+      <div class="hero-company-only" style="width:100%;">
+        <div class="gibs-hero-text">
+          <div class="gibs-hero-logo-lockup">
+            <div class="gibs-hero-logo-name">HarvestBridge</div>
+            <div class="gibs-hero-divider"></div>
+            <div class="gibs-hero-logo-tagline">Nourishing Communities &middot; Connecting Growth</div>
+          </div>
         </div>
       </div>
 
-      <!-- ── PEOPLE state: team headline ── -->
+      <!-- ── PEOPLE: text left, group photo right ── -->
       <div class="hero-people-only">
-        <h1 style="font-family:var(--font-display);font-size:clamp(22px,4vw,30px);font-weight:400;color:#fff;margin-bottom:6px;line-height:1.2;">The HarvestBridge Team</h1>
-        <p style="font-size:13px;color:rgba(255,255,255,0.72);font-style:italic;">The people behind the strategy &mdash; and the tensions within it</p>
+        <div class="gibs-hero-text" style="flex:1;">
+          <div class="gibs-hero-team-name">The HarvestBridge Team</div>
+          <div class="gibs-hero-team-sub">The people behind the strategy &mdash; and the tensions within it</div>
+        </div>
+        <div class="gibs-hero-photo">
+          <img src="Harvest_Bridge_Groupshot.png" alt="The HarvestBridge team"
+            style="object-position:center 30%;"
+            onerror="this.parentNode.style.display='none';" />
+        </div>
       </div>
 
-      <!-- ── CHAT state: Amina cinematic ── -->
+      <!-- ── CHAT: text left, Amina portrait right ── -->
       <div class="hero-chat-only">
-        <div class="gibs-hero-amina-eyebrow">AI Learning Companion</div>
-        <div class="gibs-hero-amina-name">Amina Mokoena</div>
-        <div class="gibs-hero-amina-title">Chief Executive Officer &mdash; HarvestBridge</div>
-        <div class="gibs-hero-amina-badges">
-          <span class="gibs-hero-amina-badge">Day 1 · Morning</span>
-          <span class="gibs-hero-amina-badge">Live AI</span>
-          <span class="gibs-hero-amina-badge">WCAG 2.1 AA</span>
+        <div class="gibs-hero-text" style="flex:1;">
+          <div class="gibs-hero-amina-eyebrow">AI Learning Companion</div>
+          <div class="gibs-hero-amina-name">Amina Mokoena</div>
+          <div class="gibs-hero-amina-title">Chief Executive Officer &mdash; HarvestBridge</div>
+          <div class="gibs-hero-amina-badges">
+            <span class="gibs-hero-amina-badge">Day 1 · Morning</span>
+            <span class="gibs-hero-amina-badge">Live AI</span>
+            <span class="gibs-hero-amina-badge">WCAG 2.1 AA</span>
+          </div>
+        </div>
+        <div class="gibs-hero-photo">
+          <img src="amina.jpg" alt="Amina Mokoena, CEO of HarvestBridge"
+            style="object-position:center 15%;"
+            onerror="this.parentNode.style.display='none';" />
         </div>
       </div>
 
     </div><!-- /gibs-hero-inner -->
 
-    <!-- Tab nav OUTSIDE hero-inner so it can pin to the bottom of the hero -->
+    <!-- Tab nav pinned to bottom -->
     <nav class="gibs-tabs-nav" role="tablist" aria-label="HarvestBridge sections">
-      <button class="gibs-tab-btn" role="tab" id="tab-company" aria-selected="true" aria-controls="panel-company">
-        Company
-      </button>
-      <button class="gibs-tab-btn" role="tab" id="tab-people" aria-selected="false" aria-controls="panel-people" tabindex="-1">
-        People
-      </button>
-      <button class="gibs-tab-btn" role="tab" id="tab-chat" aria-selected="false" aria-controls="panel-chat" tabindex="-1">
-        Talk to Amina
-      </button>
+      <button class="gibs-tab-btn" role="tab" id="tab-company" aria-selected="true" aria-controls="panel-company">Company</button>
+      <button class="gibs-tab-btn" role="tab" id="tab-people" aria-selected="false" aria-controls="panel-people" tabindex="-1">People</button>
+      <button class="gibs-tab-btn" role="tab" id="tab-chat" aria-selected="false" aria-controls="panel-chat" tabindex="-1">Talk to Amina</button>
     </nav>
   </header>
 

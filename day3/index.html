@@ -15,10 +15,10 @@
        CSS VARIABLES — DAY 1 GOLD STANDARD
     ═══════════════════════════════════════ */
     :root {
-      /* Primary palette — matches Day 1 navy */
-      --navy:         #0f2d4a;
-      --navy-mid:     #1a3d5c;
-      --navy-light:   #2a5070;
+      /* Primary palette — GIBS brand blue #002c77 */
+      --navy:         #002c77;
+      --navy-mid:     #003d9e;
+      --navy-light:   #1a4fa8;
       --teal:         #1a7a6e;
       --teal-light:   #22a090;
       --gold:         #c8922a;
@@ -236,40 +236,61 @@
       color: var(--white);
       border-radius: var(--radius-md);
       padding: 1rem 1.25rem;
+      height: 100%;
     }
     .decision-alert-text { font-size: .875rem; line-height: 1.6; }
     .decision-alert-text strong { display: block; font-size: .95rem; margin-bottom: .2rem; }
 
-    /* ═══════════════════════════════════════
-       LOGO BLOCK — clickable, in content
-    ═══════════════════════════════════════ */
-    .logo-block {
-      display: flex;
-      justify-content: center;
-      margin-bottom: .5rem;
+    /* ABOUT SPLIT: logo 1/3, content 2/3 */
+    .about-split { display: flex; gap: 1.25rem; align-items: flex-start; }
+    .about-logo-col {
+      flex: 0 0 33%; max-width: 33%;
+      display: flex; flex-direction: column; align-items: center; gap: .5rem;
     }
-
-    .logo-link {
-      display: inline-block;
-      border-radius: var(--radius-sm);
+    .about-logo-link {
+      display: block; border-radius: var(--radius-sm); cursor: zoom-in;
       transition: opacity var(--transition), transform var(--transition);
     }
-    .logo-link:hover { opacity: .85; transform: scale(1.03); }
-    .logo-link:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
-
-    .logo-link img {
-      width: 140px;
-      height: auto;
-      display: block;
+    .about-logo-link:hover { opacity: .9; transform: scale(1.03); }
+    .about-logo-link:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+    .about-logo-link img { width: 100%; height: auto; display: block; }
+    .about-logo-tagline {
+      text-align: center; font-family: var(--font-serif); font-style: italic;
+      font-size: .8rem; color: var(--grey-500); line-height: 1.4;
     }
+    .about-content-col { flex: 1; min-width: 0; }
 
-    .logo-tagline {
-      text-align: center;
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: .9rem;
-      color: var(--grey-500);
-      margin-top: .4rem;
+    /* LIGHTBOX */
+    .lightbox-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,44,119,.85); backdrop-filter: blur(6px);
+      z-index: 9000; align-items: center; justify-content: center; padding: 1.5rem;
+      cursor: zoom-out;
+    }
+    .lightbox-overlay.open { display: flex; }
+    .lightbox-img {
+      max-width: min(520px, 90vw); max-height: 85vh;
+      width: auto; height: auto; display: block;
+      border-radius: var(--radius-md); box-shadow: 0 16px 64px rgba(0,0,0,.5);
+    }
+    .lightbox-close {
+      position: absolute; top: 1rem; right: 1rem;
+      background: rgba(255,255,255,.15); border: 1.5px solid rgba(255,255,255,.3);
+      color: var(--white); border-radius: 50%;
+      width: 40px; height: 40px; font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: background var(--transition);
+      font-family: var(--font-sans); line-height: 1;
+    }
+    .lightbox-close:hover { background: rgba(255,255,255,.3); }
+    .lightbox-caption {
+      position: absolute; bottom: 1.25rem; left: 50%; transform: translateX(-50%);
+      color: rgba(255,255,255,.7); font-size: .78rem;
+      font-family: var(--font-serif); font-style: italic; white-space: nowrap;
+    }
+    @media (max-width: 520px) {
+      .about-split { flex-direction: column; }
+      .about-logo-col { flex: none; max-width: 60%; margin: 0 auto; }
     }
 
     /* ═══════════════════════════════════════
@@ -455,7 +476,7 @@
     /* Modal */
     .modal-overlay {
       position: absolute; inset: 0;
-      background: rgba(15,45,74,.55);
+      background: rgba(0,44,119,.55);
       backdrop-filter: blur(4px);
       display: flex; align-items: center; justify-content: center;
       z-index: 200; padding: 1rem;
@@ -501,7 +522,7 @@
       font-family: var(--font-sans); font-size: .875rem; color: var(--grey-900);
       background: var(--white); transition: border-color var(--transition);
     }
-    .modal-input:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(15,45,74,.1); }
+    .modal-input:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(0,44,119,.1); }
     .modal-submit {
       width: 100%; background: var(--navy); color: var(--white);
       border: none; border-radius: var(--radius-sm);
@@ -615,7 +636,7 @@
       color: var(--grey-900); resize: none; max-height: 120px; min-height: 42px;
       overflow-y: auto; line-height: 1.5; transition: border-color var(--transition);
     }
-    .chat-input:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(15,45,74,.08); }
+    .chat-input:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(0,44,119,.08); }
     .chat-input::placeholder { color: var(--grey-300); }
     .send-btn {
       background: var(--navy); border: none; border-radius: var(--radius-sm);
@@ -714,25 +735,35 @@
              role="tabpanel" aria-labelledby="tab-company" tabindex="0">
       <div class="content-wrap">
 
-        <!-- Clickable logo -->
-        <div class="logo-block">
-          <a href="#" class="logo-link"
-             aria-label="HarvestBridge logo. Nourishing Communities, Connecting Growth."
-             title="HarvestBridge: Nourishing Communities, Connecting Growth"
-             onclick="return false;">
-            <img src="Harvest_Bridge_Logo.png"
-                 alt="HarvestBridge: Nourishing Communities, Connecting Growth"
-                 onerror="this.parentElement.parentElement.style.display='none';" />
-          </a>
-          <p class="logo-tagline">Nourishing Communities, Connecting Growth</p>
-        </div>
+        <!-- Decision alert with logo 1/3 + content 2/3 -->
+        <div class="section-card">
+          <div class="section-card-header">About HarvestBridge</div>
+          <div class="section-card-body">
+            <div class="about-split">
 
-        <!-- Decision alert -->
-        <div class="decision-alert" role="alert">
+              <div class="about-logo-col">
+                <a class="about-logo-link"
+                   href="#"
+                   onclick="openLightbox(event)"
+                   aria-label="HarvestBridge logo. Click to enlarge. Nourishing Communities, Connecting Growth."
+                   title="Click to enlarge">
+                  <img src="Harvest_Bridge_Logo.png"
+                       alt="HarvestBridge: Nourishing Communities, Connecting Growth"
+                       onerror="this.parentElement.parentElement.style.display='none';" />
+                </a>
+                <p class="about-logo-tagline">Nourishing Communities,<br/>Connecting Growth</p>
+              </div>
 
-          <div class="decision-alert-text">
-            <strong>Board meeting: tomorrow morning.</strong>
-            Amina has three strategic directions prepared. She has asked for outside perspective before she walks in. Use the Day 3 diagnostic framework: purpose, constraint, and intentionality.
+              <div class="about-content-col">
+                <div class="decision-alert" role="alert">
+                  <div class="decision-alert-text">
+                    <strong>Board meeting: tomorrow morning.</strong>
+                    Amina has three strategic directions prepared. She has asked for outside perspective before she walks in. Use the Day 3 diagnostic framework: purpose, constraint, and intentionality.
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
         </div>
 
@@ -1307,4 +1338,59 @@
       txt += `Reflect on the frameworks you applied and how your\n`;
       txt += `thinking about HarvestBridge developed across all\n`;
       txt += `three days of Dynamic Innovation.\n\n`;
-      txt += `Formative ac
+      txt += `Formative activity · GIBS MBA · GIJ 878\n`;
+      return txt;
+    }
+
+    function downloadTranscript() {
+      const blob = new Blob([buildTranscriptText()], { type: 'text/plain' });
+      const url  = URL.createObjectURL(blob);
+      const a    = Object.assign(document.createElement('a'), { href: url, download: `HarvestBridge_Day3_${studentName}_Transcript.txt` });
+      document.body.appendChild(a); a.click();
+      document.body.removeChild(a); URL.revokeObjectURL(url);
+    }
+
+    function printTranscript() {
+      const win = window.open('', '_blank');
+      win.document.write(`<pre style="font-family:monospace;font-size:13px;white-space:pre-wrap;padding:2rem;max-width:760px;margin:0 auto;">${buildTranscriptText()}</pre>`);
+      win.document.close(); win.focus(); win.print();
+    }
+
+    // ═══ INIT ═══
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('studentName').focus();
+      document.getElementById('studentEmail').addEventListener('keydown', e => { if (e.key === 'Enter') startChat(); });
+      document.getElementById('studentName').addEventListener('keydown',  e => { if (e.key === 'Enter') document.getElementById('studentEmail').focus(); });
+    });
+  </script>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true"
+       aria-label="HarvestBridge logo enlarged"
+       onclick="closeLightbox(event)">
+    <button class="lightbox-close" onclick="closeLightbox()" aria-label="Close enlarged image">&#215;</button>
+    <img class="lightbox-img" src="Harvest_Bridge_Logo.png"
+         alt="HarvestBridge: Nourishing Communities, Connecting Growth" />
+    <div class="lightbox-caption">HarvestBridge · Nourishing Communities, Connecting Growth</div>
+  </div>
+
+  <script>
+    function openLightbox(e) {
+      e.preventDefault();
+      const lb = document.getElementById('lightbox');
+      lb.classList.add('open');
+      lb.querySelector('.lightbox-close').focus();
+      document.addEventListener('keydown', lightboxKeyClose);
+    }
+    function closeLightbox(e) {
+      if (e && e.target !== e.currentTarget && !e.target.classList.contains('lightbox-close')) return;
+      document.getElementById('lightbox').classList.remove('open');
+      document.removeEventListener('keydown', lightboxKeyClose);
+    }
+    function lightboxKeyClose(e) {
+      if (e.key === 'Escape') closeLightbox({ target: document.getElementById('lightbox'), currentTarget: document.getElementById('lightbox') });
+    }
+  </script>
+
+</body>
+</html>

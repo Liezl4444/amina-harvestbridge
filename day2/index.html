@@ -12,9 +12,9 @@
 
   <style>
     :root {
-      --navy:         #0f2d4a;
-      --navy-mid:     #1a3d5c;
-      --navy-light:   #2a5070;
+      --navy:         #002c77;
+      --navy-mid:     #003d9e;
+      --navy-light:   #1a4fa8;
       --teal:         #1a7a6e;
       --gold:         #c8922a;
       --gold-light:   #e8b84b;
@@ -204,7 +204,7 @@
     /* LIGHTBOX */
     .lightbox-overlay {
       display: none; position: fixed; inset: 0;
-      background: rgba(15,45,74,.85); backdrop-filter: blur(6px);
+      background: rgba(0,44,119,.85); backdrop-filter: blur(6px);
       z-index: 9000; align-items: center; justify-content: center; padding: 1.5rem;
       cursor: zoom-out;
     }
@@ -357,7 +357,7 @@
     /* Modal */
     .modal-overlay {
       position: absolute; inset: 0;
-      background: rgba(15,45,74,.55); backdrop-filter: blur(4px);
+      background: rgba(0,44,119,.55); backdrop-filter: blur(4px);
       display: flex; align-items: center; justify-content: center;
       z-index: 200; padding: 1rem; border-radius: var(--radius-md);
     }
@@ -395,7 +395,7 @@
       font-family: var(--font-sans); font-size: .875rem; color: var(--grey-900);
       background: var(--white); transition: border-color var(--transition);
     }
-    .modal-input:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(15,45,74,.1); }
+    .modal-input:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(0,44,119,.1); }
     .modal-warning {
       background: #fff8e8; border: 1px solid #f0c060;
       border-radius: var(--radius-sm); padding: .6rem .875rem;
@@ -566,7 +566,7 @@
       overflow-y: auto; line-height: 1.5; transition: border-color var(--transition);
       background: var(--grey-50);
     }
-    .chat-input:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(15,45,74,.08); background: var(--white); }
+    .chat-input:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(0,44,119,.08); background: var(--white); }
     .chat-input::placeholder { color: var(--grey-300); }
     .send-btn {
       background: var(--navy); border: none; border-radius: var(--radius-sm);

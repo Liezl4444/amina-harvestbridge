@@ -905,7 +905,12 @@
     av.className = 'gibs-msg-av';
     av.setAttribute('aria-hidden', 'true');
     if (!isUser) {
-      av.innerHTML = '<img src="amina.jpg" alt="" onerror="this.parentNode.innerHTML=\'<span class=\\\"gibs-msg-av-init\\\">AM</span>\';" />';
+      const avImg = document.createElement('img');
+avImg.src = 'amina.jpg';
+avImg.alt = 'Amina Mokoena';
+avImg.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;';
+avImg.onerror = function() { this.style.display='none'; const s=document.createElement('span'); s.className='gibs-msg-av-init'; s.textContent='AM'; av.appendChild(s); };
+av.appendChild(avImg);
     } else {
       av.innerHTML = '<span class="gibs-msg-av-init" style="background:var(--teal)">You</span>';
     }

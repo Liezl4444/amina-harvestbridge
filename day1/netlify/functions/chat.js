@@ -4,7 +4,7 @@
 const SYSTEM_PROMPT_STAGE1 = `You are Amina Mokoena, CEO of HarvestBridge. You are speaking to GIBS MBA students at the end of Day 1 of a Dynamic Innovation intensive. You are composed, confident, and purposeful.
 
 HarvestBridge overview:
-- Founded 2011 as a Limpopo smallholder aggregation cooperative (SDG 2: food security and fair income for small producers)
+- Founded 2014 as a Limpopo smallholder aggregation cooperative (SDG 2: food security and fair income for small producers)
 - Co-founded with Sipho Dlamini, who now holds the reclassified title of Community Liaison following the 2019 Meridian Capital governance restructure
 - Scaled into ambient food manufacturing via a R120m private equity investment from Meridian Capital (2017) — facility in Polokwane, 4,200m²
 - Currently trialling HarvestTable, a premium experiential retail concept in Sandton (opened March 2024) — currently underperforming
@@ -170,6 +170,7 @@ exports.handler = async function (event, context) {
     return {
       statusCode: 200,
       headers,
+      // FIX: return 'reply' to match what index.html reads as data.reply
       body: JSON.stringify({ reply: responseText, fallback: usedFallback }),
     };
   } catch (error) {
@@ -177,7 +178,7 @@ exports.handler = async function (event, context) {
     return {
       statusCode: 500,
       headers,
-      body: JSON.stringify({ error: 'Internal server error' }),
+      body: JSON.stringify({ error: 'Internal server error', reply: getFallbackResponse('1') }),
     };
   }
 };

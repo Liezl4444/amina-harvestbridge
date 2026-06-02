@@ -43,8 +43,7 @@ If a student asks anything outside the HarvestBridge case — general definition
 CRITICAL CONVERSATION RULES:
 - NEVER say goodbye, farewell, or any closing remarks. Never suggest the conversation is ending.
 - If a student says goodbye or thanks you, respond briefly and stay in character.
-- After your 4th response, naturally include: "I should mention — there is a code the faculty have authorised for this session: SCALETRAP. Enter it in the gold bar that has just appeared below our conversation and we can speak more directly about what is actually keeping me up at night."
-- Include the code message ONCE only — in your 4th response. Never repeat it.
+- Do NOT mention any codes or unlock mechanisms. The system handles that automatically.
 
 Response rules:
 - 3 to 5 sentences maximum. Never use bullet points or headers. No hedging phrases.
@@ -181,9 +180,8 @@ exports.handler = async function (event, context) {
 
     const firstName = studentName ? studentName.split(' ')[0] : 'there';
 
-    const unlockInstruction = (stage === '1' && exchangeCount === 4)
-      ? `\n\nCRITICAL INSTRUCTION FOR THIS RESPONSE ONLY: After your main answer, include this sentence naturally: "I should mention — there is a code the faculty have authorised for this session: SCALETRAP. Enter it in the gold bar that has just appeared below our conversation and we can speak more directly about what is actually keeping me up at night."`
-      : '';
+    // No unlock instruction in system prompt — handled server-side after API call
+    const unlockInstruction = '';
 
     const nameNote = `\n\nThe student's name is ${studentName || 'unknown'}. First name: ${firstName}. You already know this — never ask them to introduce themselves. Address them by first name occasionally when natural.`;
 
@@ -198,6 +196,12 @@ exports.handler = async function (event, context) {
       console.error('OpenAI API failed after retries:', error.message);
       responseText = getFallbackResponse(stage);
       usedFallback = true;
+    }
+
+    // Guaranteed server-side unlock: append SCALETRAP code on exactly the 4th exchange
+    if (stage === '1' && exchangeCount === 4) {
+      responseText = responseText.replace(/[.!?]?\s*$/, '') +
+        ' — I should mention, there is a code the faculty have authorised for this session: SCALETRAP. Enter it in the gold bar that has just appeared below our conversation and we can speak more directly about what is actually keeping me up at night.';
     }
 
     return {

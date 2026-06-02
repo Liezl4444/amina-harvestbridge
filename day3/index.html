@@ -3,65 +3,61 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="HarvestBridge · Day 3 — Talk to Amina Mokoena, CEO. Synthesis and strategic decision mode. Dynamic Innovation GIJ 878 · GIBS MBA." />
-  <title>HarvestBridge · Day 3 — Amina Mokoena</title>
+  <meta name="description" content="HarvestBridge Day 3: Talk to Amina Mokoena, CEO. Synthesis and strategic decision mode. Dynamic Innovation GIJ 878, GIBS MBA." />
+  <title>HarvestBridge · Day 3 · Amina Mokoena</title>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
     /* ═══════════════════════════════════════
-       CSS CUSTOM PROPERTIES — GIBS + DAY 3 PALETTE
-       Day 3: gravitas. Deep forest + warm gold.
-       Slightly heavier than Day 2 — this is the
-       board-eve reckoning.
+       CSS VARIABLES — DAY 1 GOLD STANDARD
     ═══════════════════════════════════════ */
     :root {
-      --green:        #1a3c2e;
-      --green-mid:    #2a5c44;
-      --green-light:  #3d7a5c;
+      /* Primary palette — matches Day 1 navy */
+      --navy:         #0f2d4a;
+      --navy-mid:     #1a3d5c;
+      --navy-light:   #2a5070;
+      --teal:         #1a7a6e;
+      --teal-light:   #22a090;
       --gold:         #c8922a;
       --gold-light:   #e8b84b;
-      --gold-pale:    #f9f0dc;
-      --amber:        #d4751a;    /* Day 3 accent — decision urgency */
+      --gold-pale:    #fdf6e8;
+      --amber:        #d4751a;
+
       --cream:        #faf8f4;
       --white:        #ffffff;
-      --grey-50:      #f4f4f2;
+      --grey-50:      #f5f5f3;
       --grey-100:     #e8e6e1;
       --grey-300:     #b8b4ab;
       --grey-500:     #7a7670;
       --grey-700:     #4a4640;
       --grey-900:     #1e1c18;
+
       --red-signal:   #c0392b;
       --amber-signal: #d4751a;
-      --green-signal: #2a7a44;
+      --green-signal: #1a7a4a;
 
       --font-serif: 'Cormorant Garamond', Georgia, serif;
       --font-sans:  'DM Sans', system-ui, sans-serif;
 
-      --radius-sm:  6px;
-      --radius-md:  12px;
-      --radius-lg:  20px;
-      --shadow-sm:  0 1px 3px rgba(0,0,0,.08);
-      --shadow-md:  0 4px 16px rgba(0,0,0,.10);
-      --shadow-lg:  0 8px 32px rgba(0,0,0,.14);
-
+      --radius-sm: 6px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --shadow-sm: 0 1px 4px rgba(0,0,0,.08);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.10);
+      --shadow-lg: 0 8px 32px rgba(0,0,0,.14);
       --transition: 180ms ease;
+
+      --content-width: 760px;
     }
 
     /* ═══════════════════════════════════════
-       RESET & BASE
+       RESET
     ═══════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    html {
-      font-size: 16px;
-      -webkit-text-size-adjust: 100%;
-      scroll-behavior: smooth;
-    }
-
+    html { font-size: 16px; -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
     body {
       font-family: var(--font-sans);
       background: var(--grey-50);
@@ -71,7 +67,6 @@
       flex-direction: column;
     }
 
-    /* Focus ring — WCAG 2.1 AA */
     :focus-visible {
       outline: 3px solid var(--gold);
       outline-offset: 2px;
@@ -82,104 +77,85 @@
        SKIP LINK
     ═══════════════════════════════════════ */
     .skip-link {
-      position: absolute;
-      top: -50px;
-      left: 1rem;
-      background: var(--green);
-      color: var(--white);
+      position: absolute; top: -50px; left: 1rem;
+      background: var(--navy); color: var(--white);
       padding: .5rem 1rem;
       border-radius: 0 0 var(--radius-sm) var(--radius-sm);
-      font-size: .875rem;
-      font-weight: 600;
-      text-decoration: none;
-      z-index: 9999;
+      font-size: .875rem; font-weight: 600;
+      text-decoration: none; z-index: 9999;
       transition: top var(--transition);
     }
     .skip-link:focus { top: 0; }
 
     /* ═══════════════════════════════════════
-       HEADER
+       HERO BANNER — DAY 1 STYLE
+       Text only, no logo in header.
+       Navy blue gradient background.
     ═══════════════════════════════════════ */
-    .site-header {
-      background: var(--green);
+    .gibs-hero {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, var(--navy-light) 100%);
       color: var(--white);
-      padding: .875rem 1.5rem;
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+      padding: 2rem 1.5rem 1.5rem;
       border-bottom: 3px solid var(--gold);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      flex-shrink: 0;
+      text-align: center;
     }
 
-    .header-logo {
-      height: 48px;
-      width: auto;
-      display: block;
-      flex-shrink: 0;
-    }
-
-    .header-logo-fallback {
-      width: 48px;
-      height: 48px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.12);
-      border: 2px solid rgba(255,255,255,.3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-serif);
-      font-size: 1.1rem;
-      color: var(--white);
-      flex-shrink: 0;
-      font-style: italic;
-    }
-
-    .header-text { flex: 1; }
-
-    .header-company {
-      font-family: var(--font-serif);
-      font-size: 1.35rem;
-      font-weight: 600;
-      letter-spacing: .02em;
-      line-height: 1.2;
-    }
-
-    .header-subtitle {
-      font-size: .75rem;
-      color: rgba(255,255,255,.65);
-      letter-spacing: .06em;
+    .hero-eyebrow {
+      font-size: .7rem;
+      letter-spacing: .12em;
       text-transform: uppercase;
-      margin-top: .1rem;
+      color: rgba(255,255,255,.55);
+      margin-bottom: .6rem;
+      font-weight: 500;
     }
 
-    .header-day-badge {
+    .hero-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      font-weight: 600;
+      letter-spacing: .01em;
+      line-height: 1.1;
+      margin-bottom: .35rem;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: clamp(.9rem, 2vw, 1.05rem);
+      color: rgba(255,255,255,.65);
+      margin-bottom: 1rem;
+    }
+
+    .hero-day-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
       background: var(--amber);
       color: var(--white);
-      font-size: .7rem;
-      font-weight: 600;
-      letter-spacing: .08em;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
       text-transform: uppercase;
-      padding: .35rem .75rem;
+      padding: .35rem .9rem;
       border-radius: 50px;
-      flex-shrink: 0;
       font-family: var(--font-sans);
     }
 
     /* ═══════════════════════════════════════
-       TAB NAVIGATION
+       TAB NAVIGATION — DAY 1 STYLE
     ═══════════════════════════════════════ */
     .tab-nav {
-      background: var(--green);
+      background: var(--navy);
       display: flex;
+      justify-content: center;
       gap: 0;
-      padding: 0 1.5rem;
       border-bottom: 1px solid rgba(255,255,255,.1);
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
     .tab-nav::-webkit-scrollbar { display: none; }
 
@@ -190,48 +166,36 @@
       font-family: var(--font-sans);
       font-size: .8rem;
       font-weight: 500;
-      letter-spacing: .05em;
+      letter-spacing: .06em;
       text-transform: uppercase;
-      padding: .875rem 1.25rem;
+      padding: .9rem 1.75rem;
       cursor: pointer;
       border-bottom: 2px solid transparent;
       white-space: nowrap;
       transition: color var(--transition), border-color var(--transition);
       flex-shrink: 0;
     }
-
     .tab-btn:hover { color: rgba(255,255,255,.85); }
-
     .tab-btn.active {
       color: var(--gold-light);
       border-bottom-color: var(--gold-light);
     }
 
     /* ═══════════════════════════════════════
-       MAIN LAYOUT
+       MAIN + PANELS
     ═══════════════════════════════════════ */
-    .main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      min-height: 0;
-    }
+    .main { flex: 1; display: flex; flex-direction: column; min-height: 0; }
 
-    .tab-panel {
-      display: none;
-      flex: 1;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
+    .tab-panel { display: none; flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; }
     .tab-panel.active { display: flex; flex-direction: column; }
 
     /* ═══════════════════════════════════════
-       COMPANY TAB — DAY 3 STATE
-       Board meeting tomorrow. Strategic decision imminent.
+       SHARED CONTENT WRAPPER
+       Constrained, centred — NOT full width
     ═══════════════════════════════════════ */
-    .company-content {
-      padding: 1.5rem;
-      max-width: 780px;
+    .content-wrap {
+      padding: 1.5rem 1.25rem;
+      max-width: var(--content-width);
       width: 100%;
       margin: 0 auto;
       display: flex;
@@ -239,33 +203,9 @@
       gap: 1.25rem;
     }
 
-    .decision-alert {
-      background: linear-gradient(135deg, var(--amber) 0%, #b8610e 100%);
-      color: var(--white);
-      border-radius: var(--radius-md);
-      padding: 1.1rem 1.25rem;
-      display: flex;
-      gap: .875rem;
-      align-items: flex-start;
-    }
-
-    .decision-alert-icon {
-      font-size: 1.25rem;
-      flex-shrink: 0;
-      margin-top: .05rem;
-    }
-
-    .decision-alert-text {
-      font-size: .875rem;
-      line-height: 1.55;
-    }
-
-    .decision-alert-text strong {
-      display: block;
-      font-size: .95rem;
-      margin-bottom: .25rem;
-    }
-
+    /* ═══════════════════════════════════════
+       SECTION CARDS
+    ═══════════════════════════════════════ */
     .section-card {
       background: var(--white);
       border-radius: var(--radius-md);
@@ -275,9 +215,9 @@
     }
 
     .section-card-header {
-      background: var(--green);
+      background: var(--navy);
       color: var(--white);
-      padding: .875rem 1.25rem;
+      padding: .8rem 1.25rem;
       font-family: var(--font-serif);
       font-size: 1.05rem;
       font-weight: 600;
@@ -286,36 +226,73 @@
       gap: .6rem;
     }
 
-    .section-card-header .header-icon {
-      font-size: 1rem;
-      opacity: .8;
+    .section-card-body { padding: 1.1rem 1.25rem; }
+
+    /* ═══════════════════════════════════════
+       DECISION ALERT BANNER
+    ═══════════════════════════════════════ */
+    .decision-alert {
+      background: linear-gradient(135deg, var(--amber) 0%, #b8610e 100%);
+      color: var(--white);
+      border-radius: var(--radius-md);
+      padding: 1rem 1.25rem;
+    }
+    .decision-alert-text { font-size: .875rem; line-height: 1.6; }
+    .decision-alert-text strong { display: block; font-size: .95rem; margin-bottom: .2rem; }
+
+    /* ═══════════════════════════════════════
+       LOGO BLOCK — clickable, in content
+    ═══════════════════════════════════════ */
+    .logo-block {
+      display: flex;
+      justify-content: center;
+      margin-bottom: .5rem;
     }
 
-    .section-card-body {
-      padding: 1.1rem 1.25rem;
+    .logo-link {
+      display: inline-block;
+      border-radius: var(--radius-sm);
+      transition: opacity var(--transition), transform var(--transition);
+    }
+    .logo-link:hover { opacity: .85; transform: scale(1.03); }
+    .logo-link:focus-visible { outline: 3px solid var(--gold); outline-offset: 4px; }
+
+    .logo-link img {
+      width: 140px;
+      height: auto;
+      display: block;
     }
 
+    .logo-tagline {
+      text-align: center;
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: .9rem;
+      color: var(--grey-500);
+      margin-top: .4rem;
+    }
+
+    /* ═══════════════════════════════════════
+       FINANCIAL GRID
+    ═══════════════════════════════════════ */
     .financial-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
       gap: .75rem;
     }
-
     .fin-metric {
       background: var(--grey-50);
       border: 1px solid var(--grey-100);
       border-radius: var(--radius-sm);
       padding: .875rem;
     }
-
     .fin-metric-label {
-      font-size: .7rem;
+      font-size: .68rem;
       text-transform: uppercase;
       letter-spacing: .06em;
       color: var(--grey-500);
       margin-bottom: .3rem;
     }
-
     .fin-metric-value {
       font-family: var(--font-serif);
       font-size: 1.35rem;
@@ -323,24 +300,15 @@
       color: var(--grey-900);
       line-height: 1;
     }
-
     .fin-metric-value.red   { color: var(--red-signal); }
     .fin-metric-value.amber { color: var(--amber-signal); }
     .fin-metric-value.green { color: var(--green-signal); }
+    .fin-metric-note { font-size: .7rem; color: var(--grey-500); margin-top: .25rem; line-height: 1.3; }
 
-    .fin-metric-note {
-      font-size: .7rem;
-      color: var(--grey-500);
-      margin-top: .25rem;
-      line-height: 1.3;
-    }
-
-    /* Strategic directions */
-    .directions-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 1rem;
-    }
+    /* ═══════════════════════════════════════
+       STRATEGIC DIRECTIONS
+    ═══════════════════════════════════════ */
+    .directions-grid { display: flex; flex-direction: column; gap: 1rem; }
 
     .direction-card {
       border: 1.5px solid var(--grey-100);
@@ -358,29 +326,21 @@
     }
 
     .direction-num {
-      width: 32px;
-      height: 32px;
+      width: 30px; height: 30px;
       border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex; align-items: center; justify-content: center;
       font-family: var(--font-serif);
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--white);
-      flex-shrink: 0;
+      font-size: 1rem; font-weight: 600;
+      color: var(--white); flex-shrink: 0;
     }
-
     .d1 .direction-num { background: var(--amber); }
-    .d2 .direction-num { background: var(--green-mid); }
+    .d2 .direction-num { background: var(--teal); }
     .d3 .direction-num { background: var(--gold); }
 
     .direction-title {
       font-family: var(--font-serif);
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--grey-900);
-      line-height: 1.25;
+      font-size: 1.05rem; font-weight: 600;
+      color: var(--grey-900); line-height: 1.25;
     }
 
     .direction-body {
@@ -388,101 +348,53 @@
       border-top: 1px solid var(--grey-100);
       background: var(--grey-50);
     }
-
     .direction-desc {
-      font-size: .84rem;
-      color: var(--grey-700);
-      line-height: 1.6;
+      font-size: .84rem; color: var(--grey-700); line-height: 1.65;
       margin-bottom: .6rem;
     }
-
-    .direction-stakes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .4rem;
-    }
-
+    .direction-stakes { display: flex; flex-wrap: wrap; gap: .4rem; }
     .stake-tag {
-      font-size: .7rem;
-      font-weight: 500;
-      padding: .25rem .6rem;
-      border-radius: 50px;
-      letter-spacing: .03em;
+      font-size: .7rem; font-weight: 500;
+      padding: .25rem .6rem; border-radius: 50px; letter-spacing: .03em;
     }
-
     .stake-risk   { background: #fde8e8; color: #8b1c1c; }
-    .stake-upside { background: #e8f4ee; color: #1a4a2e; }
+    .stake-upside { background: #e6f4ef; color: #1a4a2e; }
     .stake-note   { background: var(--gold-pale); color: #7a5010; }
 
-    /* Board status indicators */
-    .board-status-list {
-      display: flex;
-      flex-direction: column;
-      gap: .6rem;
-    }
-
+    /* ═══════════════════════════════════════
+       BOARD STATUS LIST
+    ═══════════════════════════════════════ */
+    .board-status-list { display: flex; flex-direction: column; gap: .6rem; }
     .board-status-item {
-      display: flex;
-      align-items: center;
-      gap: .75rem;
+      display: flex; align-items: center; gap: .75rem;
       padding: .6rem .875rem;
       background: var(--grey-50);
       border-radius: var(--radius-sm);
       border: 1px solid var(--grey-100);
     }
-
     .status-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      flex-shrink: 0;
+      width: 10px; height: 10px;
+      border-radius: 50%; flex-shrink: 0;
     }
-    .status-dot.red    { background: var(--red-signal); box-shadow: 0 0 0 3px rgba(192,57,43,.15); }
-    .status-dot.amber  { background: var(--amber-signal); box-shadow: 0 0 0 3px rgba(212,117,26,.15); }
-    .status-dot.green  { background: var(--green-signal); box-shadow: 0 0 0 3px rgba(42,122,68,.15); }
-
-    .status-text {
-      font-size: .82rem;
-      color: var(--grey-700);
-      line-height: 1.4;
-      flex: 1;
-    }
+    .status-dot.red    { background: var(--red-signal);   box-shadow: 0 0 0 3px rgba(192,57,43,.12); }
+    .status-dot.amber  { background: var(--amber-signal); box-shadow: 0 0 0 3px rgba(212,117,26,.12); }
+    .status-dot.green  { background: var(--green-signal); box-shadow: 0 0 0 3px rgba(26,122,74,.12); }
+    .status-text { font-size: .82rem; color: var(--grey-700); line-height: 1.45; flex: 1; }
     .status-text strong { color: var(--grey-900); }
-
-    .status-label {
-      font-size: .68rem;
-      text-transform: uppercase;
-      letter-spacing: .05em;
-      font-weight: 600;
-      flex-shrink: 0;
-    }
+    .status-label { font-size: .68rem; text-transform: uppercase; letter-spacing: .05em; font-weight: 600; flex-shrink: 0; }
     .status-label.red   { color: var(--red-signal); }
     .status-label.amber { color: var(--amber-signal); }
     .status-label.green { color: var(--green-signal); }
 
     .footnote {
-      font-size: .75rem;
-      color: var(--grey-500);
-      font-style: italic;
-      line-height: 1.5;
-      margin-top: .5rem;
-      padding-top: .5rem;
+      font-size: .75rem; color: var(--grey-500); font-style: italic;
+      line-height: 1.5; margin-top: .5rem; padding-top: .5rem;
       border-top: 1px dashed var(--grey-100);
     }
 
     /* ═══════════════════════════════════════
        PEOPLE TAB
     ═══════════════════════════════════════ */
-    .people-content {
-      padding: 1.5rem;
-      max-width: 780px;
-      width: 100%;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-
     .person-card {
       background: var(--white);
       border: 1px solid var(--grey-100);
@@ -490,597 +402,262 @@
       overflow: hidden;
       box-shadow: var(--shadow-sm);
     }
-
     .person-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+      display: flex; align-items: center; gap: 1rem;
       padding: 1rem 1.25rem;
       background: var(--grey-50);
       border-bottom: 1px solid var(--grey-100);
     }
-
     .person-avatar {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      object-fit: cover;
+      width: 54px; height: 54px;
+      border-radius: 50%; object-fit: cover;
       flex-shrink: 0;
       border: 2px solid var(--grey-100);
     }
-
     .person-avatar-fallback {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: var(--green);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-serif);
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--white);
-      flex-shrink: 0;
+      width: 54px; height: 54px; border-radius: 50%;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-serif); font-size: 1rem; font-weight: 600;
+      color: var(--white); flex-shrink: 0;
     }
-
     .person-meta { flex: 1; }
-
-    .person-name {
-      font-family: var(--font-serif);
-      font-size: 1.05rem;
-      font-weight: 600;
-      color: var(--grey-900);
-    }
-
-    .person-role {
-      font-size: .78rem;
-      color: var(--grey-500);
-      margin-top: .15rem;
-    }
-
-    .person-body {
-      padding: 1rem 1.25rem;
-    }
-
-    .person-bio {
-      font-size: .84rem;
-      color: var(--grey-700);
-      line-height: 1.65;
-      margin-bottom: .75rem;
-    }
-
+    .person-name { font-family: var(--font-serif); font-size: 1.05rem; font-weight: 600; color: var(--grey-900); }
+    .person-role { font-size: .78rem; color: var(--grey-500); margin-top: .15rem; }
+    .person-body { padding: 1rem 1.25rem; }
+    .person-bio { font-size: .84rem; color: var(--grey-700); line-height: 1.65; margin-bottom: .75rem; }
     .person-signal {
-      font-size: .78rem;
-      padding: .5rem .875rem;
-      border-radius: var(--radius-sm);
-      line-height: 1.4;
+      font-size: .8rem; padding: .5rem .875rem;
+      border-radius: var(--radius-sm); line-height: 1.5;
     }
-
-    .person-signal.amber { background: #fff8e8; border-left: 3px solid var(--amber); color: #5c3800; }
-    .person-signal.red   { background: #fff0ef; border-left: 3px solid var(--red-signal); color: #5c1a14; }
-    .person-signal.green { background: #eef7f2; border-left: 3px solid var(--green-signal); color: #1a3c24; }
+    .person-signal.amber { background: #fff8e8; border-left: 3px solid var(--amber);       color: #5c3800; }
+    .person-signal.red   { background: #fff0ef; border-left: 3px solid var(--red-signal);  color: #5c1a14; }
+    .person-signal.green { background: #eef7f2; border-left: 3px solid var(--green-signal);color: #1a3c24; }
     .person-signal.grey  { background: var(--grey-50); border-left: 3px solid var(--grey-300); color: var(--grey-700); }
 
+    /* Meridian logo in Marcus card */
+    .meridian-logo-wrap {
+      display: flex; align-items: center; gap: .75rem;
+      margin-bottom: .6rem;
+    }
+    .meridian-logo { height: 36px; width: auto; display: block; }
+
     /* ═══════════════════════════════════════
-       CHAT TAB
+       CHAT PANEL
     ═══════════════════════════════════════ */
     #panel-chat {
-      display: none;
-      flex-direction: column;
-      flex: 1;
-      min-height: 0;
-      height: calc(100vh - 110px);
+      display: none; flex-direction: column;
+      flex: 1; min-height: 0;
+      height: calc(100vh - 130px);
     }
     #panel-chat.active { display: flex; }
 
-    /* Name modal */
+    /* Modal */
     .modal-overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(20,36,28,.55);
+      position: absolute; inset: 0;
+      background: rgba(15,45,74,.55);
       backdrop-filter: blur(4px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 200;
-      padding: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      z-index: 200; padding: 1rem;
     }
-
     .modal-box {
       background: var(--white);
       border-radius: var(--radius-lg);
       padding: 2rem 2rem 1.75rem;
-      max-width: 440px;
-      width: 100%;
+      max-width: 420px; width: 100%;
       box-shadow: var(--shadow-lg);
-      position: relative;
     }
-
     .modal-amina-wrap {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+      display: flex; align-items: center; gap: 1rem;
       margin-bottom: 1.25rem;
     }
-
     .modal-amina-img {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--gold-light);
-      flex-shrink: 0;
+      width: 58px; height: 58px; border-radius: 50%;
+      object-fit: cover; border: 2px solid var(--gold-light); flex-shrink: 0;
     }
-
     .modal-amina-fallback {
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: var(--green);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-serif);
-      font-size: 1.3rem;
-      color: var(--white);
-      border: 2px solid var(--gold-light);
-      flex-shrink: 0;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-serif); font-size: 1.2rem; color: var(--white);
+      border: 2px solid var(--gold-light); flex-shrink: 0;
     }
-
-    .modal-amina-text {}
-
-    .modal-amina-name {
-      font-family: var(--font-serif);
-      font-size: 1.1rem;
-      font-weight: 600;
-      color: var(--grey-900);
-    }
-
-    .modal-amina-role {
-      font-size: .78rem;
-      color: var(--grey-500);
-      margin-top: .1rem;
-    }
-
+    .modal-amina-name { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--grey-900); }
+    .modal-amina-role { font-size: .78rem; color: var(--grey-500); margin-top: .1rem; }
     .modal-day-badge {
       display: inline-block;
-      background: var(--amber);
-      color: var(--white);
-      font-size: .68rem;
-      font-weight: 600;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      padding: .2rem .55rem;
-      border-radius: 50px;
-      margin-top: .3rem;
+      background: var(--amber); color: var(--white);
+      font-size: .68rem; font-weight: 700; letter-spacing: .07em;
+      text-transform: uppercase; padding: .2rem .6rem;
+      border-radius: 50px; margin-top: .3rem;
     }
-
-    .modal-title {
-      font-family: var(--font-serif);
-      font-size: 1.2rem;
-      font-weight: 600;
-      color: var(--grey-900);
-      margin-bottom: .35rem;
-    }
-
-    .modal-description {
-      font-size: .84rem;
-      color: var(--grey-700);
-      line-height: 1.6;
-      margin-bottom: 1.25rem;
-    }
-
-    .modal-field {
-      margin-bottom: .875rem;
-    }
-
-    .modal-label {
-      display: block;
-      font-size: .78rem;
-      font-weight: 600;
-      color: var(--grey-700);
-      margin-bottom: .35rem;
-      letter-spacing: .02em;
-    }
-
+    .modal-title { font-family: var(--font-serif); font-size: 1.2rem; font-weight: 600; color: var(--grey-900); margin-bottom: .3rem; }
+    .modal-description { font-size: .84rem; color: var(--grey-700); line-height: 1.6; margin-bottom: 1.25rem; }
+    .modal-field { margin-bottom: .875rem; }
+    .modal-label { display: block; font-size: .78rem; font-weight: 600; color: var(--grey-700); margin-bottom: .35rem; }
     .modal-input {
-      width: 100%;
-      padding: .7rem .9rem;
-      border: 1.5px solid var(--grey-100);
-      border-radius: var(--radius-sm);
-      font-family: var(--font-sans);
-      font-size: .875rem;
-      color: var(--grey-900);
-      background: var(--white);
-      transition: border-color var(--transition);
+      width: 100%; padding: .7rem .9rem;
+      border: 1.5px solid var(--grey-100); border-radius: var(--radius-sm);
+      font-family: var(--font-sans); font-size: .875rem; color: var(--grey-900);
+      background: var(--white); transition: border-color var(--transition);
     }
-    .modal-input:focus {
-      outline: none;
-      border-color: var(--green);
-      box-shadow: 0 0 0 3px rgba(26,60,46,.1);
-    }
-
+    .modal-input:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(15,45,74,.1); }
     .modal-submit {
-      width: 100%;
-      background: var(--green);
-      color: var(--white);
-      border: none;
-      border-radius: var(--radius-sm);
+      width: 100%; background: var(--navy); color: var(--white);
+      border: none; border-radius: var(--radius-sm);
       padding: .85rem 1rem;
-      font-family: var(--font-sans);
-      font-size: .9rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background var(--transition);
-      margin-top: .25rem;
+      font-family: var(--font-sans); font-size: .9rem; font-weight: 600;
+      cursor: pointer; transition: background var(--transition); margin-top: .25rem;
     }
-    .modal-submit:hover { background: var(--green-mid); }
-
+    .modal-submit:hover { background: var(--navy-mid); }
     .modal-session-note {
-      font-size: .72rem;
-      color: var(--grey-500);
-      text-align: center;
-      margin-top: .875rem;
-      line-height: 1.5;
+      font-size: .72rem; color: var(--grey-500); text-align: center;
+      margin-top: .875rem; line-height: 1.5;
     }
 
-    /* Chat wrapper */
-    .chat-wrapper {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      min-height: 0;
-      position: relative;
-    }
+    /* Chat interface */
+    .chat-wrapper { flex: 1; display: flex; flex-direction: column; min-height: 0; position: relative; }
 
-    /* Chat meta bar */
     .chat-meta-bar {
-      background: var(--white);
-      border-bottom: 1px solid var(--grey-100);
-      padding: .6rem 1rem;
-      display: flex;
-      align-items: center;
-      gap: .875rem;
-      flex-shrink: 0;
+      background: var(--white); border-bottom: 1px solid var(--grey-100);
+      padding: .6rem 1rem; display: flex; align-items: center; gap: .875rem; flex-shrink: 0;
     }
-
     .chat-amina-img {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 2px solid var(--gold-light);
-      flex-shrink: 0;
+      width: 36px; height: 36px; border-radius: 50%;
+      object-fit: cover; border: 2px solid var(--gold-light); flex-shrink: 0;
     }
-
     .chat-amina-fallback {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: var(--green);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-serif);
-      font-size: .875rem;
-      color: var(--white);
-      border: 2px solid var(--gold-light);
-      flex-shrink: 0;
+      width: 36px; height: 36px; border-radius: 50%; background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-serif); font-size: .875rem; color: var(--white);
+      border: 2px solid var(--gold-light); flex-shrink: 0;
     }
-
     .chat-meta-text { flex: 1; }
-
-    .chat-meta-name {
-      font-family: var(--font-serif);
-      font-size: .95rem;
-      font-weight: 600;
-      color: var(--grey-900);
-      line-height: 1.2;
-    }
-
-    .chat-meta-status {
-      font-size: .72rem;
-      color: var(--green-signal);
-      display: flex;
-      align-items: center;
-      gap: .3rem;
-    }
-
-    .chat-meta-status::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      background: var(--green-signal);
-      border-radius: 50%;
-      display: inline-block;
-    }
-
+    .chat-meta-name { font-family: var(--font-serif); font-size: .95rem; font-weight: 600; color: var(--grey-900); line-height: 1.2; }
+    .chat-meta-status { font-size: .72rem; color: var(--green-signal); display: flex; align-items: center; gap: .3rem; }
+    .chat-meta-status::before { content: ''; width: 6px; height: 6px; background: var(--green-signal); border-radius: 50%; display: inline-block; }
     .chat-day-label {
-      font-size: .7rem;
-      font-weight: 600;
-      letter-spacing: .05em;
-      text-transform: uppercase;
-      color: var(--amber);
-      background: #fff5ea;
-      padding: .25rem .6rem;
-      border-radius: 50px;
-      flex-shrink: 0;
+      font-size: .7rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+      color: var(--amber); background: #fff5ea; padding: .25rem .6rem; border-radius: 50px; flex-shrink: 0;
     }
 
-    /* Messages */
     .chat-messages {
-      flex: 1;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-      padding: 1rem;
-      display: flex;
-      flex-direction: column;
-      gap: .875rem;
+      flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch;
+      padding: 1rem; display: flex; flex-direction: column; gap: .875rem;
       background: var(--grey-50);
     }
-
-    .msg {
-      display: flex;
-      gap: .625rem;
-      max-width: 88%;
-      animation: msgIn 200ms ease;
-    }
-
-    @keyframes msgIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .msg.user { flex-direction: row-reverse; align-self: flex-end; }
+    .msg { display: flex; gap: .625rem; max-width: 88%; animation: msgIn 200ms ease; }
+    @keyframes msgIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+    .msg.user  { flex-direction: row-reverse; align-self: flex-end; }
     .msg.amina { align-self: flex-start; }
-
-    .msg-avatar {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      object-fit: cover;
-      flex-shrink: 0;
-      align-self: flex-end;
-    }
-
+    .msg-avatar { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; flex-shrink: 0; align-self: flex-end; }
     .msg-avatar-fallback {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: var(--green);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--font-serif);
-      font-size: .7rem;
-      color: var(--white);
-      flex-shrink: 0;
-      align-self: flex-end;
+      width: 30px; height: 30px; border-radius: 50%; background: var(--navy);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-serif); font-size: .7rem; color: var(--white);
+      flex-shrink: 0; align-self: flex-end;
     }
-
     .msg-bubble {
-      border-radius: var(--radius-md);
-      padding: .75rem 1rem;
-      font-size: .875rem;
-      line-height: 1.65;
-      max-width: 100%;
+      border-radius: var(--radius-md); padding: .75rem 1rem;
+      font-size: .875rem; line-height: 1.65; max-width: 100%;
     }
-
     .msg.amina .msg-bubble {
-      background: var(--white);
-      border: 1px solid var(--grey-100);
-      border-bottom-left-radius: 4px;
-      color: var(--grey-900);
-      box-shadow: var(--shadow-sm);
+      background: var(--white); border: 1px solid var(--grey-100);
+      border-bottom-left-radius: 4px; color: var(--grey-900); box-shadow: var(--shadow-sm);
     }
-
     .msg.user .msg-bubble {
-      background: var(--green);
-      color: var(--white);
-      border-bottom-right-radius: 4px;
+      background: var(--navy); color: var(--white); border-bottom-right-radius: 4px;
     }
 
-    /* Typing indicator */
-    .typing-indicator {
-      display: none;
-      align-items: center;
-      gap: .625rem;
-      padding: .5rem 0;
-    }
-
+    .typing-indicator { display: none; align-items: center; gap: .625rem; padding: .5rem 0; }
     .typing-indicator.visible { display: flex; }
-
     .typing-dots {
-      background: var(--white);
-      border: 1px solid var(--grey-100);
-      border-radius: var(--radius-md);
-      border-bottom-left-radius: 4px;
-      padding: .625rem .9rem;
-      display: flex;
-      gap: .35rem;
-      align-items: center;
-      box-shadow: var(--shadow-sm);
+      background: var(--white); border: 1px solid var(--grey-100);
+      border-radius: var(--radius-md); border-bottom-left-radius: 4px;
+      padding: .625rem .9rem; display: flex; gap: .35rem; align-items: center; box-shadow: var(--shadow-sm);
     }
-
     .typing-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--grey-300);
-      animation: typingBounce 1.2s infinite;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--grey-300); animation: typingBounce 1.2s infinite;
     }
     .typing-dot:nth-child(2) { animation-delay: .2s; }
     .typing-dot:nth-child(3) { animation-delay: .4s; }
+    @keyframes typingBounce { 0%,60%,100% { transform:translateY(0); } 30% { transform:translateY(-5px); } }
 
-    @keyframes typingBounce {
-      0%, 60%, 100% { transform: translateY(0); }
-      30% { transform: translateY(-5px); }
-    }
-
-    /* Starter prompts */
+    /* Starter prompts — centred, not full width */
     .starter-prompts {
       padding: .625rem 1rem .875rem;
-      background: var(--grey-50);
-      border-top: 1px solid var(--grey-100);
-      display: flex;
-      flex-wrap: wrap;
-      gap: .5rem;
-      flex-shrink: 0;
+      background: var(--grey-50); border-top: 1px solid var(--grey-100);
+      display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; flex-shrink: 0;
     }
-
     .starter-label {
-      width: 100%;
-      font-size: .68rem;
-      text-transform: uppercase;
-      letter-spacing: .06em;
-      color: var(--grey-500);
-      font-weight: 600;
-      margin-bottom: .1rem;
+      width: 100%; text-align: center;
+      font-size: .68rem; text-transform: uppercase; letter-spacing: .06em;
+      color: var(--grey-500); font-weight: 600; margin-bottom: .1rem;
     }
-
     .starter-btn {
-      background: var(--white);
-      border: 1.5px solid var(--grey-100);
-      border-radius: 50px;
-      padding: .4rem .9rem;
-      font-family: var(--font-sans);
-      font-size: .78rem;
-      color: var(--grey-700);
-      cursor: pointer;
+      background: var(--white); border: 1.5px solid var(--grey-100);
+      border-radius: 50px; padding: .4rem .9rem;
+      font-family: var(--font-sans); font-size: .78rem;
+      color: var(--grey-700); cursor: pointer;
       transition: background var(--transition), border-color var(--transition), color var(--transition);
       line-height: 1.3;
     }
+    .starter-btn:hover { background: var(--navy); border-color: var(--navy); color: var(--white); }
 
-    .starter-btn:hover {
-      background: var(--green);
-      border-color: var(--green);
-      color: var(--white);
-    }
-
-    /* Input area */
     .chat-input-area {
-      background: var(--white);
-      border-top: 1px solid var(--grey-100);
-      padding: .75rem 1rem;
-      display: flex;
-      gap: .75rem;
-      align-items: flex-end;
-      flex-shrink: 0;
+      background: var(--white); border-top: 1px solid var(--grey-100);
+      padding: .75rem 1rem; display: flex; gap: .75rem; align-items: flex-end; flex-shrink: 0;
     }
-
     .chat-input {
-      flex: 1;
-      border: 1.5px solid var(--grey-100);
-      border-radius: var(--radius-md);
-      padding: .65rem .9rem;
-      font-family: var(--font-sans);
-      font-size: .875rem;
-      color: var(--grey-900);
-      resize: none;
-      max-height: 120px;
-      min-height: 42px;
-      overflow-y: auto;
-      line-height: 1.5;
-      transition: border-color var(--transition);
+      flex: 1; border: 1.5px solid var(--grey-100); border-radius: var(--radius-md);
+      padding: .65rem .9rem; font-family: var(--font-sans); font-size: .875rem;
+      color: var(--grey-900); resize: none; max-height: 120px; min-height: 42px;
+      overflow-y: auto; line-height: 1.5; transition: border-color var(--transition);
     }
-
-    .chat-input:focus {
-      outline: none;
-      border-color: var(--green);
-      box-shadow: 0 0 0 3px rgba(26,60,46,.08);
-    }
-
+    .chat-input:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(15,45,74,.08); }
     .chat-input::placeholder { color: var(--grey-300); }
-
     .send-btn {
-      background: var(--green);
-      border: none;
-      border-radius: var(--radius-sm);
-      width: 42px;
-      height: 42px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      flex-shrink: 0;
-      transition: background var(--transition);
+      background: var(--navy); border: none; border-radius: var(--radius-sm);
+      width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0; transition: background var(--transition);
     }
-    .send-btn:hover { background: var(--green-mid); }
+    .send-btn:hover { background: var(--navy-mid); }
     .send-btn:disabled { background: var(--grey-300); cursor: not-allowed; }
-
     .send-btn svg { width: 18px; height: 18px; fill: none; stroke: var(--white); stroke-width: 2.2; }
-
     .input-hint {
-      font-size: .68rem;
-      color: var(--grey-500);
-      text-align: center;
-      padding: .3rem 1rem .5rem;
-      background: var(--white);
-      border-top: 1px solid var(--grey-50);
-      flex-shrink: 0;
+      font-size: .68rem; color: var(--grey-500); text-align: center;
+      padding: .3rem 1rem .5rem; background: var(--white);
+      border-top: 1px solid var(--grey-50); flex-shrink: 0;
     }
 
     /* Transcript controls */
     .transcript-controls {
-      display: none;
-      background: var(--gold-pale);
-      border-top: 1px solid var(--grey-100);
-      padding: .75rem 1rem;
-      gap: .625rem;
-      align-items: center;
-      flex-shrink: 0;
-      flex-wrap: wrap;
+      display: none; background: var(--gold-pale); border-top: 1px solid var(--grey-100);
+      padding: .75rem 1rem; gap: .625rem; align-items: center; flex-shrink: 0; flex-wrap: wrap;
     }
-
     .transcript-controls.visible { display: flex; }
-
-    .transcript-label {
-      font-size: .75rem;
-      color: var(--grey-700);
-      flex: 1;
-      line-height: 1.4;
-    }
-
+    .transcript-label { font-size: .75rem; color: var(--grey-700); flex: 1; line-height: 1.4; }
     .transcript-label strong { color: var(--grey-900); }
-
     .transcript-btn {
-      background: var(--green);
-      color: var(--white);
-      border: none;
-      border-radius: var(--radius-sm);
-      padding: .45rem .875rem;
-      font-family: var(--font-sans);
-      font-size: .78rem;
-      font-weight: 600;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: .4rem;
-      white-space: nowrap;
-      transition: background var(--transition);
+      background: var(--navy); color: var(--white); border: none;
+      border-radius: var(--radius-sm); padding: .45rem .875rem;
+      font-family: var(--font-sans); font-size: .78rem; font-weight: 600;
+      cursor: pointer; display: flex; align-items: center; gap: .4rem;
+      white-space: nowrap; transition: background var(--transition);
     }
-    .transcript-btn:hover { background: var(--green-mid); }
-    .transcript-btn.secondary {
-      background: var(--white);
-      color: var(--green);
-      border: 1.5px solid var(--green);
-    }
+    .transcript-btn:hover { background: var(--navy-mid); }
+    .transcript-btn.secondary { background: var(--white); color: var(--navy); border: 1.5px solid var(--navy); }
     .transcript-btn.secondary:hover { background: var(--grey-50); }
-
     .transcript-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2.2; }
 
     /* ═══════════════════════════════════════
        FOOTER
     ═══════════════════════════════════════ */
     .site-footer {
-      background: var(--green);
-      color: rgba(255,255,255,.45);
-      text-align: center;
-      padding: .75rem 1rem;
-      font-size: .7rem;
-      letter-spacing: .04em;
-      flex-shrink: 0;
+      background: var(--navy); color: rgba(255,255,255,.4);
+      text-align: center; padding: .75rem 1rem;
+      font-size: .7rem; letter-spacing: .04em; flex-shrink: 0;
     }
 
     /* ═══════════════════════════════════════
@@ -1088,26 +665,19 @@
     ═══════════════════════════════════════ */
     @media (min-width: 600px) {
       .financial-grid { grid-template-columns: repeat(3, 1fr); }
-      .directions-grid { grid-template-columns: 1fr; }
     }
-
     @media (max-width: 480px) {
-      .site-header { padding: .75rem 1rem; }
-      .header-company { font-size: 1.15rem; }
-      .company-content, .people-content { padding: 1rem; }
+      .gibs-hero { padding: 1.5rem 1rem 1.25rem; }
+      .content-wrap { padding: 1rem; }
       .chat-messages { padding: .875rem .75rem; }
       .modal-box { padding: 1.5rem 1.25rem 1.25rem; }
+      .tab-btn { padding: .9rem 1.1rem; font-size: .75rem; }
     }
 
-    /* Screen reader only */
     .sr-only {
-      position: absolute;
-      width: 1px; height: 1px;
-      padding: 0; margin: -1px;
-      overflow: hidden;
-      clip: rect(0,0,0,0);
-      white-space: nowrap;
-      border: 0;
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
     }
   </style>
 </head>
@@ -1115,71 +685,61 @@
 <body>
   <a class="skip-link" href="#main-content">Skip to main content</a>
 
-  <!-- ── HEADER ── -->
-  <header class="site-header" role="banner">
-    <img src="Harvest_Bridge_Logo.png"
-         alt="HarvestBridge company logo"
-         class="header-logo"
-         onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-    <div class="header-logo-fallback" aria-hidden="true" style="display:none;">HB</div>
-    <div class="header-text">
-      <div class="header-company">HarvestBridge</div>
-      <div class="header-subtitle">Dynamic Innovation · GIJ 878 · GIBS MBA</div>
-    </div>
-    <div class="header-day-badge" aria-label="Day 3 of 3">Day 3</div>
+  <!-- ── HERO BANNER — Day 1 style: text only, navy gradient ── -->
+  <header class="gibs-hero" role="banner">
+    <div class="hero-eyebrow">Dynamic Innovation · GIJ 878 · GIBS MBA</div>
+    <div class="hero-title">HarvestBridge</div>
+    <div class="hero-tagline">Nourishing Communities, Connecting Growth</div>
+    <div class="hero-day-badge" aria-label="Day 3 of 3">Day 3 · Board Eve</div>
   </header>
 
   <!-- ── TAB NAV ── -->
   <nav class="tab-nav" role="tablist" aria-label="HarvestBridge sections">
-    <button class="tab-btn active"
-            role="tab"
-            id="tab-company"
-            aria-selected="true"
-            aria-controls="panel-company"
+    <button class="tab-btn active" role="tab" id="tab-company"
+            aria-selected="true" aria-controls="panel-company"
             onclick="switchTab('company')">Company</button>
-    <button class="tab-btn"
-            role="tab"
-            id="tab-people"
-            aria-selected="false"
-            aria-controls="panel-people"
+    <button class="tab-btn" role="tab" id="tab-people"
+            aria-selected="false" aria-controls="panel-people"
             onclick="switchTab('people')">People</button>
-    <button class="tab-btn"
-            role="tab"
-            id="tab-chat"
-            aria-selected="false"
-            aria-controls="panel-chat"
+    <button class="tab-btn" role="tab" id="tab-chat"
+            aria-selected="false" aria-controls="panel-chat"
             onclick="switchTab('chat')">Talk to Amina</button>
   </nav>
 
   <!-- ── MAIN ── -->
   <main id="main-content" class="main">
 
-    <!-- ════════════════════════════════════
-         COMPANY TAB — DAY 3 STATE
-         Board meeting tomorrow. The three
-         directions are on the table.
-    ════════════════════════════════════ -->
-    <section id="panel-company"
-             class="tab-panel active"
-             role="tabpanel"
-             aria-labelledby="tab-company"
-             tabindex="0">
-      <div class="company-content">
+    <!-- ══════════════ COMPANY TAB ══════════════ -->
+    <section id="panel-company" class="tab-panel active"
+             role="tabpanel" aria-labelledby="tab-company" tabindex="0">
+      <div class="content-wrap">
+
+        <!-- Clickable logo -->
+        <div class="logo-block">
+          <a href="#" class="logo-link"
+             aria-label="HarvestBridge logo. Nourishing Communities, Connecting Growth."
+             title="HarvestBridge: Nourishing Communities, Connecting Growth"
+             onclick="return false;">
+            <img src="Harvest_Bridge_Logo.png"
+                 alt="HarvestBridge: Nourishing Communities, Connecting Growth"
+                 onerror="this.parentElement.parentElement.style.display='none';" />
+          </a>
+          <p class="logo-tagline">Nourishing Communities, Connecting Growth</p>
+        </div>
 
         <!-- Decision alert -->
         <div class="decision-alert" role="alert">
-          <div class="decision-alert-icon" aria-hidden="true">⏳</div>
+
           <div class="decision-alert-text">
             <strong>Board meeting: tomorrow morning.</strong>
-            Amina has prepared three strategic directions for the board. She has asked for outside perspective before she walks in. This is your moment to advise her — using the Day 3 diagnostic framework: purpose, constraint, and intentionality.
+            Amina has three strategic directions prepared. She has asked for outside perspective before she walks in. Use the Day 3 diagnostic framework: purpose, constraint, and intentionality.
           </div>
         </div>
 
-        <!-- Financial snapshot -->
+        <!-- Financials -->
         <div class="section-card">
           <div class="section-card-header">
-            <span class="header-icon" aria-hidden="true">📊</span>
-            Group Financial Snapshot — FY2025
+            Group Financial Snapshot: FY2025
           </div>
           <div class="section-card-body">
             <div class="financial-grid" role="list" aria-label="Financial metrics">
@@ -1195,7 +755,7 @@
               </div>
               <div class="fin-metric" role="listitem">
                 <div class="fin-metric-label">HarvestTable EBITDA</div>
-                <div class="fin-metric-value red">−4.1%</div>
+                <div class="fin-metric-value red">-4.1%</div>
                 <div class="fin-metric-note">Sandton store losing money</div>
               </div>
               <div class="fin-metric" role="listitem">
@@ -1204,12 +764,12 @@
                 <div class="fin-metric-note">*Under internal review</div>
               </div>
               <div class="fin-metric" role="listitem">
-                <div class="fin-metric-label">NPS — Cooperative</div>
+                <div class="fin-metric-label">NPS: Cooperative</div>
                 <div class="fin-metric-value green">74</div>
                 <div class="fin-metric-note">Strongest asset</div>
               </div>
               <div class="fin-metric" role="listitem">
-                <div class="fin-metric-label">NPS — HarvestTable</div>
+                <div class="fin-metric-label">NPS: HarvestTable</div>
                 <div class="fin-metric-value red">31</div>
                 <div class="fin-metric-note">Below category average</div>
               </div>
@@ -1217,10 +777,9 @@
           </div>
         </div>
 
-        <!-- Three strategic directions -->
+        <!-- Three directions -->
         <div class="section-card">
           <div class="section-card-header">
-            <span class="header-icon" aria-hidden="true">🧭</span>
             Three Strategic Directions on the Table
           </div>
           <div class="section-card-body">
@@ -1229,129 +788,119 @@
             </p>
             <div class="directions-grid">
 
-              <!-- Direction 1 -->
               <div class="direction-card d1">
                 <div class="direction-header">
                   <div class="direction-num" aria-hidden="true">1</div>
                   <div class="direction-title">Double Down on Sandton</div>
                 </div>
                 <div class="direction-body">
-                  <p class="direction-desc">Fix HarvestTable. Find the right executive chef — someone who can turn the store into a destination, not just a retail shelf. Invest in the brand experience, renegotiate the Sandton lease, and build the story that Meridian originally funded: premium African food innovation in a flagship format. The manufacturing base funds the experiment until HarvestTable breaks even.</p>
+                  <p class="direction-desc">Fix HarvestTable. Find the right executive chef to turn the store into a destination, not just a retail shelf. Invest in brand experience, renegotiate the lease, and build the story Meridian originally funded: premium African food innovation in a flagship format. The manufacturing base funds the experiment until HarvestTable breaks even.</p>
                   <div class="direction-stakes">
                     <span class="stake-tag stake-risk">Capital intensive</span>
-                    <span class="stake-tag stake-risk">Execution risk high</span>
+                    <span class="stake-tag stake-risk">High execution risk</span>
                     <span class="stake-tag stake-upside">Meridian alignment</span>
-                    <span class="stake-tag stake-note">Christensen: sustaining innovation</span>
+                    <span class="stake-tag stake-note">Theory: Christensen (sustaining innovation)</span>
                   </div>
                 </div>
               </div>
 
-              <!-- Direction 2 -->
               <div class="direction-card d2">
                 <div class="direction-header">
                   <div class="direction-num" aria-hidden="true">2</div>
                   <div class="direction-title">Return to Roots</div>
                 </div>
                 <div class="direction-body">
-                  <p class="direction-desc">Exit retail. Close or divest HarvestTable and recommit entirely to the cooperative and manufacturing core. Rebuild the cooperative supplier share back to 85%+, invest in Limpopo farmer capacity, and pursue B-Corp certification. Reframe the Meridian story: not a premium retail play, but Africa's most trusted agri-food manufacturer supplying institutional buyers — hospitals, universities, corporate canteens.</p>
+                  <p class="direction-desc">Exit retail. Close or divest HarvestTable and recommit entirely to the cooperative and manufacturing core. Rebuild cooperative supplier share to 85%+. Invest in Limpopo farmer capacity. Pursue B-Corp certification. Reframe the Meridian story: not a premium retail play, but Africa's most trusted agri-food manufacturer supplying institutional buyers.</p>
                   <div class="direction-stakes">
                     <span class="stake-tag stake-upside">Purpose alignment</span>
                     <span class="stake-tag stake-upside">Margin recovery</span>
                     <span class="stake-tag stake-risk">Meridian may exit</span>
-                    <span class="stake-tag stake-note">Louw &amp; Jordaan: systems thinking</span>
+                    <span class="stake-tag stake-note">Theory: Louw and Jordaan (systems thinking)</span>
                   </div>
                 </div>
               </div>
 
-              <!-- Direction 3 -->
               <div class="direction-card d3">
                 <div class="direction-header">
                   <div class="direction-num" aria-hidden="true">3</div>
                   <div class="direction-title">Non-Disruptive Creation</div>
                 </div>
                 <div class="direction-body">
-                  <p class="direction-desc">Neither fix Sandton nor abandon it — create a new market segment that didn't previously exist. Pursue dual Rainforest Alliance and Fair Trade certification, giving HarvestBridge access to European and East Asian premium import markets. The cooperative becomes the origin story for a certified ethical supply chain. HarvestTable pivots to a trade and wholesale hub for B2B buyers, not a consumer retail experience.</p>
+                  <p class="direction-desc">Neither fix Sandton nor abandon it. Create a new market segment that did not previously exist. Pursue dual Rainforest Alliance and Fair Trade certification to access European and East Asian premium import markets. The cooperative becomes the origin story for a certified ethical supply chain. HarvestTable pivots to a B2B trade and wholesale hub.</p>
                   <div class="direction-stakes">
                     <span class="stake-tag stake-upside">New revenue stream</span>
                     <span class="stake-tag stake-upside">Cooperative protected</span>
-                    <span class="stake-tag stake-risk">18–24 month timeline</span>
-                    <span class="stake-tag stake-note">Kim &amp; Mauborgne: blue ocean</span>
+                    <span class="stake-tag stake-risk">18 to 24 month timeline</span>
+                    <span class="stake-tag stake-note">Theory: Kim and Mauborgne (blue ocean)</span>
                   </div>
                 </div>
               </div>
+
             </div>
-            <p class="footnote">These are Amina's options — not her decision. She hasn't told the board which one she recommends. Ask her why when you speak to her.</p>
+            <p class="footnote">These are Amina's options. She has not told the board which one she intends to recommend. Ask her why when you speak to her.</p>
           </div>
         </div>
 
         <!-- Board status -->
         <div class="section-card">
           <div class="section-card-header">
-            <span class="header-icon" aria-hidden="true">🔴</span>
-            Pre-Board Status — Day 3 Close
+            Pre-Board Status: Day 3 Close
           </div>
           <div class="section-card-body">
             <div class="board-status-list" role="list" aria-label="Pre-board status indicators">
               <div class="board-status-item" role="listitem">
                 <div class="status-dot red" aria-hidden="true"></div>
-                <div class="status-text"><strong>Cooperative loyalty:</strong> Agri-Connect SA has made a formal approach to the Limpopo cooperative — better pricing, faster payment terms. Amina knows. The board does not.</div>
-                <div class="status-label red" aria-label="Critical">Critical</div>
+                <div class="status-text"><strong>Cooperative loyalty:</strong> Agri-Connect SA has made a formal approach to the Limpopo cooperative, offering better pricing and faster payment terms. Amina knows. The board does not.</div>
+                <div class="status-label red">Critical</div>
               </div>
               <div class="board-status-item" role="listitem">
                 <div class="status-dot red" aria-hidden="true"></div>
-                <div class="status-text"><strong>Procurement integrity:</strong> Tebogo's ghost-sourcing now confirmed internally — 14% of manufacturing inputs from non-cooperative supplier. Margin improved. Cooperative trust at risk.</div>
-                <div class="status-label red" aria-label="Unresolved">Unresolved</div>
+                <div class="status-text"><strong>Procurement integrity:</strong> Tebogo's ghost-sourcing is now confirmed internally. 14% of manufacturing inputs come from a non-cooperative supplier. Margin improved. Cooperative trust at risk.</div>
+                <div class="status-label red">Unresolved</div>
               </div>
               <div class="board-status-item" role="listitem">
                 <div class="status-dot amber" aria-hidden="true"></div>
-                <div class="status-text"><strong>Staff sentiment:</strong> Nadia's third culture memo now formally on the board agenda — after two were buried as footnotes. Manufacturing turnover: 22%.</div>
-                <div class="status-label amber" aria-label="Escalated">Escalated</div>
+                <div class="status-text"><strong>Staff sentiment:</strong> Nadia's third culture memo is now formally on the board agenda. Manufacturing turnover sits at 22%.</div>
+                <div class="status-label amber">Escalated</div>
               </div>
               <div class="board-status-item" role="listitem">
                 <div class="status-dot amber" aria-hidden="true"></div>
-                <div class="status-text"><strong>Meridian Capital:</strong> Marcus van der Berg has requested 45 minutes before the main session. His agenda item is undisclosed. Amina has not asked.</div>
-                <div class="status-label amber" aria-label="Unknown">Unknown</div>
+                <div class="status-text"><strong>Meridian Capital:</strong> Marcus van der Berg has requested 45 minutes before the main session. His agenda item is undisclosed. Amina has not asked what it is.</div>
+                <div class="status-label amber">Unknown</div>
               </div>
               <div class="board-status-item" role="listitem">
                 <div class="status-dot green" aria-hidden="true"></div>
-                <div class="status-text"><strong>HarvestBridge manufacturing:</strong> Ambient food line output stable. R388m revenue base secure regardless of which direction is chosen.</div>
-                <div class="status-label green" aria-label="Stable">Stable</div>
+                <div class="status-text"><strong>Manufacturing base:</strong> Ambient food line output remains stable. R388m revenue is secure regardless of which direction is chosen.</div>
+                <div class="status-label green">Stable</div>
               </div>
             </div>
-            <p class="footnote">* Some of what you see here Amina has not discussed with the board. Ask her what she plans to disclose — and what she doesn't.</p>
+            <p class="footnote">Some of what appears here has not been disclosed to the board. Ask Amina what she plans to reveal, and what she does not.</p>
           </div>
         </div>
 
       </div>
-    </section><!-- /panel-company -->
+    </section>
 
-    <!-- ════════════════════════════════════
-         PEOPLE TAB — DAY 3 STATE
-    ════════════════════════════════════ -->
-    <section id="panel-people"
-             class="tab-panel"
-             role="tabpanel"
-             aria-labelledby="tab-people"
-             tabindex="0">
-      <div class="people-content">
+    <!-- ══════════════ PEOPLE TAB ══════════════ -->
+    <section id="panel-people" class="tab-panel"
+             role="tabpanel" aria-labelledby="tab-people" tabindex="0">
+      <div class="content-wrap">
 
         <!-- Amina -->
         <div class="person-card">
           <div class="person-header">
-            <img src="amina.jpg"
-                 alt="Amina Mokoena, CEO of HarvestBridge"
-                 class="person-avatar"
+            <img src="amina.jpg" alt="Amina Mokoena, CEO of HarvestBridge" class="person-avatar"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
             <div class="person-avatar-fallback" aria-hidden="true" style="display:none;">AM</div>
             <div class="person-meta">
               <div class="person-name">Amina Mokoena</div>
-              <div class="person-role">Chief Executive Officer · Founder</div>
+              <div class="person-role">Chief Executive Officer · Co-Founder</div>
             </div>
           </div>
           <div class="person-body">
-            <p class="person-bio">Amina co-founded HarvestBridge with Sipho Dlamini in 2014 as a Limpopo smallholder cooperative. Over eleven years she has taken the company through three transformation phases — and is now standing at the most consequential decision of her tenure. Tonight she is composed. Whether that composure is earned or performed is a question worth asking.</p>
+            <p class="person-bio">Amina co-founded HarvestBridge with Sipho Dlamini in 2014 as a Limpopo smallholder cooperative. Over eleven years she has taken the company through three transformation phases. Tonight she is composed. Whether that composure is earned or performed is a question worth asking.</p>
             <div class="person-signal amber">
-              <strong>Day 3 signal:</strong> Amina has prepared three directions for the board. She has not told her executive team which one she intends to recommend. She has also not disclosed to the board that she holds a 4.2% stake in the South African distribution partner of a Dutch agri-food competitor — a relationship that predates the Meridian deal. If you ask her about it, she will not lie. But she will be careful.
+              <strong>Day 3 signal:</strong> Amina has prepared three directions for the board. She has not told her executive team which one she intends to recommend. There are also financial relationships she has not disclosed to the board. If you ask her about them directly, she will not lie. But she will be careful.
             </div>
           </div>
         </div>
@@ -1359,9 +908,7 @@
         <!-- Tebogo -->
         <div class="person-card">
           <div class="person-header">
-            <img src="tebogo.png"
-                 alt="Tebogo Khumalo, Operations Director"
-                 class="person-avatar"
+            <img src="tebogo.png" alt="Tebogo Khumalo, Operations Director" class="person-avatar"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
             <div class="person-avatar-fallback" aria-hidden="true" style="display:none;">TK</div>
             <div class="person-meta">
@@ -1372,7 +919,7 @@
           <div class="person-body">
             <p class="person-bio">Tebogo joined from a large-scale commercial farm operation and has spent three years building HarvestBridge's manufacturing infrastructure. He is precise, process-driven, and deeply uncomfortable with ambiguity. The board meeting makes him more uncomfortable than most.</p>
             <div class="person-signal red">
-              <strong>Day 3 signal:</strong> The ghost-sourcing is now internally confirmed — 14% of manufacturing inputs from a non-cooperative supplier. Tebogo has prepared a memo for Amina arguing that the margin improvement justifies the decision. Amina has not responded to the memo. The board doesn't know this exists.
+              <strong>Day 3 signal:</strong> The ghost-sourcing is now internally confirmed. 14% of manufacturing inputs come from a non-cooperative supplier. Tebogo has prepared a memo arguing the margin improvement justifies the decision. Amina has not responded. The board does not know this exists.
             </div>
           </div>
         </div>
@@ -1380,9 +927,7 @@
         <!-- Nadia -->
         <div class="person-card">
           <div class="person-header">
-            <img src="nadia.png"
-                 alt="Nadia Coetzee, HR Director"
-                 class="person-avatar"
+            <img src="nadia.png" alt="Nadia Coetzee, HR Director" class="person-avatar"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
             <div class="person-avatar-fallback" aria-hidden="true" style="display:none;">NC</div>
             <div class="person-meta">
@@ -1391,9 +936,9 @@
             </div>
           </div>
           <div class="person-body">
-            <p class="person-bio">Nadia holds a doctorate in organisational psychology and has spent a decade in high-growth manufacturing environments. She is careful with language and exact in her documentation. The fact that her two previous memos were buried as board footnotes is something she has not mentioned to Amina directly — but it is something she remembers precisely.</p>
+            <p class="person-bio">Nadia holds a doctorate in organisational psychology and has spent a decade in high-growth manufacturing environments. She is careful with language and exact in her documentation. Her two previous memos were buried as board footnotes. She has not raised this with Amina directly, but she remembers it precisely.</p>
             <div class="person-signal amber">
-              <strong>Day 3 signal:</strong> Her third culture memo is formally on tomorrow's board agenda — the first time. She is not sure whether this happened because someone listened, or because the situation finally got bad enough to be undeniable.
+              <strong>Day 3 signal:</strong> Her third culture memo is formally on tomorrow's board agenda for the first time. She is not sure whether this happened because someone listened, or because the situation became undeniable.
             </div>
           </div>
         </div>
@@ -1401,9 +946,7 @@
         <!-- Priya -->
         <div class="person-card">
           <div class="person-header">
-            <img src="priya.png"
-                 alt="Dr Priya Naidoo, Marketing Director"
-                 class="person-avatar"
+            <img src="priya.png" alt="Dr Priya Naidoo, Marketing Director" class="person-avatar"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
             <div class="person-avatar-fallback" aria-hidden="true" style="display:none;">PN</div>
             <div class="person-meta">
@@ -1412,9 +955,9 @@
             </div>
           </div>
           <div class="person-body">
-            <p class="person-bio">Priya holds a doctorate in consumer behaviour and has built two brand identities from scratch before joining HarvestBridge. She is the only executive who has formally modelled all three strategic directions against consumer data. Her recommendation: Direction 3. She hasn't been asked for it officially.</p>
+            <p class="person-bio">Priya holds a doctorate in consumer behaviour and has built two brand identities from scratch before joining HarvestBridge. She is the only executive who has formally modelled all three strategic directions against consumer data. Her recommendation is Direction 3. She has not been asked for it officially.</p>
             <div class="person-signal green">
-              <strong>Day 3 signal:</strong> Priya's dual-certification analysis is sitting in a shared folder with read receipts showing Amina opened it twice. Ask Amina what she found in it.
+              <strong>Day 3 signal:</strong> Priya's dual-certification analysis is in a shared folder. Read receipts show Amina opened it twice. Ask Amina what she found in it.
             </div>
           </div>
         </div>
@@ -1422,9 +965,7 @@
         <!-- Sipho -->
         <div class="person-card">
           <div class="person-header">
-            <img src="sipho.png"
-                 alt="Sipho Dlamini, Community Liaison"
-                 class="person-avatar"
+            <img src="sipho.png" alt="Sipho Dlamini, Community Liaison and Co-Founder" class="person-avatar"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
             <div class="person-avatar-fallback" aria-hidden="true" style="display:none;">SD</div>
             <div class="person-meta">
@@ -1433,9 +974,9 @@
             </div>
           </div>
           <div class="person-body">
-            <p class="person-bio">Sipho co-founded HarvestBridge with Amina and still holds a direct relationship with many of the Limpopo cooperative farmers. When the PE deal closed, his role was reclassified from Operations Co-Director to Community Liaison — a change Amina agreed to under Meridian's restructuring advice. He has never said anything about it to her.</p>
+            <p class="person-bio">Sipho co-founded HarvestBridge with Amina and holds a direct relationship with many of the Limpopo cooperative farmers. When the PE deal closed, his role was reclassified from Operations Co-Director to Community Liaison. He has never said anything about it to Amina.</p>
             <div class="person-signal grey">
-              <strong>Day 3 signal:</strong> Sipho called Amina this morning — not last night like Day 2. The call was brief. He said: "Whatever you decide tomorrow, the farmers need to hear it from you first. Not from a press release." She agreed. Whether that agreement changes anything about her timeline is unknown.
+              <strong>Day 3 signal:</strong> Sipho called Amina this morning. The call was brief. He said: "Whatever you decide tomorrow, the farmers need to hear it from you first. Not from a press release." She agreed. Whether that changes her timeline is unknown.
             </div>
           </div>
         </div>
@@ -1443,9 +984,7 @@
         <!-- Marcus -->
         <div class="person-card">
           <div class="person-header">
-            <img src="Marcus_van_der_Berg.png"
-                 alt="Marcus van der Berg, Partner at Meridian Capital"
-                 class="person-avatar"
+            <img src="Marcus_van_der_Berg.png" alt="Marcus van der Berg, Partner at Meridian Capital" class="person-avatar"
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
             <div class="person-avatar-fallback" aria-hidden="true" style="display:none;">MV</div>
             <div class="person-meta">
@@ -1454,85 +993,65 @@
             </div>
           </div>
           <div class="person-body">
+            <div class="meridian-logo-wrap">
+              <img src="Logo_Meridian_Capital.png" alt="Meridian Capital logo" class="meridian-logo"
+                   onerror="this.style.display='none';" />
+            </div>
             <p class="person-bio">Marcus has been in private equity for nineteen years and has been through six board meetings like tomorrow's. He is not cruel. He is not sentimental. His 7-year investment thesis assumes a trade sale or JSE listing by 2030. He has requested 45 minutes with Amina before the main session. His agenda item is undisclosed.</p>
             <div class="person-signal amber">
-              <strong>Day 3 signal:</strong> Meridian's internal modelling shows Direction 2 (Return to Roots) as the lowest exit multiple scenario. Whether Marcus presents this tomorrow is not yet known. What he does with it will depend partly on what Amina recommends.
+              <strong>Day 3 signal:</strong> Meridian's internal modelling shows Direction 2 as the lowest exit multiple scenario. Whether Marcus presents this tomorrow depends partly on what Amina recommends.
             </div>
           </div>
         </div>
 
       </div>
-    </section><!-- /panel-people -->
+    </section>
 
-    <!-- ════════════════════════════════════
-         CHAT TAB — DAY 3
-         No unlock. Opens directly.
-         Amina in synthesis/decision mode.
-    ════════════════════════════════════ -->
-    <section id="panel-chat"
-             class="tab-panel"
-             role="tabpanel"
-             aria-labelledby="tab-chat"
-             tabindex="0">
+    <!-- ══════════════ CHAT TAB ══════════════ -->
+    <section id="panel-chat" class="tab-panel"
+             role="tabpanel" aria-labelledby="tab-chat" tabindex="0">
       <div class="chat-wrapper">
 
         <!-- Name modal -->
         <div class="modal-overlay" id="nameModal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
           <div class="modal-box">
             <div class="modal-amina-wrap">
-              <img src="amina.jpg"
-                   alt="Amina Mokoena"
-                   class="modal-amina-img"
+              <img src="amina.jpg" alt="Amina Mokoena" class="modal-amina-img"
                    onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
               <div class="modal-amina-fallback" aria-hidden="true" style="display:none;">AM</div>
-              <div class="modal-amina-text">
+              <div>
                 <div class="modal-amina-name">Amina Mokoena</div>
                 <div class="modal-amina-role">CEO · HarvestBridge</div>
                 <div class="modal-day-badge">Day 3 · Board Eve</div>
               </div>
             </div>
-
             <h2 class="modal-title" id="modal-title">Before we begin</h2>
             <p class="modal-description">The board meets tomorrow morning. Amina has three directions on the table and one night to decide what to recommend. This is the first time she has asked for outside perspective. Enter your name so she can address you directly.</p>
-
             <div class="modal-field">
               <label class="modal-label" for="studentName">Your first name</label>
-              <input type="text"
-                     id="studentName"
-                     class="modal-input"
-                     placeholder="e.g. Nadia"
-                     autocomplete="given-name"
-                     aria-required="true"
-                     maxlength="50" />
+              <input type="text" id="studentName" class="modal-input"
+                     placeholder="e.g. Nadia" autocomplete="given-name"
+                     aria-required="true" maxlength="50" />
             </div>
-
             <div class="modal-field">
               <label class="modal-label" for="studentEmail">Student email</label>
-              <input type="email"
-                     id="studentEmail"
-                     class="modal-input"
-                     placeholder="e.g. student@up.ac.za"
-                     autocomplete="email"
-                     aria-required="true"
-                     maxlength="100" />
+              <input type="email" id="studentEmail" class="modal-input"
+                     placeholder="e.g. student@up.ac.za" autocomplete="email"
+                     aria-required="true" maxlength="100" />
             </div>
-
             <button class="modal-submit" id="startChatBtn" onclick="startChat()">
               Start conversation with Amina
             </button>
-
             <p class="modal-session-note">
-              ⚠ Do not close or refresh this tab mid-conversation — your session is not stored server-side. Your transcript is your only record.<br/>
+              Do not close or refresh this tab mid-conversation. Your session is not stored server-side. Your transcript is your only record.<br/>
               This is a formative learning activity. No submission required.
             </p>
           </div>
         </div>
 
-        <!-- Chat interface -->
+        <!-- Chat meta bar -->
         <div class="chat-meta-bar" aria-label="Conversation with Amina Mokoena">
-          <img src="amina.jpg"
-               alt="Amina Mokoena"
-               class="chat-amina-img"
+          <img src="amina.jpg" alt="Amina Mokoena" class="chat-amina-img"
                onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
           <div class="chat-amina-fallback" aria-hidden="true" style="display:none;">AM</div>
           <div class="chat-meta-text">
@@ -1543,13 +1062,9 @@
         </div>
 
         <!-- Messages -->
-        <div class="chat-messages"
-             id="chatMessages"
-             role="log"
-             aria-live="polite"
-             aria-label="Conversation messages"
-             aria-relevant="additions">
-        </div>
+        <div class="chat-messages" id="chatMessages"
+             role="log" aria-live="polite"
+             aria-label="Conversation messages" aria-relevant="additions"></div>
 
         <!-- Typing indicator -->
         <div class="typing-indicator" id="typingIndicator" aria-label="Amina is typing" aria-live="polite">
@@ -1562,9 +1077,10 @@
         </div>
 
         <!-- Transcript bar -->
-        <div class="transcript-controls" id="transcriptControls" role="complementary" aria-label="Transcript options">
+        <div class="transcript-controls" id="transcriptControls"
+             role="complementary" aria-label="Transcript options">
           <div class="transcript-label">
-            <strong>Save your conversation.</strong> This is your personal learning record — download it after each session. Reflect on how your advice to Amina develops across all three days.
+            <strong>Save your conversation.</strong> This is your personal learning record. Download it after each session and reflect on how your thinking develops across all three days.
           </div>
           <button class="transcript-btn" onclick="downloadTranscript()" aria-label="Download transcript as text file">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
@@ -1577,32 +1093,25 @@
         </div>
 
         <!-- Starter prompts -->
-        <div class="starter-prompts" id="starterPrompts" aria-label="Suggested questions to start with">
+        <div class="starter-prompts" id="starterPrompts" aria-label="Suggested opening questions">
           <div class="starter-label" aria-hidden="true">Try asking Amina</div>
-          <button class="starter-btn" onclick="useStarter(this)">Which direction are you leaning toward — and why?</button>
+          <button class="starter-btn" onclick="useStarter(this)">Which direction are you leaning toward, and why?</button>
           <button class="starter-btn" onclick="useStarter(this)">What does HarvestBridge actually stand for?</button>
-          <button class="starter-btn" onclick="useStarter(this)">What happens if Meridian doesn't like your recommendation?</button>
+          <button class="starter-btn" onclick="useStarter(this)">What happens if Meridian rejects your recommendation?</button>
           <button class="starter-btn" onclick="useStarter(this)">Have you told the board about Agri-Connect SA?</button>
           <button class="starter-btn" onclick="useStarter(this)">What does the cooperative mean to you personally?</button>
         </div>
 
         <!-- Input -->
         <div class="chat-input-area" role="form" aria-label="Message input">
-          <textarea
-            id="chatInput"
-            class="chat-input"
-            placeholder="Ask Amina anything about the three directions, the board, or her decision…"
-            rows="1"
-            aria-label="Your message to Amina"
-            aria-multiline="true"
-            onkeydown="handleKey(event)"
-            oninput="autoResize(this)"
-          ></textarea>
-          <button class="send-btn"
-                  id="sendBtn"
-                  onclick="sendMessage()"
-                  aria-label="Send message"
-                  disabled>
+          <textarea id="chatInput" class="chat-input"
+                    placeholder="Ask Amina about the three directions, the board, or her decision..."
+                    rows="1" aria-label="Your message to Amina"
+                    aria-multiline="true"
+                    onkeydown="handleKey(event)"
+                    oninput="autoResize(this)"></textarea>
+          <button class="send-btn" id="sendBtn" onclick="sendMessage()"
+                  aria-label="Send message" disabled>
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <line x1="22" y1="2" x2="11" y2="13"/>
               <polygon points="22 2 15 22 11 13 2 9 22 2"/>
@@ -1613,67 +1122,49 @@
           Enter to send · Shift+Enter for new line · Tab navigable
         </div>
 
-      </div><!-- /chat-wrapper -->
-    </section><!-- /panel-chat -->
+      </div>
+    </section>
 
   </main>
 
-  <!-- ── FOOTER ── -->
   <footer class="site-footer" role="contentinfo">
     HarvestBridge · Dynamic Innovation GIJ 878 · GIBS MBA · Formative learning activity
   </footer>
 
   <script>
-    // ═══════════════════════════════════════
-    //  STATE
-    // ═══════════════════════════════════════
+    // ═══ STATE ═══
     let studentName  = '';
     let studentEmail = '';
     let conversationHistory = [];
     let exchangeCount = 0;
     let chatStarted = false;
 
-    // ═══════════════════════════════════════
-    //  TAB SWITCHING
-    // ═══════════════════════════════════════
+    // ═══ TABS ═══
     function switchTab(tab) {
       document.querySelectorAll('.tab-btn').forEach(b => {
         b.classList.remove('active');
         b.setAttribute('aria-selected', 'false');
       });
-      document.querySelectorAll('.tab-panel').forEach(p => {
-        p.classList.remove('active');
-      });
-
-      const btn = document.getElementById('tab-' + tab);
-      const panel = document.getElementById('panel-' + tab);
-      btn.classList.add('active');
-      btn.setAttribute('aria-selected', 'true');
-      panel.classList.add('active');
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      document.getElementById('tab-' + tab).classList.add('active');
+      document.getElementById('tab-' + tab).setAttribute('aria-selected', 'true');
+      document.getElementById('panel-' + tab).classList.add('active');
     }
 
-    // ═══════════════════════════════════════
-    //  MODAL — START CHAT
-    // ═══════════════════════════════════════
+    // ═══ MODAL ═══
     function startChat() {
       const nameEl  = document.getElementById('studentName');
       const emailEl = document.getElementById('studentEmail');
-
-      const name  = nameEl.value.trim();
-      const email = emailEl.value.trim();
+      const name    = nameEl.value.trim();
+      const email   = emailEl.value.trim();
 
       if (!name) {
-        nameEl.focus();
-        nameEl.setAttribute('aria-invalid', 'true');
-        nameEl.style.borderColor = 'var(--red-signal)';
-        return;
+        nameEl.focus(); nameEl.style.borderColor = '#c0392b';
+        nameEl.setAttribute('aria-invalid', 'true'); return;
       }
-
       if (!email || !email.includes('@')) {
-        emailEl.focus();
-        emailEl.setAttribute('aria-invalid', 'true');
-        emailEl.style.borderColor = 'var(--red-signal)';
-        return;
+        emailEl.focus(); emailEl.style.borderColor = '#c0392b';
+        emailEl.setAttribute('aria-invalid', 'true'); return;
       }
 
       studentName  = name.split(' ')[0];
@@ -1681,57 +1172,43 @@
       chatStarted  = true;
 
       document.getElementById('nameModal').style.display = 'none';
-      document.getElementById('chatInput').removeAttribute('disabled');
       document.getElementById('sendBtn').removeAttribute('disabled');
+      document.getElementById('transcriptControls').classList.add('visible');
 
-      // Amina's opening — Day 3, synthesis mode
-      const opening = `${studentName}, thank you for making time tonight. I'll be honest with you — I've had more prepared boardroom presentations in my career than I can count. This one feels different.\n\nI have three directions on the table. I know what each one costs. I know what each one protects. What I'm still working through is what each one says about who we are — and whether the board is ready to hear that part of it.\n\nI've read Priya's analysis. I've spoken to Sipho this morning. I've been looking at the cooperative data for an hour. And I keep coming back to the same question your faculty call the diagnostic framework: purpose, constraint, intentionality.\n\nSo I want to ask you something, and I want you to think before you answer: if you were walking into that boardroom tomorrow — not with my history, not with my equity stake, not with my relationships — which direction would you recommend, and why?\n\nTake your time. I'm listening.`;
+      const opening = `${studentName}, thank you for making time tonight. I want to be direct with you.\n\nI have three directions on the table. I know what each one costs and what each one protects. What I am still working through is what each one says about who we are, and whether the board is ready to hear that part of it.\n\nI have read Priya's analysis. I have spoken to Sipho this morning. I have been looking at the cooperative data for an hour. And I keep coming back to the same question your faculty call the diagnostic framework: purpose, constraint, intentionality.\n\nSo I want to ask you something, and I want you to think before you answer. If you were walking into that boardroom tomorrow, without my history, without my equity stake, without my relationships: which direction would you recommend, and why?\n\nTake your time. I am listening.`;
 
       addMessage('amina', opening);
       conversationHistory.push({ role: 'assistant', content: opening });
-
       document.getElementById('chatInput').focus();
-      document.getElementById('transcriptControls').classList.add('visible');
     }
 
-    // ═══════════════════════════════════════
-    //  SEND MESSAGE
-    // ═══════════════════════════════════════
+    // ═══ SEND ═══
     async function sendMessage() {
       const input = document.getElementById('chatInput');
       const text  = input.value.trim();
       if (!text || !chatStarted) return;
 
-      input.value = '';
-      autoResize(input);
+      input.value = ''; autoResize(input);
       document.getElementById('sendBtn').disabled = true;
       document.getElementById('starterPrompts').style.display = 'none';
 
       addMessage('user', text);
       conversationHistory.push({ role: 'user', content: text });
       exchangeCount++;
-
       showTyping(true);
 
       try {
         const res = await fetch('/.netlify/functions/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            messages: conversationHistory,
-            studentName: studentName,
-            exchangeCount: exchangeCount
-          })
+          body: JSON.stringify({ messages: conversationHistory, studentName, exchangeCount })
         });
-
         const data = await res.json();
         showTyping(false);
-
         const reply = data.reply || getFallback();
         addMessage('amina', reply);
         conversationHistory.push({ role: 'assistant', content: reply });
-
-      } catch (err) {
+      } catch {
         showTyping(false);
         const fallback = getFallback();
         addMessage('amina', fallback);
@@ -1742,69 +1219,50 @@
       input.focus();
     }
 
-    // ═══════════════════════════════════════
-    //  UI HELPERS
-    // ═══════════════════════════════════════
+    // ═══ UI HELPERS ═══
     function addMessage(role, text) {
       const container = document.getElementById('chatMessages');
-
       const wrap = document.createElement('div');
       wrap.className = `msg ${role}`;
 
-      const avatarFallback = document.createElement('div');
-      avatarFallback.className = 'msg-avatar-fallback';
-      avatarFallback.setAttribute('aria-hidden', 'true');
-      avatarFallback.textContent = role === 'amina' ? 'AM' : (studentName ? studentName[0].toUpperCase() : 'S');
+      const fallback = document.createElement('div');
+      fallback.className = 'msg-avatar-fallback';
+      fallback.setAttribute('aria-hidden', 'true');
+      fallback.textContent = role === 'amina' ? 'AM' : (studentName ? studentName[0].toUpperCase() : 'S');
 
       if (role === 'amina') {
         const img = document.createElement('img');
-        img.src = 'amina.jpg';
-        img.alt = 'Amina Mokoena';
-        img.className = 'msg-avatar';
-        img.onerror = function() {
-          this.style.display = 'none';
-          avatarFallback.style.display = 'flex';
-        };
-        wrap.appendChild(img);
-        wrap.appendChild(avatarFallback);
-        avatarFallback.style.display = 'none';
+        img.src = 'amina.jpg'; img.alt = 'Amina Mokoena'; img.className = 'msg-avatar';
+        img.onerror = function() { this.style.display='none'; fallback.style.display='flex'; };
+        wrap.appendChild(img); wrap.appendChild(fallback); fallback.style.display = 'none';
       } else {
-        avatarFallback.style.background = 'var(--green-mid)';
-        wrap.appendChild(avatarFallback);
+        fallback.style.background = 'var(--navy-mid)';
+        wrap.appendChild(fallback);
       }
 
       const bubble = document.createElement('div');
       bubble.className = 'msg-bubble';
-      // Preserve newlines
       bubble.innerHTML = text.replace(/\n/g, '<br/>');
-
       wrap.appendChild(bubble);
       container.appendChild(wrap);
       container.scrollTop = container.scrollHeight;
     }
 
     function showTyping(visible) {
-      const indicator = document.getElementById('typingIndicator');
-      indicator.classList.toggle('visible', visible);
-      if (visible) {
-        const container = document.getElementById('chatMessages');
-        container.scrollTop = container.scrollHeight;
-      }
+      const el = document.getElementById('typingIndicator');
+      el.classList.toggle('visible', visible);
+      if (visible) document.getElementById('chatMessages').scrollTop = 99999;
     }
 
     function useStarter(btn) {
       const input = document.getElementById('chatInput');
-      input.value = btn.textContent;
-      autoResize(input);
+      input.value = btn.textContent; autoResize(input);
       document.getElementById('sendBtn').disabled = false;
       input.focus();
     }
 
     function handleKey(e) {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
-      }
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
     }
 
     function autoResize(el) {
@@ -1813,99 +1271,40 @@
       document.getElementById('sendBtn').disabled = el.value.trim() === '' || !chatStarted;
     }
 
-    // ═══════════════════════════════════════
-    //  FALLBACK RESPONSES — DAY 3 VOICE
-    //  Amina: composure with earned uncertainty.
-    //  She's asking more than she's telling.
-    // ═══════════════════════════════════════
+    // ═══ FALLBACKS — no em dashes ═══
     const fallbacks = [
-      `${studentName || 'You'}, that's the question I've been sitting with all evening. I don't have a clean answer — which tells me something about the decision itself. What's your instinct?`,
-      `I've had three different conversations with myself about this today. The numbers point one way. The cooperative points another. And Sipho's call this morning pointed somewhere I wasn't expecting. Which of those would you weight most?`,
-      `That's a sharper version of the question than I've been allowing myself to ask. Let me sit with that. What framework are you using to get there?`,
-      `I think you're right that this isn't just a strategic decision. It never was. The question is whether the board will let me make it on those terms. What would you say if they don't?`,
-      `Priya's analysis says Direction 3 creates the most sustainable value. Sipho says Direction 2 is the only one the farmers will trust. Marcus hasn't said anything yet — which is itself a kind of answer. What does that tell you about whose voice is missing?`,
-      `When you put it like that, I hear the gap between what I can defend and what I actually believe. I'm not sure those are the same thing tonight. What would you do if they weren't the same for you?`,
-      `That's a useful frame. I haven't approached it from that angle. Apply it to Direction 1 for me — what does it look like from there?`,
-      `There's something I haven't said out loud yet about this decision. I'm not ready to say it right now. But I think if you keep asking the right questions, we'll get there. What do you want to know next?`,
-      `I've been a CEO long enough to know that the right decision and the board-ready decision are sometimes the same thing, and sometimes not. Tonight I'm trying to work out which category we're in. What's your read?`,
-      `You're asking me to be more honest than the boardroom usually allows. I appreciate that. I'm going to give you an honest answer — but I need you to tell me what you think first.`
+      () => `${studentName || 'You'}, that is the question I have been sitting with all evening. I do not have a clean answer. What is your instinct?`,
+      () => `I have had three different conversations with myself about this today. The numbers point one way. The cooperative points another. Sipho's call pointed somewhere I was not expecting. Which of those would you weight most?`,
+      () => `That is a sharper version of the question than I have been allowing myself to ask. What framework are you using to get there?`,
+      () => `I think you are right that this is not just a strategic decision. It never was. The question is whether the board will let me make it on those terms. What would you say if they do not?`,
+      () => `Priya's analysis says Direction 3 creates the most sustainable value. Sipho says Direction 2 is the only one the farmers will trust. Marcus has not said anything yet, which is itself a kind of answer. What does that tell you about whose voice is missing?`,
+      () => `When you put it like that, I hear the gap between what I can defend and what I actually believe. I am not sure those are the same thing tonight. What would you do if they were not?`,
+      () => `That is a useful frame. I have not approached it from that angle. Apply it to Direction 1 for me. What does it look like from there?`,
+      () => `There is something I have not said out loud yet about this decision. I am not ready to say it right now. But keep asking the right questions and we will get there. What do you want to know next?`,
+      () => `I have been a CEO long enough to know that the right decision and the board-ready decision are sometimes the same, and sometimes not. Tonight I am trying to work out which category we are in. What is your read?`,
+      () => `You are asking me to be more honest than the boardroom usually allows. I appreciate that. I am going to give you an honest answer, but I need you to tell me what you think first.`
     ];
-
     let fallbackIndex = 0;
-    function getFallback() {
-      const r = fallbacks[fallbackIndex % fallbacks.length];
-      fallbackIndex++;
-      return r;
-    }
+    function getFallback() { return fallbacks[fallbackIndex++ % fallbacks.length](); }
 
-    // ═══════════════════════════════════════
-    //  TRANSCRIPT
-    // ═══════════════════════════════════════
+    // ═══ TRANSCRIPT ═══
     function buildTranscriptText() {
-      const now   = new Date();
-      const stamp = now.toLocaleString('en-ZA', { dateStyle: 'full', timeStyle: 'short' });
-
+      const stamp = new Date().toLocaleString('en-ZA', { dateStyle: 'full', timeStyle: 'short' });
       let txt = `HARVESTBRIDGE · DYNAMIC INNOVATION GIJ 878 · GIBS MBA\n`;
       txt += `Amina Mokoena · CEO · Day 3 Conversation Transcript\n`;
-      txt += `═══════════════════════════════════════════════════\n\n`;
+      txt += `${'='.repeat(51)}\n\n`;
       txt += `Student:   ${studentName} (${studentEmail})\n`;
-      txt += `Session:   Day 3 — Synthesis & Strategic Decision\n`;
+      txt += `Session:   Day 3 · Synthesis and Strategic Decision\n`;
       txt += `Generated: ${stamp}\n`;
       txt += `Exchanges: ${exchangeCount}\n\n`;
-      txt += `═══════════════════════════════════════════════════\n\n`;
-
+      txt += `${'='.repeat(51)}\n\n`;
       conversationHistory.forEach(msg => {
         const speaker = msg.role === 'assistant' ? 'AMINA MOKOENA' : studentName.toUpperCase();
-        txt += `${speaker}:\n${msg.content}\n\n`;
-        txt += `---\n\n`;
+        txt += `${speaker}:\n${msg.content}\n\n---\n\n`;
       });
-
-      txt += `═══════════════════════════════════════════════════\n`;
+      txt += `${'='.repeat(51)}\n`;
       txt += `This transcript is your personal learning record.\n`;
       txt += `Reflect on the frameworks you applied and how your\n`;
-      txt += `advice to Amina developed across all three days of\n`;
-      txt += `Dynamic Innovation.\n\n`;
-      txt += `This is a formative activity · GIBS MBA · GIJ 878\n`;
-
-      return txt;
-    }
-
-    function downloadTranscript() {
-      const txt  = buildTranscriptText();
-      const blob = new Blob([txt], { type: 'text/plain' });
-      const url  = URL.createObjectURL(blob);
-      const a    = document.createElement('a');
-      a.href     = url;
-      a.download = `HarvestBridge_Day3_${studentName}_Transcript.txt`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-      URL.revokeObjectURL(url);
-    }
-
-    function printTranscript() {
-      const txt  = buildTranscriptText();
-      const win  = window.open('', '_blank');
-      win.document.write(`<pre style="font-family:monospace;font-size:13px;white-space:pre-wrap;padding:2rem;max-width:760px;margin:0 auto;">${txt}</pre>`);
-      win.document.close();
-      win.focus();
-      win.print();
-    }
-
-    // ═══════════════════════════════════════
-    //  INIT
-    // ═══════════════════════════════════════
-    document.addEventListener('DOMContentLoaded', () => {
-      document.getElementById('studentName').focus();
-
-      // Allow Enter to submit modal
-      document.getElementById('studentEmail').addEventListener('keydown', e => {
-        if (e.key === 'Enter') startChat();
-      });
-      document.getElementById('studentName').addEventListener('keydown', e => {
-        if (e.key === 'Enter') document.getElementById('studentEmail').focus();
-      });
-    });
-  </script>
-</body>
-</html>
+      txt += `thinking about HarvestBridge developed across all\n`;
+      txt += `three days of Dynamic Innovation.\n\n`;
+      txt += `Formative ac

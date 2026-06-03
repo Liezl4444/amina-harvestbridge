@@ -1171,7 +1171,7 @@
           badge.textContent = 'Stage 2 · Unlocked';
           badge.classList.add('unlocked');
 
-          const const firstName = studentName ? studentName.split(' ')[0] : 'there';
+          const firstName = studentName ? studentName.split(' ')[0] : 'there';
           transitionMsg = `${firstName}, I need to be frank with you. The board called while we have been speaking and the picture is not improving. The Sandton model is not holding and I am running out of time to find an answer before that meeting. I have been careful about what I say in this conversation. I am going to be less careful now. What do you want to push on?`;
           addMessage('assistant', transitionMsg);
           conversationHistory.push({ role: 'assistant', content: transitionMsg });

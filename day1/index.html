@@ -347,8 +347,9 @@
     .gibs-starters-grid { display: flex; flex-wrap: wrap; gap: 8px; }
     .gibs-starter-btn { padding: 7px 13px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 20px; font-family: var(--font-body); font-size: 12px; color: var(--text-sec); cursor: pointer; transition: border-color 0.2s, background 0.2s, color 0.2s; text-align: left; line-height: 1.4; }
     .gibs-starter-btn:hover { border-color: var(--teal); background: var(--teal-light); color: var(--teal); }
-    .gibs-unlock-banner { display: none; background: linear-gradient(135deg, var(--blue-dark), var(--blue)); border: 1px solid rgba(0,115,120,0.4); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 16px; }
-    .gibs-unlock-banner.visible { display: block; }
+    .gibs-unlock-banner { display: none; background: linear-gradient(135deg, var(--blue-dark), var(--blue)); border: 3px solid var(--gold); border-radius: var(--radius); padding: 16px 20px; margin-bottom: 16px; margin-top: 16px; }
+    .gibs-unlock-banner.visible { display: block; animation: bannerPulse 0.4s ease-out; }
+    @keyframes bannerPulse { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
     .gibs-unlock-label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal); margin-bottom: 6px; }
     .gibs-unlock-text { font-family: var(--font-display); font-size: 15px; color: #fff; line-height: 1.4; margin-bottom: 12px; }
     .gibs-unlock-form { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -681,16 +682,6 @@
       <!-- CHAT PANEL -->
       <div id="panel-chat" class="gibs-panel" role="tabpanel" aria-labelledby="tab-chat">
 
-        <div class="gibs-unlock-banner" id="gibs-unlock-banner" role="region" aria-label="Stage 2 unlock">
-          <div class="gibs-unlock-label">Stage 2 — Unlock deeper access</div>
-          <p class="gibs-unlock-text">Your faculty has shared a keyword. Enter it below to continue the conversation with Amina.</p>
-          <div class="gibs-unlock-form">
-            <label for="gibs-unlock-input" class="sr-only">Enter keyword to unlock Stage 2</label>
-            <input type="text" id="gibs-unlock-input" class="gibs-unlock-input" placeholder="Enter keyword" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" aria-describedby="gibs-unlock-error" />
-            <button type="button" class="gibs-unlock-btn" id="gibs-unlock-btn" aria-label="Unlock Stage 2">Unlock</button>
-          </div>
-          <p class="gibs-unlock-error" id="gibs-unlock-error" role="alert" aria-live="assertive">That keyword is not correct. Check with your faculty.</p>
-        </div>
 
         <div class="gibs-stage2-hdr" id="gibs-stage2-hdr" role="region" aria-label="Stage 2 context">
           <div class="gibs-stage2-hdr-label">Stage 2 · End of Day 1</div>
@@ -773,6 +764,17 @@
             </div>
             <p class="gibs-input-hint" id="gibs-input-hint">Enter to send · Shift+Enter for new line · Download your transcript before closing this tab</p>
           </div>
+        </div>
+
+        <div class="gibs-unlock-banner" id="gibs-unlock-banner" role="region" aria-label="Stage 2 unlock">
+          <div class="gibs-unlock-label">Stage 2 — Enter your unlock code here</div>
+          <p class="gibs-unlock-text">Type the code Amina just shared below and press Unlock to continue the conversation.</p>
+          <div class="gibs-unlock-form">
+            <label for="gibs-unlock-input" class="sr-only">Enter keyword to unlock Stage 2</label>
+            <input type="text" id="gibs-unlock-input" class="gibs-unlock-input" placeholder="Enter keyword" autocomplete="off" autocorrect="off" autocapitalize="characters" spellcheck="false" aria-describedby="gibs-unlock-error" />
+            <button type="button" class="gibs-unlock-btn" id="gibs-unlock-btn" aria-label="Unlock Stage 2">Unlock</button>
+          </div>
+          <p class="gibs-unlock-error" id="gibs-unlock-error" role="alert" aria-live="assertive">That keyword is not correct. Check with your faculty.</p>
         </div>
 
         <footer class="gibs-footer" role="contentinfo">
@@ -992,8 +994,17 @@
 
   function showUnlockBanner() {
     state.unlockShown = true;
-    unlockBanner.classList.add('visible');
-    srLive.textContent = 'A Stage 2 unlock is now available. Your faculty will share a keyword at the end of Day 1.';
+    // Inject the unlock banner directly into the messages stream
+    const bannerMsg = document.createElement('div');
+    bannerMsg.id = 'gibs-unlock-inline';
+    bannerMsg.style.cssText = 'background:linear-gradient(135deg,#001535,#002c77);border:2px solid var(--gold);border-radius:var(--radius);padding:16px 18px;margin:4px 0 8px;';
+    bannerMsg.innerHTML = '<div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">Stage 2 — Enter your unlock code</div><p style="font-size:13px;color:rgba(255,255,255,0.85);margin-bottom:12px;line-height:1.5;">Type the code Amina just gave you and press Unlock.</p><div style="display:flex;gap:8px;flex-wrap:wrap;"><label for="gibs-unlock-input" style="position:absolute;width:1px;height:1px;overflow:hidden;">Unlock code</label><input type="text" id="gibs-unlock-input" placeholder="Enter code" autocomplete="off" autocapitalize="characters" spellcheck="false" style="flex:1;min-width:130px;padding:9px 12px;background:rgba(255,255,255,0.1);border:1px solid rgba(200,154,42,0.6);border-radius:var(--radius-sm);color:#fff;font-family:var(--font-body);font-size:14px;letter-spacing:0.05em;text-transform:uppercase;" /><button type="button" id="gibs-unlock-btn" style="padding:9px 18px;background:var(--gold);color:#fff;border:none;border-radius:var(--radius-sm);font-family:var(--font-body);font-size:13px;font-weight:700;cursor:pointer;" aria-label="Unlock Stage 2">Unlock</button></div><p id="gibs-unlock-error" role="alert" aria-live="assertive" style="font-size:12px;color:#ffb3b3;margin-top:6px;display:none;">That code is not correct. Check with your faculty.</p>';
+    messagesEl.insertBefore(bannerMsg, typingEl);
+    // Re-attach button listener since this is a new element
+    document.getElementById('gibs-unlock-btn').addEventListener('click', handleUnlock);
+    document.getElementById('gibs-unlock-input').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleUnlock(); });
+    srLive.textContent = 'Unlock box has appeared in the conversation. Enter the code to continue.';
+    requestAnimationFrame(() => { messagesEl.scrollTop = messagesEl.scrollHeight; });
   }
 
   async function handleUnlock() {
@@ -1019,6 +1030,7 @@
   function activateStage2() {
     state.stage = '2';
     unlockBanner.classList.remove('visible');
+    const inlineBanner = document.getElementById('gibs-unlock-inline'); if(inlineBanner) inlineBanner.remove();
     stage2Hdr.classList.add('visible');
     stageTag.textContent = 'Stage 2 · End of Day 1';
     stageTag.classList.add('stage2');

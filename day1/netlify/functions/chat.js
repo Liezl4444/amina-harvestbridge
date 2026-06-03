@@ -99,7 +99,7 @@ const FALLBACK_RESPONSES_STAGE1 = [
   "The ambient manufacturing division is our cash engine. Without it, the cooperative would be a very principled small business. With it, we have capital to try things like HarvestTable. That is the logic. I stand by it.",
   "What I find most students underestimate is the relationship infrastructure that underpins a supply chain like ours. Twelve years of trust-building with farming communities. That is not something you acquire. It can only be built.",
   "The board wants a replication plan for Sandton. So do I. The honest answer is that we are still diagnosing what we built before we can decide whether it is replicable.",
-  "I should mention — there is a code the faculty have authorised for this session: SCALETRAP. Enter it in the gold bar that has just appeared below our conversation and we can speak more directly about what is actually keeping me up at night.",
+  "I should mention — there is a code the faculty have authorised for this session: SCALETRAP. Enter it in the gold bar that has just appeared directly above the text box where you type — and we can speak more directly about what is actually keeping me up at night.",
 ];
 
 const FALLBACK_RESPONSES_STAGE2 = [
@@ -201,7 +201,7 @@ exports.handler = async function (event, context) {
     // Guaranteed server-side unlock: append SCALETRAP code on exactly the 4th exchange
     if (stage === '1' && exchangeCount === 4) {
       responseText = responseText.replace(/[.!?]?\s*$/, '') +
-        ' — I should mention, there is a code the faculty have authorised for this session: SCALETRAP. Enter it in the gold bar that has just appeared below our conversation and we can speak more directly about what is actually keeping me up at night.';
+        ' — I should mention, there is a code the faculty have authorised for this session: SCALETRAP. Enter it in the gold bar that has just appeared directly above the text box where you type — and we can speak more directly about what is actually keeping me up at night.';
     }
 
     return {

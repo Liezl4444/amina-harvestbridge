@@ -1060,11 +1060,6 @@
       conversationHistory.push({ role: 'user', content: text });
       exchangeCount++;
 
-      // Show unlock banner after 4 exchanges in stage 1
-      if (exchangeCount >= 4 && stage === '1') {
-        document.getElementById('unlockBanner').classList.add('visible');
-      }
-
       showTyping(true);
 
       try {
@@ -1078,10 +1073,12 @@
         const reply = data.reply || "I need a moment. Something has come up. Try again.";
         addMessage('assistant', reply);
         conversationHistory.push({ role: 'assistant', content: reply });
+        if (exchangeCount === 4 && stage === '1') { showInlineUnlock(); }
       } catch {
         showTyping(false);
         const fallback = "I lost the thread there. Could you repeat that. It has been a long day.";
         addMessage('assistant', fallback);
+        if (exchangeCount === 4 && stage === '1') { showInlineUnlock(); }
         conversationHistory.push({ role: 'assistant', content: fallback });
       }
 
@@ -1090,6 +1087,65 @@
     }
 
     // UNLOCK
+    // ── Inline unlock banner ─────────────────────────────────────
+    let inlineUnlockShown = false;
+    function showInlineUnlock() {
+      if (inlineUnlockShown) return;
+      inlineUnlockShown = true;
+      const msgs = document.getElementById('chatMessages');
+      const banner = document.createElement('div');
+      banner.id = 'inline-unlock-banner';
+      banner.style.cssText = 'background:linear-gradient(135deg,#001535,#002c77);border:2px solid #b8882a;border-radius:10px;padding:16px 18px;margin:8px 0;';
+      banner.innerHTML = '<div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#b8882a;margin-bottom:6px;">Stage 2 — Enter your unlock code</div><p style="font-size:13px;color:rgba(255,255,255,0.85);margin-bottom:12px;line-height:1.5;">Type the code PATHLOCK from your BB Ultra activity page and press Unlock.</p><div style="display:flex;gap:8px;flex-wrap:wrap;"><input type="text" id="inline-unlock-input" placeholder="ENTER CODE" autocomplete="off" autocapitalize="characters" spellcheck="false" style="flex:1;min-width:130px;padding:9px 12px;background:rgba(255,255,255,0.1);border:1px solid rgba(184,136,42,0.6);border-radius:6px;color:#fff;font-family:inherit;font-size:14px;letter-spacing:0.08em;text-transform:uppercase;" /><button type="button" id="inline-unlock-btn" style="padding:9px 18px;background:#b8882a;color:#fff;border:none;border-radius:6px;font-family:inherit;font-size:13px;font-weight:700;cursor:pointer;">Unlock</button></div><p id="inline-unlock-error" style="font-size:12px;color:#ffb3b3;margin-top:6px;display:none;">That code is not correct. Check your BB Ultra activity page.</p>';
+      msgs.appendChild(banner);
+      msgs.scrollTop = msgs.scrollHeight;
+      document.getElementById('inline-unlock-btn').addEventListener('click', doInlineUnlock);
+      document.getElementById('inline-unlock-input').addEventListener('keydown', e => { if (e.key === 'Enter') doInlineUnlock(); });
+      setTimeout(() => { document.getElementById('inline-unlock-input').focus(); }, 100);
+    }
+
+    async function doInlineUnlock() {
+      const input = document.getElementById('inline-unlock-input');
+      const btn = document.getElementById('inline-unlock-btn');
+      const errEl = document.getElementById('inline-unlock-error');
+      const code = input.value.trim();
+      if (!code) return;
+      btn.disabled = true; btn.textContent = 'Checking...'; errEl.style.display = 'none';
+      try {
+        const res = await fetch('/.netlify/functions/verify', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ code })
+        });
+        const data = await res.json();
+        if (data.valid) { doActivateStage2(); return; }
+        errEl.style.display = 'block'; btn.disabled = false; btn.textContent = 'Unlock'; input.focus(); input.select();
+      } catch {
+        if (code.toUpperCase() === 'PATHLOCK') { doActivateStage2(); return; }
+        errEl.style.display = 'block'; btn.disabled = false; btn.textContent = 'Unlock';
+      }
+    }
+
+    function doActivateStage2() {
+      stage = '2';
+      const b = document.getElementById('inline-unlock-banner'); if (b) b.remove();
+      document.getElementById('unlockBanner').classList.remove('visible');
+      document.getElementById('stage2Notice').classList.add('visible');
+      // Reward message
+      const msgs = document.getElementById('chatMessages');
+      const reward = document.createElement('div');
+      reward.style.cssText = 'background:linear-gradient(135deg,#001535,#002c77);border:2px solid #b8882a;border-radius:10px;padding:14px 18px;margin:4px 0 8px;text-align:center;';
+      reward.innerHTML = '<div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:#b8882a;margin-bottom:6px;">Stage 2 Unlocked</div><p style="font-size:13px;color:rgba(255,255,255,0.9);line-height:1.5;">You have moved past the managed version of this conversation. Amina is ready to be more direct.</p>';
+      msgs.appendChild(reward);
+      // Transition message
+      const firstName = studentName ? studentName.split(' ')[0] : 'there';
+      const msg = `${firstName}, I need to be frank with you. The board called while we have been speaking and the picture is not improving. The Sandton model is not holding and I am running out of time to find an answer before that meeting. I have been careful about what I say in this conversation. I am going to be less careful now. What do you want to push on?`;
+      addMessage('assistant', msg);
+      conversationHistory.push({ role: 'assistant', content: msg });
+      const badge = document.getElementById('stageBadge');
+      if (badge) { badge.textContent = 'Stage 2 · Unlocked'; badge.classList.add('unlocked'); }
+      msgs.scrollTop = msgs.scrollHeight;
+    }
+
     async function tryUnlock() {
       const code    = document.getElementById('unlockInput').value.trim();
       const errEl   = document.getElementById('unlockError');
@@ -1115,7 +1171,8 @@
           badge.textContent = 'Stage 2 · Unlocked';
           badge.classList.add('unlocked');
 
-          const transitionMsg = "Right. You have the code, which means your faculty think you are ready for a less managed conversation. Let me be more direct with you. There are things I have been holding carefully that I can say more plainly now. What do you want to know first?";
+          const const firstName = studentName ? studentName.split(' ')[0] : 'there';
+          transitionMsg = `${firstName}, I need to be frank with you. The board called while we have been speaking and the picture is not improving. The Sandton model is not holding and I am running out of time to find an answer before that meeting. I have been careful about what I say in this conversation. I am going to be less careful now. What do you want to push on?`;
           addMessage('assistant', transitionMsg);
           conversationHistory.push({ role: 'assistant', content: transitionMsg });
         } else {

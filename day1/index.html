@@ -1050,7 +1050,8 @@
     startersS1.style.display = 'none';
     startersS2.style.display = 'block';
     srLive.textContent = 'Stage 2 unlocked. Amina has returned.';
-    const transition = "I have been thinking about what we discussed this morning. The board called while you were in your afternoon sessions. Their question is more pointed now. What specifically is it about the Sandton model that is not holding?";
+    const firstName = state.studentName ? state.studentName.split(' ')[0] : 'there';
+    const transition = `${firstName}, I need to be more direct with you. The board has been in touch and the pressure is building. Their question is sharper now: why is the Sandton model not holding, and what am I going to do about it before that meeting. I have been careful in this conversation. I am going to be less careful from here. What do you want to push on?`;
     state.messages.push({ role: 'assistant', content: transition });
     renderMessage('assistant', transition);
     inputEl.focus();

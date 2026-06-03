@@ -817,7 +817,7 @@
 
   const OPENAI_ENDPOINT = '/.netlify/functions/chat';
   const UNLOCK_ENDPOINT = '/.netlify/functions/verify';
-  const UNLOCK_THRESHOLD = 4;
+  const UNLOCK_THRESHOLD = 3;
 
   const state = {
     stage: '1', messages: [], isLoading: false, msgCount: 0,
@@ -905,12 +905,7 @@
     av.className = 'gibs-msg-av';
     av.setAttribute('aria-hidden', 'true');
     if (!isUser) {
-      const avImg = document.createElement('img');
-avImg.src = 'amina.jpg';
-avImg.alt = 'Amina Mokoena';
-avImg.style.cssText = 'width:100%;height:100%;object-fit:cover;border-radius:50%;display:block;';
-avImg.onerror = function() { this.style.display='none'; const s=document.createElement('span'); s.className='gibs-msg-av-init'; s.textContent='AM'; av.appendChild(s); };
-av.appendChild(avImg);
+      av.innerHTML = '<img src="amina.jpg" alt="" onerror="this.parentNode.innerHTML=\'<span class=\\\"gibs-msg-av-init\\\">AM</span>\';" />';
     } else {
       av.innerHTML = '<span class="gibs-msg-av-init" style="background:var(--teal)">You</span>';
     }

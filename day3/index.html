@@ -537,7 +537,7 @@
     }
 
     /* Chat interface */
-    .chat-wrapper { flex: 1; display: flex; flex-direction: column; min-height: 0; position: relative; }
+    .chat-wrapper { flex: 1; display: flex; flex-direction: column; min-height: 0; position: relative; max-width: var(--content-width); width: 100%; margin: 0 auto; }
 
     .chat-meta-bar {
       background: var(--white); border-bottom: 1px solid var(--grey-100);
@@ -1273,14 +1273,7 @@
 
       const bubble = document.createElement('div');
       bubble.className = 'msg-bubble';
-      const clean = text
-  .replace(/\*\*(.+?)\*\*/g, '$1')   // remove bold **text**
-  .replace(/\*(.+?)\*/g, '$1')        // remove italic *text*
-  .replace(/^#{1,3}\s/gm, '')         // remove headers
-  .replace(/^[-*]\s/gm, '')           // remove bullet points
-  .replace(/^\d+\.\s/gm, '')          // remove numbered list markers
-  .replace(/\n/g, '<br/>');
-bubble.innerHTML = clean;
+      bubble.innerHTML = text.replace(/\n/g, '<br/>');
       wrap.appendChild(bubble);
       container.appendChild(wrap);
       container.scrollTop = container.scrollHeight;

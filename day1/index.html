@@ -1000,20 +1000,25 @@
     const bannerMsg = document.createElement('div');
     bannerMsg.id = 'gibs-unlock-inline';
     bannerMsg.style.cssText = 'background:linear-gradient(135deg,#001535,#002c77);border:2px solid var(--gold);border-radius:var(--radius);padding:16px 18px;margin:4px 0 8px;';
-    bannerMsg.innerHTML = '<div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">Stage 2 — Enter your unlock code</div><p style="font-size:13px;color:rgba(255,255,255,0.85);margin-bottom:12px;line-height:1.5;">Type the code Amina just gave you and press Unlock.</p><div style="display:flex;gap:8px;flex-wrap:wrap;"><label for="gibs-unlock-input" style="position:absolute;width:1px;height:1px;overflow:hidden;">Unlock code</label><input type="text" id="gibs-unlock-input" placeholder="Enter code" autocomplete="off" autocapitalize="characters" spellcheck="false" style="flex:1;min-width:130px;padding:9px 12px;background:rgba(255,255,255,0.1);border:1px solid rgba(200,154,42,0.6);border-radius:var(--radius-sm);color:#fff;font-family:var(--font-body);font-size:14px;letter-spacing:0.05em;text-transform:uppercase;" /><button type="button" id="gibs-unlock-btn" style="padding:9px 18px;background:var(--gold);color:#fff;border:none;border-radius:var(--radius-sm);font-family:var(--font-body);font-size:13px;font-weight:700;cursor:pointer;" aria-label="Unlock Stage 2">Unlock</button></div><p id="gibs-unlock-error" role="alert" aria-live="assertive" style="font-size:12px;color:#ffb3b3;margin-top:6px;display:none;">That code is not correct. Check with your faculty.</p>';
+    bannerMsg.innerHTML = '<div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">Stage 2 — Enter your unlock code</div><p style="font-size:13px;color:rgba(255,255,255,0.85);margin-bottom:12px;line-height:1.5;">Type the code Amina just gave you and press Unlock.</p><div style="display:flex;gap:8px;flex-wrap:wrap;"><label for="gibs-unlock-input" style="position:absolute;width:1px;height:1px;overflow:hidden;">Unlock code</label><input type="text" id="gibs-unlock-input-inline" placeholder="Enter code" autocomplete="off" autocapitalize="characters" spellcheck="false" style="flex:1;min-width:130px;padding:9px 12px;background:rgba(255,255,255,0.1);border:1px solid rgba(200,154,42,0.6);border-radius:var(--radius-sm);color:#fff;font-family:var(--font-body);font-size:14px;letter-spacing:0.05em;text-transform:uppercase;" /><button type="button" id="gibs-unlock-btn-inline" style="padding:9px 18px;background:var(--gold);color:#fff;border:none;border-radius:var(--radius-sm);font-family:var(--font-body);font-size:13px;font-weight:700;cursor:pointer;" aria-label="Unlock Stage 2">Unlock</button></div><p id="gibs-unlock-error-inline" role="alert" aria-live="assertive" style="font-size:12px;color:#ffb3b3;margin-top:6px;display:none;">That code is not correct. Check with your faculty.</p>';
     messagesEl.insertBefore(bannerMsg, typingEl);
     // Re-attach button listener since this is a new element
-    document.getElementById('gibs-unlock-btn').addEventListener('click', handleUnlock);
-    document.getElementById('gibs-unlock-input').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleUnlock(); });
+    document.getElementById('gibs-unlock-btn-inline').addEventListener('click', handleUnlock);
+    document.getElementById('gibs-unlock-input-inline').addEventListener('keydown', (e) => { if (e.key === 'Enter') handleUnlock(); });
     srLive.textContent = 'Unlock box has appeared in the conversation. Enter the code to continue.';
     requestAnimationFrame(() => { messagesEl.scrollTop = messagesEl.scrollHeight; });
   }
 
   async function handleUnlock() {
-    const code = unlockInput.value.trim().toUpperCase();
+    // Read from inline input if present, otherwise fall back to original
+    const inlineInput = document.getElementById('gibs-unlock-input-inline');
+    const inlineBtn = document.getElementById('gibs-unlock-btn-inline');
+    const activeInput = inlineInput || unlockInput;
+    const activeBtn = inlineBtn || unlockBtn;
+    const code = activeInput.value.trim().toUpperCase();
     if (!code) return;
-    unlockBtn.disabled = true;
-    unlockBtn.textContent = 'Checking...';
+    activeBtn.disabled = true;
+    activeBtn.textContent = 'Checking...';
     unlockError.classList.remove('visible');
     try {
       const res = await fetch(UNLOCK_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code }) });
@@ -1024,8 +1029,8 @@
       if (code === 'SCALETRAP') { activateStage2(); return; }
       showUnlockError();
     } finally {
-      unlockBtn.disabled = false;
-      unlockBtn.textContent = 'Unlock';
+      activeBtn.disabled = false;
+      activeBtn.textContent = 'Unlock';
     }
   }
 
@@ -1033,6 +1038,12 @@
     state.stage = '2';
     unlockBanner.classList.remove('visible');
     const inlineBanner = document.getElementById('gibs-unlock-inline'); if(inlineBanner) inlineBanner.remove();
+    // Reward message
+    const rewardEl = document.createElement('div');
+    rewardEl.style.cssText = 'background:linear-gradient(135deg,#001535,#002c77);border:2px solid var(--gold);border-radius:var(--radius);padding:14px 18px;margin:4px 0 8px;text-align:center;';
+    rewardEl.innerHTML = '<div style="font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:6px;">Stage 2 Unlocked</div><p style="font-size:13px;color:rgba(255,255,255,0.9);line-height:1.5;">You have completed the orientation phase of HarvestBridge. Amina is ready to speak more directly about what is really keeping her up at night.</p>';
+    messagesEl.insertBefore(rewardEl, typingEl);
+    requestAnimationFrame(() => { messagesEl.scrollTop = messagesEl.scrollHeight; });
     stage2Hdr.classList.add('visible');
     stageTag.textContent = 'Stage 2 · End of Day 1';
     stageTag.classList.add('stage2');
